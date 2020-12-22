@@ -16,7 +16,7 @@ Data should be exported into `./data/{id_number}_{year}_{month}_{day}.csv`
 
 Most of the parameters of interest can be changed in the `stroop.py` file. They exist as keyword arguments. The current config is here for testing purposes.
 
-**Fixation time is an ISI. I'll need to add a function to make it variable.**
+Parameters can also be changed by linking them with a subject_id and entering them into a row in the `./preferences/id_preferences_table.csv`
 
 ```
 num_blocks=2, fixation_time=2, congruence_rate=.2, num_trials=10, ibi_time=10

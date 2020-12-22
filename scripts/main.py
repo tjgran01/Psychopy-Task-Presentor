@@ -14,16 +14,20 @@ def main():
         sys.exit()
 
     # Try to load preferences from file.
-    prefs = pd.read_csv("../preferences/id_preference_table.csv", dtype={"sub_id": str})
-    prefs.set_index("sub_id", inplace=True)
-    prefs = prefs.loc[sub_id].to_dict(orient='records')
-    print(prefs)
-    st = StroopTask(sub_id[0], num_blocks=prefs[0]["num_blocks"],
-                    fixation_time=prefs[0]["fixation_time"],
-                    congruence_rate=prefs[0]["congruence_rate"],
-                    num_trials=prefs[0]["num_trials"],
-                    ibi_time=prefs[0]["ibi_time"],
-                    variable_isi=prefs[0]["variable_isi"])
+    try:
+        prefs = pd.read_csv("../preferences/id_preference_table.csv", dtype={"sub_id": str})
+        prefs.set_index("sub_id", inplace=True)
+        prefs = prefs.loc[sub_id].to_dict(orient='records')
+        st = StroopTask(sub_id[0], num_blocks=prefs[0]["num_blocks"],
+                        fixation_time=prefs[0]["fixation_time"],
+                        congruence_rate=prefs[0]["congruence_rate"],
+                        num_trials=prefs[0]["num_trials"],
+                        ibi_time=prefs[0]["ibi_time"],
+                        variable_isi=prefs[0]["variable_isi"])
+    except:
+        print("No preference file found (or preferences file is missing specified Subject ID.)")
+        print("Running with Default Arguments")
+        st = StroopTask(sub_id[0])
 
 if __name__ == "__main__":
     main()
