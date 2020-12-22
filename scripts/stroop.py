@@ -1,6 +1,7 @@
 from psychopy import visual, core, event
 from globals import StroopGlobals
 
+import numpy as np
 import time
 import datetime
 import random
@@ -8,13 +9,16 @@ import random
 import csv
 
 class StroopTask(object):
-    def __init__(self, subject_id, num_blocks=2, fixation_time=2, congruence_rate=.2, num_trials=10, ibi_time=10):
+    def __init__(self, subject_id, num_blocks=2, fixation_time=2, congruence_rate=.2,
+                 num_trials=10, ibi_time=10, variable_isi=True):
         self.subject_id = subject_id
         self.num_blocks = num_blocks
         self.fixation_time = fixation_time
         self.congruence_rate = congruence_rate
         self.num_trials = num_trials
         self.ibi_time = ibi_time
+        self.variable_isi = variable_isi
+        print(self.congruence_rate)
 
         self.globals = StroopGlobals()
         self.window = self.globals.window
@@ -24,15 +28,20 @@ class StroopTask(object):
                                             colorSpace='rgb', color=(1.0, 0.0, 0.0), pos=(0.0, -0.8))
         self.fixation_cross = visual.TextStim(self.window, text="+")
         self.response_timer = core.Clock()
+
         self._colors = {
                        "red": [(1.0, 0.0, 0.0), "right"],
                        "green": [(0.0, 1.0, 0.0), "down"],
                        "blue": [(0.0, 0.0, 1.0), "left"],
                        }
 
-        self.export_header = ["subject_id", "timestamp", "block_num", "trial_num", "display_text", "display_color", "trial_type", "response_accuracy", "response_time"]
+        self.export_header = ["subject_id", "timestamp", "block_num", "trial_num",
+                              "display_text", "display_color", "trial_type",
+                              "response_accuracy", "response_time"]
         self.export_lines = [self.export_header, ]
 
+
+        # Actual running of stroop.
         self.display_instructions()
 
         for block in range(self.num_blocks):
@@ -48,6 +57,7 @@ class StroopTask(object):
         self.display_drawer.draw_all()
         self.window.flip()
         core.wait(self.ibi_time)
+
 
     def display_instructions(self):
 
@@ -95,9 +105,27 @@ class StroopTask(object):
         return trials
 
 
+    def create_variable_isi_list(self, isi_amt, how="gamma"):
+
+        if how == "gamma":
+            shape = self.fixation_time
+            scale = self.fixation_time / 2
+            dist = np.random.gamma(shape, scale, 1000)
+            return list(np.random.choice(dist, size=isi_amt))
+
+
+
+
     def run_block(self, block_num=0):
 
+        # create all the trials that will be used.
         trial_list = self.create_trial_list()
+        #
+        if self.variable_isi:
+            isi_list = self.create_variable_isi_list(len(trial_list), how="gamma")
+            print(isi_list)
+        else:
+            isi_list = [self.fixation_time for elm in trial_list]
 
         for indx, trial in enumerate(trial_list):
             self.response_timer.reset()
@@ -118,7 +146,7 @@ class StroopTask(object):
             self.display_drawer.add_to_draw_list(self.fixation_cross)
             self.display_drawer.draw_all()
             self.window.flip()
-            core.wait(self.fixation_time)
+            core.wait(isi_list[indx])
 
 
     def export_data(self):

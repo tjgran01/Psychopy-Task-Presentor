@@ -2,6 +2,8 @@ from stroop import StroopTask
 from psychopy import gui
 import sys
 
+import pandas as pd
+
 
 def main():
     myDlg = gui.Dlg(title="Participant ID Entry Field")
@@ -11,7 +13,17 @@ def main():
     if not myDlg.OK:  # or if ok_data is not None
         sys.exit()
 
-    st = StroopTask(subject_id=sub_id[0])
+    # Try to load preferences from file.
+    prefs = pd.read_csv("../preferences/id_preference_table.csv", dtype={"sub_id": str})
+    prefs.set_index("sub_id", inplace=True)
+    prefs = prefs.loc[sub_id].to_dict(orient='records')
+    print(prefs)
+    st = StroopTask(sub_id[0], num_blocks=prefs[0]["num_blocks"],
+                    fixation_time=prefs[0]["fixation_time"],
+                    congruence_rate=prefs[0]["congruence_rate"],
+                    num_trials=prefs[0]["num_trials"],
+                    ibi_time=prefs[0]["ibi_time"],
+                    variable_isi=prefs[0]["variable_isi"])
 
 if __name__ == "__main__":
     main()
