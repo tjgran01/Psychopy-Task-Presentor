@@ -50,6 +50,7 @@ class DataLogger(object):
                     "response_strings",
                     "response_value",
                     "is_correct",]
+                    # Pass data of previous page reading time into multiple choice question.
         elif self.task_name == "stroop":
             return ["subject_id",
                     "timestamp",

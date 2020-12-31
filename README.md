@@ -21,3 +21,26 @@ Parameters can also be changed by linking them with a subject_id and entering th
 ```
 num_blocks=2, fixation_time=2, congruence_rate=.2, num_trials=10, ibi_time=10
 ```
+
+#### Big Picture Questions
+
+1. How many pages of text **per block**?
+2. How many questions in total? (per block)
+3. How many mind wander probes? (if we aren't just doing it after whole block of reading...?)
+
+Default assumption is page_num = question = mind wander probe?
+
+csv or tsv |sv
+
+page_text | page number | question text | answer text. | 0_1
+
+#### Where to put things.
+
+Texts:
+  - `./resources/affect_reading_texts`
+Video:
+    `./resources/affect_reading_texts`
+Question files:
+    `./resources/affect_reading_questions`
+Scale information:
+    ``

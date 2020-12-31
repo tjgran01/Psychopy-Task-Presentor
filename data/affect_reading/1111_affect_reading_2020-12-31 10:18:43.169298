@@ -1,0 +1,3 @@
+subject_id,timestamp,response_time,block_num,question_type,response_numbers,response_strings,response_value,is_correct
+1111,1609435208.9824934,83.0687873259958,0,alert,"[1, 2, 3, 4, 5, 6, 7]",Low||Low||Low||Med||High||High||High,6.0,
+1111,1609435212.9822094,3.9844138150001527,0,affect,"[1, 2, 3, 4, 5, 6, 7]",Low||Low||Low||Med||High||High||High,1,

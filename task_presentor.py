@@ -63,7 +63,7 @@ class TaskPresentor(object):
             return in_file.readlines()
 
 
-    def display_instructions(self, instructions, return_complete=False):
+    def display_instructions(self, instructions, return_bool=False):
 
         for text_prompt in instructions:
             display_text = visual.TextStim(self.window, text=text_prompt)

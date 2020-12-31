@@ -28,8 +28,20 @@ class AffectReadingTask(object):
 
     def display_sliding_scale(self, type="alert", block_num=0):
 
-        m_ticks = [1,2,3,4,5,6,7]
-        m_labels = ["Low", "Low", "Low", "Med", "High", "High", "High"]
+        if type == "alert":
+
+            m_ticks = [1,2,3,4,5,6,7]
+            m_labels = ["Very Sleepy", "", "", "", "", "", "Very Alert"]
+
+        elif type == "mult_choice":
+
+            m_ticks = [1,2,3,4]
+            m_labels = ["a - {whatever the question text }", "b", "c", "d"]
+
+        elif type == "mind_wandering":
+
+            m_tick = [1, 2]
+            m_labels = ["Yes", "No"]
 
         slider = visual.Slider(win=self.task_presentor.window,
                                ticks=m_ticks,
