@@ -74,7 +74,7 @@ class AffectReadingTask(object):
     def display_affect_induction(self, affect_string):
 
         fpath = f"./resources/affect_videos/{affect_string}.mp4"
-        movie_stim = visual.MovieStim3(win=self.task_presentor.window, filename=fpath)
+        movie_stim = visual.MovieStim3(win=self.task_presentor.window, filename=fpath, size=[])
 
         movie_clock = core.CountdownTimer(movie_stim.duration)
 

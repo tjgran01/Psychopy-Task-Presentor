@@ -43,4 +43,4 @@ Video:
 Question files:
     `./resources/affect_reading_questions`
 Scale information:
-    ``
+    `./resources/affect_`
