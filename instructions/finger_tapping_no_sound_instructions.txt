@@ -1,0 +1,6 @@
+Finger Tapping Task
+In this task you will be asked to tap your index finger on either your right or left hand.
+While tapping your finger in this way, try match the rate at which your finger is tapping by listening to the beeping sounds played to you in your headphones
+There will be a countdown timer in the bottom left corner of the screen which will tell you how much time is left before moving on to the next task.
+Once you finish the task, you will be given a period of rest before beginning the next task.
+Please ask the experimenter if you have any questions at this time.
