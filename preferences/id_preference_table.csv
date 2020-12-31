@@ -1,7 +1,0 @@
-sub_id,num_blocks,fixation_time,congruence_rate,num_trials,ibi_time,variable_isi
-1111,2,2,.2,10,10,True
-9999,2,2,.2,10,10,True
-0101,2,2,.2,10,10,True
-9998,2,2,.2,10,10,True
-9997,2,2,.2,10,10,True
-9996,2,2,.2,10,10,True
