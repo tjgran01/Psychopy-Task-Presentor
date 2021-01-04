@@ -7,7 +7,10 @@ class DataLogger(object):
         self.root_data_dir = "./data/"
         self.subject_id = subject_id
         self.task_name = task_name
-        self.current_time = datetime.datetime.now()
+        self.current_time = str(datetime.datetime.now())
+        # So windows doesn't cry.
+        self.current_time = self.current_time.replace(":", "_")
+        self.current_time = self.current_time.replace(" ", "_")
 
 
     def set_current_task(self, task):

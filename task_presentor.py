@@ -63,7 +63,7 @@ class TaskPresentor(object):
             return in_file.readlines()
 
 
-    def display_instructions(self, instructions, return_bool=False):
+    def display_instructions(self, instructions, return_complete=False):
 
         for text_prompt in instructions:
             display_text = visual.TextStim(self.window, text=text_prompt)
@@ -74,7 +74,7 @@ class TaskPresentor(object):
             while not event.getKeys(keyList=['space']):
                 continue
 
-        if return_bool:
+        if return_complete:
             return True
 
 
@@ -100,6 +100,14 @@ class TaskPresentor(object):
     def display_stim(self, stim):
 
         self.display_drawer.add_to_draw_list(stim)
+        self.display_drawer.draw_all()
+        self.window.flip()
+
+
+    def display_stims(self, stim_list):
+
+        for stim in stim_list:
+            self.display_drawer.add_to_draw_list(stim)
         self.display_drawer.draw_all()
         self.window.flip()
 

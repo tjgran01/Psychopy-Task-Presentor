@@ -1,0 +1,3 @@
+subject_id,timestamp,response_time,block_num,question_type,response_numbers,response_strings,response_value,is_correct
+1111,1609778256.6545339,1.8505018450000534,0,mult_choice,"[1, 2, 3, 4]",a - {whatever the question text }||b||c||d,1.0,
+1111,1609778258.1378253,1.4667813219998607,0,mult_choice,"[1, 2, 3, 4]",a - {whatever the question text }||b||c||d,3.0,

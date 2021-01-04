@@ -30,33 +30,55 @@ class AffectReadingTask(object):
 
         if type == "alert":
 
+            m_text = "Please indicate your current level of alertness at this time."
             m_ticks = [1,2,3,4,5,6,7]
-            m_labels = ["Very Sleepy", "", "", "", "", "", "Very Alert"]
+            m_labels = ["Extremely Sleepy", "", "", "Neutral", "", "", "Extremely Alert"]
+            m_style = "triangleMarker"
+            m_size = [1.0, 0.1]
+
+        elif type == "affect":
+
+            m_text = "Please Indicate the extent to which you feel happy or sad currently."
+            m_ticks = [1,2,3,4,5,6,7]
+            m_labels = ["Extremely Sad", "", "", "Neutral", "", "", "Extremely Happy"]
+            m_style = "rating"
+            m_size = [1.0, 0.1]
 
         elif type == "mult_choice":
 
+            m_text = "Please indicate your response for the following question using the choices provided below."
             m_ticks = [1,2,3,4]
             m_labels = ["a - {whatever the question text }", "b", "c", "d"]
+            m_style = "radio"
+            m_size = [0.1, 1.0]
 
         elif type == "mind_wandering":
 
+            m_text = "Please indicate how much you were zoning out while reading the text."
             m_tick = [1, 2]
             m_labels = ["Yes", "No"]
+            m_style = "rating"
+            m_size = [1.0, 0.1]
 
+        text_stim = visual.TextStim(win=self.task_presentor.window,
+                                    text=m_text, pos=(0, .8))
         slider = visual.Slider(win=self.task_presentor.window,
                                ticks=m_ticks,
-                               labels=m_labels)
+                               labels=m_labels,
+                               style=m_style,
+                               size=m_size)
+
+        print(slider.size)
         slider.markerPos = 4
 
-        self.task_presentor.display_stim(slider)
+        self.task_presentor.display_stims([slider, text_stim])
 
-        print(self.mouse.getWheelRel())
         while not slider.getRating():
             core.wait(.1)
             y_change =  self.mouse.getWheelRel()[1]
             if y_change != 0.0:
                 slider.markerPos += y_change
-                self.task_presentor.display_stim(slider)
+                self.task_presentor.display_stims([slider, text_stim])
             if self.mouse.getPressed()[0] == 1:
                 slider.recordRating(slider.markerPos)
                 self.task_presentor.logger.write_data_row([self.subject_id,
@@ -103,15 +125,15 @@ class AffectReadingTask(object):
 
     def run_block(self, affect_condition="happy", block_num=0):
 
-        self.display_sliding_scale(type="alert", block_num=block_num)
-        self.display_sliding_scale(type="affect",block_num=block_num)
-        self.task_presentor.run_isi(random.choice([3, 5])) # Runs a fixation.
-        self.display_affect_induction(affect_condition)
-        self.task_presentor.run_isi(random.choice([4, 2])) # Runs a fixation.
-        self.display_sliding_scale(type="alert")
-        self.display_sliding_scale(type="affect")
-        self.task_presentor.run_isi(random.choice([3, 5])) # Runs a fixation.
-        self.run_reading_task("test")
-        self.display_sliding_scale(type="mind_wandering")
-        self.display_sliding_scale(type="multiple_choice")
-        self.task_presentor.run_isi(random.choice([4, 2]))
+        # self.display_sliding_scale(type="alert", block_num=block_num)
+        # self.display_sliding_scale(type="affect",block_num=block_num)
+        # self.task_presentor.run_isi(random.choice([3, 5])) # Runs a fixation.
+        # self.display_affect_induction(affect_condition)
+        # self.task_presentor.run_isi(random.choice([4, 2])) # Runs a fixation.
+        # self.display_sliding_scale(type="alert")
+        # self.display_sliding_scale(type="affect")
+        # self.task_presentor.run_isi(random.choice([3, 5])) # Runs a fixation.
+        self.run_reading_task("scientific_method")
+        # self.display_sliding_scale(type="mind_wandering")
+        # self.display_sliding_scale(type="multiple_choice")
+        # self.task_presentor.run_isi(random.choice([4, 2]))
