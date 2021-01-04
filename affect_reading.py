@@ -2,6 +2,7 @@ import random
 from psychopy import visual, core, event
 
 import time
+import pandas as pd
 
 class AffectReadingTask(object):
     def __init__(self, subject_id, task_presentor, num_blocks=2, affect_order=["happy", "sad"], max_reading_time=180):
@@ -13,7 +14,8 @@ class AffectReadingTask(object):
         self.max_reading_time = max_reading_time
         self.instructions = self.task_presentor.read_instructions_from_file(self.task_name)
         self.mouse = event.Mouse()
-        self
+        self.question_df = pd.read_csv("./resources/affect_reading_questions/rote.csv")
+        print(self.question_df.columns)
 
 
     def run_full_task(self):
@@ -24,6 +26,13 @@ class AffectReadingTask(object):
             self.run_block(affect_condition=self.affect_order[block], block_num=block)
 
         self.export_data()
+
+
+    def get_multiple_choice_question_data(self):
+
+        pass
+
+
 
 
     def display_sliding_scale(self, type="alert", block_num=0):
@@ -46,9 +55,9 @@ class AffectReadingTask(object):
 
         elif type == "mult_choice":
 
-            m_text = "Please indicate your response for the following question using the choices provided below."
+            m_text = "Question {x} Default Text"
             m_ticks = [1,2,3,4]
-            m_labels = ["a - {whatever the question text }", "b", "c", "d"]
+            m_labels = ["Answer D", "Answer C", "Answer B", "Answer A"]
             m_style = "radio"
             m_size = [0.1, 1.0]
 
@@ -125,8 +134,9 @@ class AffectReadingTask(object):
 
     def run_block(self, affect_condition="happy", block_num=0):
 
-        # self.display_sliding_scale(type="alert", block_num=block_num)
-        # self.display_sliding_scale(type="affect",block_num=block_num)
+        self.display_sliding_scale(type="alert", block_num=block_num)
+        self.display_sliding_scale(type="affect",block_num=block_num)
+        self.display_sliding_scale(type="mult_choice")
         # self.task_presentor.run_isi(random.choice([3, 5])) # Runs a fixation.
         # self.display_affect_induction(affect_condition)
         # self.task_presentor.run_isi(random.choice([4, 2])) # Runs a fixation.
@@ -135,5 +145,5 @@ class AffectReadingTask(object):
         # self.task_presentor.run_isi(random.choice([3, 5])) # Runs a fixation.
         self.run_reading_task("scientific_method")
         # self.display_sliding_scale(type="mind_wandering")
-        # self.display_sliding_scale(type="multiple_choice")
+        self.display_sliding_scale(type="mult_choice")
         # self.task_presentor.run_isi(random.choice([4, 2]))

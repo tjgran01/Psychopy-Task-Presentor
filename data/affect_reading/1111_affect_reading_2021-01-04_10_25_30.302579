@@ -1,0 +1,3 @@
+subject_id,timestamp,response_time,block_num,question_type,response_numbers,response_strings,response_value,is_correct
+1111,1609781144.9371967,12.467363339999793,0,alert,"[1, 2, 3, 4, 5, 6, 7]",Extremely Sleepy||||||Neutral||||||Extremely Alert,5.0,
+1111,1609781151.2873604,6.334043047000705,0,affect,"[1, 2, 3, 4, 5, 6, 7]",Extremely Sad||||||Neutral||||||Extremely Happy,2.0,
