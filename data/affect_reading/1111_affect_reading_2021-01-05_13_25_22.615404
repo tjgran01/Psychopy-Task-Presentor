@@ -1,0 +1,3 @@
+subject_id,timestamp,response_time,block_num,question_type,response_numbers,response_strings,response_value,is_correct
+1111,1609878328.533612,4.001482146999479,0,mult_choice,"[1, 2, 3, 4]","A set of interconnected facts, entities and events||A careful, deliberate observation which uses adequate control groups||A theoretically-driven guess about connections between entities and events||A theory which is uncertain and needs further evidence",4,
+1111,1609878330.0661104,1.5006297140007518,0,mult_choice,"[1, 2, 3, 4]",The process by which we search for the simplest explanation for an observation||A tool used by those who search for truth||The process by which we search for connections between facts||A book by the philosopher William of Occam,3,

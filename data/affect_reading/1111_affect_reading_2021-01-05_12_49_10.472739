@@ -1,0 +1,5 @@
+subject_id,timestamp,response_time,block_num,question_type,response_numbers,response_strings,response_value,is_correct
+1111,1609876152.9563057,1.03376502699939,0,alert,"[1, 2, 3, 4, 5, 6, 7]",Extremely Sleepy||||||Neutral||||||Extremely Alert,1.0,
+1111,1609876154.9065084,1.9339525789982872,0,affect,"[1, 2, 3, 4, 5, 6, 7]",Extremely Sad||||||Neutral||||||Extremely Happy,6.0,
+1111,1609876192.5400453,3.783682430999761,0,alert,"[1, 2, 3, 4, 5, 6, 7]",Extremely Sleepy||||||Neutral||||||Extremely Alert,7.0,
+1111,1609876195.9405518,3.384145930000159,0,affect,"[1, 2, 3, 4, 5, 6, 7]",Extremely Sad||||||Neutral||||||Extremely Happy,7.0,

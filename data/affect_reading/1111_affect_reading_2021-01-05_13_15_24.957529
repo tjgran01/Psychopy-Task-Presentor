@@ -1,0 +1,2 @@
+subject_id,timestamp,response_time,block_num,question_type,response_numbers,response_strings,response_value,is_correct
+1111,1609877729.492218,2.183705393999844,0,mult_choice,"[1, 2, 3, 4]","A theory which is uncertain and needs further evidence||A careful, deliberate observation which uses adequate control groups||A theoretically-driven guess about connections between entities and events||A set of interconnected facts, entities and events",4.0,

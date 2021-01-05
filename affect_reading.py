@@ -5,9 +5,10 @@ import time
 import pandas as pd
 
 class AffectReadingTask(object):
-    def __init__(self, subject_id, task_presentor, num_blocks=4, affect_order=["happy", "sad", "happy", "sad"],
+    def __init__(self, subject_id, task_presentor, num_blocks=4, affect_order=["happy", "none", "happy", "none"],
                  max_reading_time=180, readings=["hypotheses", "causalclaims", "validity", "variables"],
                  mult_choice_question_num=4):
+        self.testing = True
         self.task_name = "affect_reading"
         self.subject_id = subject_id
         self.task_presentor = task_presentor
@@ -29,9 +30,14 @@ class AffectReadingTask(object):
         self.task_presentor.display_instructions(self.instructions)
 
         for block in range(self.num_blocks):
-            self.run_block(affect_condition=self.affect_order[block],
-                           block_num=block,
-                           reading=self.readings[block])
+            if self.testing:
+                self.run_test(affect_condition=self.affect_order[block],
+                               block_num=block,
+                               reading=self.readings[block])
+            else:
+                self.run_block(affect_condition=self.affect_order[block],
+                               block_num=block,
+                               reading=self.readings[block])
 
         self.export_data()
 
@@ -68,6 +74,7 @@ class AffectReadingTask(object):
             m_style = "triangleMarker"
             m_size = [1.0, 0.1]
             m_pos = (0.0, 0.0)
+            m_flip = False
 
         elif type == "affect":
 
@@ -77,6 +84,7 @@ class AffectReadingTask(object):
             m_style = "rating"
             m_size = [1.0, 0.1]
             m_pos = (0.0, 0.0)
+            m_flip = False
 
         elif type == "mult_choice":
 
@@ -89,18 +97,20 @@ class AffectReadingTask(object):
                                 mult_choice_data["AnswerOption4"]]
             random.shuffle(question_answers)
             m_labels = question_answers
-            m_style = "radio"
+            m_style = "myRadio"
             m_size = [0.05, 0.5]
-            m_pos = (0.5, -0.4)
+            m_pos = (-0.8, -0.4)
+            m_flip = True
 
         elif type == "mind_wandering":
 
             m_text = "Please indicate how much you were zoning out while reading the text."
-            m_tick = [1, 2]
+            m_ticks = [1, 2]
             m_labels = ["Yes", "No"]
             m_style = "rating"
             m_size = [1.0, 0.1]
             m_pos = (0.0, 0.0)
+            m_flip = False
 
         text_stim = visual.TextStim(win=self.task_presentor.window,
                                     text=m_text, pos=(0, .8))
@@ -109,9 +119,10 @@ class AffectReadingTask(object):
                                labels=m_labels,
                                style=m_style,
                                size=m_size,
-                               pos=m_pos)
+                               pos=m_pos,
+                               flip=m_flip)
 
-        slider.markerPos = 4
+        slider.markerPos = random.choice(m_ticks)
 
         if m_question_text:
             question_text_stim = visual.TextStim(win=self.task_presentor.window,
@@ -145,7 +156,7 @@ class AffectReadingTask(object):
     def display_affect_induction(self, affect_string):
 
         fpath = f"./resources/affect_videos/{affect_string}.mp4"
-        movie_stim = visual.MovieStim3(win=self.task_presentor.window, filename=fpath, size=[])
+        movie_stim = visual.MovieStim3(win=self.task_presentor.window, filename=fpath)
 
         movie_clock = core.CountdownTimer(movie_stim.duration)
 
@@ -168,7 +179,7 @@ class AffectReadingTask(object):
         total_reading_timer = core.CountdownTimer(self.max_reading_time)
 
         while total_reading_timer.getTime() > 0: # While they still have time to read the ENTIRE text.
-            if self.task_presentor.display_instructions(text_lines, return_complete=True): # If they finish early.
+            if self.task_presentor.display_instructions(text_lines, return_complete=True, reading_task=True): # If they finish early.
                 break
 
 
@@ -188,15 +199,25 @@ class AffectReadingTask(object):
 
     def run_block(self, affect_condition="happy", block_num=0, reading=""):
 
-        # self.run_reading_task(reading)
-        self.run_mult_choice_block(block_num, reading)
-        # self.display_sliding_scale(type="alert", block_num=block_num)
-        # self.display_sliding_scale(type="affect",block_num=block_num)
+        self.display_sliding_scale(type="alert", block_num=block_num)
+        self.display_sliding_scale(type="affect",block_num=block_num)
         self.task_presentor.run_isi(random.choice([3, 5])) # Runs a fixation.
-        # self.display_affect_induction(affect_condition)
-        # self.task_presentor.run_isi(random.choice([4, 2])) # Runs a fixation.
-        # self.display_sliding_scale(type="alert")
-        # self.display_sliding_scale(type="affect")
-        # self.task_presentor.run_isi(random.choice([3, 5])) # Runs a fixation.
-        # self.display_sliding_scale(type="mind_wandering")
-        # self.task_presentor.run_isi(random.choice([4, 2]))
+
+        # If No affect condition --- don't run video.
+        if affect_condition != "none":
+            self.display_affect_induction(affect_condition)
+
+        self.task_presentor.run_isi(random.choice([4, 2])) # Runs a fixation.
+        self.display_sliding_scale(type="affect")
+        self.display_sliding_scale(type="alert")
+        self.run_reading_task(reading)
+        self.task_presentor.run_isi(random.choice([3, 5])) # Runs a fixation.
+        self.display_sliding_scale(type="mind_wandering")
+        self.run_mult_choice_block(block_num, reading, randomize_presentation=True)
+        self.task_presentor.run_isi(random.choice([4, 2]))
+
+
+    def run_test(self, affect_condition="happy", block_num=0, reading=""):
+
+        self.run_mult_choice_block(block_num, reading, randomize_presentation=True)
+        self.task_presentor.run_isi(random.choice([1, 2]))
