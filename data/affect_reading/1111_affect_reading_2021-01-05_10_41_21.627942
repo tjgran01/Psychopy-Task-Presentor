@@ -1,2 +1,0 @@
-subject_id,timestamp,response_time,block_num,question_type,response_numbers,response_strings,response_value,is_correct
-1111,1609868485.5625231,1.700898312999925,0,mult_choice,"[1, 2, 3, 4]",Answer D||Answer C||Answer B||Answer A,4,

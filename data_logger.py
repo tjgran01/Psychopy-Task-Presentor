@@ -39,8 +39,6 @@ class DataLogger(object):
             writer.writerow(data_row)
 
 
-
-
     def get_data_header(self):
 
         if self.task_name == "affect_reading":
@@ -49,9 +47,11 @@ class DataLogger(object):
                     "response_time",
                     "block_num",
                     "question_type",
+                    "question_text",
                     "response_numbers",
                     "response_strings",
                     "response_value",
+                    "response_string",
                     "is_correct",]
                     # Pass data of previous page reading time into multiple choice question.
         elif self.task_name == "stroop":

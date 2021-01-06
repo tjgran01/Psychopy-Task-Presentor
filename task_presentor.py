@@ -66,10 +66,7 @@ class TaskPresentor(object):
     def display_instructions(self, instructions, return_complete=False,
                              reading_task=False):
 
-        if reading_task:
-            size_mult = .8
-        else:
-            size_mult = 1.0
+        size_mult = 1.0
 
         for text_prompt in instructions:
             display_text = visual.TextStim(self.window, text=text_prompt, height=(0.1*size_mult))
