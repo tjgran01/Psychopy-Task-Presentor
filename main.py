@@ -6,6 +6,8 @@ import sys
 
 import pandas as pd
 
+import time
+
 
 def main():
     myDlg = gui.Dlg(title="Participant ID Entry Field")

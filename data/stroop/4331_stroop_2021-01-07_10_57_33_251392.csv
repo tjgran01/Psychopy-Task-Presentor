@@ -1,0 +1,11 @@
+subject_id,timestamp,block_num,trial_num,display_text,display_color,trial_type,response_accuracy,response_time
+4331,1610042256.4035501,0,0,red,blue,incongruent,lapse,5000
+4331,1610042256.6702518,0,1,green,red,incongruent,lapse,5000
+4331,1610042259.4869552,0,2,red,green,incongruent,lapse,5000
+4331,1610042260.170291,0,3,green,green,congruent,lapse,5000
+4331,1610042265.0370266,0,4,green,blue,incongruent,lapse,5000
+4331,1610042267.5870378,0,5,red,green,incongruent,lapse,5000
+4331,1610042270.18708,0,6,red,green,incongruent,lapse,5000
+4331,1610042271.4537625,0,7,green,green,congruent,lapse,5000
+4331,1610042272.6871111,0,8,red,green,incongruent,lapse,5000
+4331,1610042273.85379,0,9,green,red,incongruent,lapse,5000

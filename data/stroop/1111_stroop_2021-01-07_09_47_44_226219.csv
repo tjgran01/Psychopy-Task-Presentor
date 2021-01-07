@@ -1,0 +1,6 @@
+subject_id,timestamp,block_num,trial_num,display_text,display_color,trial_type,response_accuracy,response_time
+1111,1610038067.2951558,0,0,red,blue,incongruent,incorrect,535.1628729999902
+1111,1610038070.2841763,0,1,blue,red,incongruent,incorrect,771.5316690000691
+1111,1610038072.0522313,0,2,blue,green,incongruent,incorrect,341.9659870000942
+1111,1610038074.2962117,0,3,green,blue,incongruent,incorrect,498.3589039998151
+1111,1610038078.9412475,0,4,green,green,congruent,incorrect,479.7458220000408

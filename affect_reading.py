@@ -53,7 +53,7 @@ class AffectReadingTask(object):
 
         question_dict = {}
         for r in readings:
-            df = pd.read_csv(f"./resources/affect_reading_questions/{r}_rote_questions.csv", sep="\t")
+            df = pd.read_csv(f"./resources/affect_reading_questions/{r}_rote_questions.csv")
             question_dict[r] = self.parse_question_df(df)
 
         return question_dict
@@ -153,7 +153,7 @@ class AffectReadingTask(object):
                                                    question_answers,
                                                    mult_choice_data)
                     _question_text = m_question_text
-                    type_text = f"mult_choice_{mult_choice_data['Concept']}_page_{mult_choice_data['PageNum']}"
+                    type_text = f"mult_choice_{mult_choice_data['Text']}_page_{mult_choice_data['PageNum']}"
                 else:
                     type_text = type
                     score = -1

@@ -1,9 +1,10 @@
 from psychopy import visual, core
 
 from parameters.trigger_dict import trigger_dict, trigger_string_dict
+import time
 
 class FingerTappingTask(object):
-    def __init__(self, sub_id, task_presentor, num_blocks=6, block_time=15, ibi_time=15,
+    def __init__(self, sub_id, task_presentor, num_blocks=12, block_time=15, ibi_time=15,
                  is_sound=False):
         self.task_name = "finger_tapping"
         self.sub_id = sub_id
@@ -14,6 +15,12 @@ class FingerTappingTask(object):
         self.is_sound = is_sound
 
         self.conditions_list = [
+                                 [120, "right"],
+                                 [80, "right"],
+                                 [120, "left"],
+                                 [80, "left"],
+                                 [120, "both"],
+                                 [80, "both"],
                                  [120, "right"],
                                  [80, "right"],
                                  [120, "left"],
@@ -43,8 +50,6 @@ class FingerTappingTask(object):
             self.run_block(block_num=block, bpm=self.conditions_list[block][0], hand_condition=self.conditions_list[block][1])
             self.task_presentor.run_ibi(self.ibi_time)
 
-        self.export_data()
-
 
     def run_block(self, bpm, hand_condition, block_num=0):
 
@@ -66,8 +71,9 @@ class FingerTappingTask(object):
 
         core.wait(.1)
         self.task_presentor.trigger_handler.send_int_trigger(trigger_int)
+        self.task_presentor.logger.write_data_row([self.sub_id, time.time(), block_num, hand_condition, bpm, "start"])
         block_timer.reset()
-        
+
         while block_timer.getTime() > 0:
             current_time = str(int(block_timer.getTime()))
             timer_text = visual.TextStim(self.task_presentor.window, text=current_time, pos=(-0.9, 0.9))
@@ -93,6 +99,7 @@ class FingerTappingTask(object):
 
         # 3 means task ended.
         self.task_presentor.trigger_handler.send_int_trigger(trigger_string_dict["Task_End"])
+        self.task_presentor.logger.write_data_row([self.sub_id, time.time(), block_num, hand_condition, bpm, "end"])
         core.wait(.2)
         return
 
@@ -125,7 +132,3 @@ class FingerTappingTask(object):
                   ]
 
         self.task_presentor.draw_and_wait_for_input(what_to_draw=to_draw)
-
-
-    def export_data(self):
-        pass

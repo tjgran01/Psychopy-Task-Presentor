@@ -10,7 +10,8 @@ import csv
 
 class StroopTask(object):
     def __init__(self, subject_id, task_presentor, num_blocks=2, fixation_time=2, congruence_rate=.2,
-                 num_trials=10, ibi_time=10, variable_isi=True):
+                 num_trials=10, ibi_time=10, variable_isi=True, scoring_method="color_correct", response_timeout=5):
+        # scoring methods "congruence" and "color_select"
         self.task_name = "stroop"
         self.subject_id = subject_id
         self.task_presentor = task_presentor
@@ -20,9 +21,12 @@ class StroopTask(object):
         self.num_trials = num_trials
         self.ibi_time = ibi_time
         self.variable_isi = variable_isi
+        self.scoring_method = scoring_method
+        self.response_timeout = response_timeout
         self.instructions = self.task_presentor.read_instructions_from_file(self.task_name)
 
         self.response_timer = core.Clock()
+        self.trial_timer = core.CountdownTimer(self.response_timeout)
 
         self._colors = {
                        "red": [(1.0, 0.0, 0.0), "right"],
@@ -30,10 +34,10 @@ class StroopTask(object):
                        "blue": [(0.0, 0.0, 1.0), "left"],
                        }
 
-        self.export_header = ["subject_id", "timestamp", "block_num", "trial_num",
-                              "display_text", "display_color", "trial_type",
-                              "response_accuracy", "response_time"]
-        self.export_lines = [self.export_header, ]
+        # self.export_header = ["subject_id", "timestamp", "block_num", "trial_num",
+        #                       "display_text", "display_color", "trial_type",
+        #                       "response_accuracy", "response_time"]
+        # self.export_lines = [self.export_header, ]
 
 
     def run_full_task(self):
@@ -44,7 +48,7 @@ class StroopTask(object):
             self.run_block(block_num=block)
             self.task_presentor.run_ibi(self.ibi_time)
 
-        self.export_data()
+        # self.export_data()
 
 
     def create_congruent_trial(self):
@@ -106,28 +110,38 @@ class StroopTask(object):
 
         for indx, trial in enumerate(trial_list):
             self.response_timer.reset()
+            self.trial_timer.reset()
             self.task_presentor.display_stim(trial[0])
 
-            # Wait for response.
             key = event.waitKeys(keyList=['right', 'down', 'left'])
 
             rt = self.response_timer.getTime()
+
             if key[0] == trial[1]:
                 response = "correct"
             else:
                 response = "incorrect"
 
-            self.export_lines.append([self.subject_id, time.time(), block_num, indx, trial[2], trial[3], trial[4], response, rt * 1000])
+
+            self.task_presentor.logger.write_data_row([self.subject_id,
+                                                       time.time(),
+                                                       block_num,
+                                                       indx,
+                                                       trial[2],
+                                                       trial[3],
+                                                       trial[4],
+                                                       response,
+                                                       rt * 1000])
 
             # Run ITI
             self.task_presentor.run_isi(isi_list[indx])
 
 
-    def export_data(self):
-
-        now = datetime.datetime.now()
-        with open(f"./data/{self.subject_id}_{now.year}_{now.month}_{now.day}", "w") as out_csv:
-            writer = csv.writer(out_csv, delimiter=",")
-
-            for row in self.export_lines:
-                writer.writerow(row)
+    # def export_data(self):
+    #
+    #     now = datetime.datetime.now()
+    #     with open(f"./data/{self.subject_id}_{now.year}_{now.month}_{now.day}", "w") as out_csv:
+    #         writer = csv.writer(out_csv, delimiter=",")
+    #
+    #         for row in self.export_lines:
+    #             writer.writerow(row)

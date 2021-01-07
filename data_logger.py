@@ -64,3 +64,10 @@ class DataLogger(object):
                     "trial_type",
                     "response_accuracy",
                     "response_time"]
+        elif self.task_name == "finger_tapping":
+            return ["subject_id",
+                    "timestamp",
+                    "block_num",
+                    "hand_condition",
+                    "bpm",
+                    "event"]

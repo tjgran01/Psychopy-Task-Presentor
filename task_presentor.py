@@ -15,7 +15,7 @@ from parameters.trigger_dict import trigger_dict, trigger_string_dict
 import sys
 
 class TaskPresentor(object):
-    def __init__(self, subject_id, task_list=["affect_reading", "finger_tapping", "stroop", "end"]):
+    def __init__(self, subject_id, task_list=["finger_tapping", "stroop", "affect_reading", "end"]):
         self.subject_id = subject_id
         self.task_list = task_list
         self.globals = PsychopyGlobals()
@@ -35,10 +35,11 @@ class TaskPresentor(object):
             self.logger.set_current_task(task)
             task_obj.run_full_task()
             del task_obj
-            del self.logger
 
 
     def run_end(self):
+
+        event.clearEvents()
 
         end_text = visual.TextStim(self.window, text="Thank you for completing all of the tasks")
         self.display_drawer.add_to_draw_list(end_text)
@@ -46,7 +47,7 @@ class TaskPresentor(object):
         self.display_drawer.draw_all()
         self.window.flip()
 
-        while event.getKeys():
+        while not event.getKeys():
             continue
 
         sys.exit()
