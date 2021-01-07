@@ -1,4 +1,0 @@
-subject_id,timestamp,response_time,block_num,question_type,response_numbers,response_strings,response_value,is_correct
-1111,1609781195.9709878,1.1171467800004393,0,alert,"[1, 2, 3, 4, 5, 6, 7]",Extremely Sleepy||||||Neutral||||||Extremely Alert,5.0,
-1111,1609781197.0043561,1.0171016109998163,0,affect,"[1, 2, 3, 4, 5, 6, 7]",Extremely Sad||||||Neutral||||||Extremely Happy,5.0,
-1111,1609781308.048931,111.02808790299969,0,mult_choice,"[1, 2, 3, 4]",Answer D||Answer C||Answer B||Answer A,3.0,
