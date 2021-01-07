@@ -39,8 +39,6 @@ class AffectReadingTask(object):
                                block_num=block,
                                reading=self.readings[block])
 
-        self.export_data()
-
 
     def parse_question_df(self, df):
 
@@ -154,14 +152,18 @@ class AffectReadingTask(object):
                     score = self.score_mult_choice(selection,
                                                    question_answers,
                                                    mult_choice_data)
+                    _question_text = m_question_text
+                    type_text = f"mult_choice_{mult_choice_data['Concept']}_page_{mult_choice_data['PageNum']}"
                 else:
+                    type_text = type
                     score = -1
+                    _question_text = m_text
                 self.task_presentor.logger.write_data_row([self.subject_id,
                                                            time.time(),
                                                            slider.getRT(),
                                                            block_num,
-                                                           type,
-                                                           m_question_text,
+                                                           type_text,
+                                                           _question_text,
                                                            m_ticks,
                                                            m_labels,
                                                            selection,
@@ -190,7 +192,9 @@ class AffectReadingTask(object):
             return in_file.readlines()
 
 
-    def run_page(self, page_text, block_num, text_name, start_time, timer):
+    def run_page(self, page_text, block_num, text_name, start_time, timer, page_num):
+
+        event.clearEvents()
 
         size_mult = 0.8
 
@@ -210,12 +214,12 @@ class AffectReadingTask(object):
                                                    time.time(),
                                                    page_time,
                                                    block_num,
-                                                   f"reading_{text_name}",
+                                                   f"reading_{text_name}_page_{page_num + 1}",
                                                    page_text,
                                                    [],
                                                    [],
-                                                   [],
-                                                   [],
+                                                   -1,
+                                                   "None",
                                                    -1])
 
 
@@ -228,8 +232,8 @@ class AffectReadingTask(object):
 
 
         while total_reading_timer.getTime() > 0: # While they still have time to read the ENTIRE text.
-            for page in text_lines:
-                self.run_page(page, block_num, text_name, total_reading_timer.getTime(),total_reading_timer)
+            for indx, page in enumerate(text_lines):
+                self.run_page(page, block_num, text_name, total_reading_timer.getTime(),total_reading_timer, indx)
             # Finish Early.
             break
 
