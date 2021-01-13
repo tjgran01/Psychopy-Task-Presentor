@@ -1,5 +1,0 @@
-subject_id,timestamp,block_num,hand_condition,bpm,event
-4321,1610040936.7031577,0,right,120,start
-4321,1610040951.9367778,0,right,120,end
-4321,1610040969.6702845,1,right,80,start
-4321,1610040984.9039083,1,right,80,end

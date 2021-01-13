@@ -4,10 +4,12 @@ from psychopy import visual, core, event
 import time
 import pandas as pd
 
+from psychopy_questions import QuestionFactory
+
 class AffectReadingTask(object):
     def __init__(self, subject_id, task_presentor, num_blocks=4, affect_order=["happy", "none", "happy", "none"],
                  max_reading_time=180, readings=["hypotheses", "causalclaims", "validity", "variables"],
-                 mult_choice_question_num=4):
+                 mult_choice_question_num=4, question_mode="likert"):
         self.testing = True
         self.task_name = "affect_reading"
         self.subject_id = subject_id
@@ -17,6 +19,18 @@ class AffectReadingTask(object):
         self.max_reading_time = max_reading_time
         self.readings = readings
         self.mult_choice_question_num = mult_choice_question_num
+        self.question_mode = question_mode
+
+        self.question_factory = QuestionFactory(self.task_presentor, mode=self.question_mode)
+
+        self.max_reading_time = 10
+
+        self.question_timeouts = {"slider alert": 6,
+                                  "slider affect": 6,
+                                  "slider mind_wandering": 6,
+                                  "slider mult_choice": 30}
+
+        self.question_timer = core.CountdownTimer(self.question_timeouts["slider alert"])
 
         assert (self.num_blocks == len(self.readings)) and (self.num_blocks == len(self.affect_order))
 
@@ -70,106 +84,16 @@ class AffectReadingTask(object):
     def display_sliding_scale(self, type="alert", block_num=0,
                               mult_choice_data={}):
 
-        m_question_text = ""
-
-        if type == "alert":
-
-            m_text = "Please indicate your current level of alertness at this time."
-            m_ticks = [1,2,3,4,5,6,7]
-            m_labels = ["Extremely Sleepy", "", "", "Neutral", "", "", "Extremely Alert"]
-            m_style = "triangleMarker"
-            m_size = [1.0, 0.1]
-            m_pos = (0.0, 0.0)
-            m_flip = False
-
-        elif type == "affect":
-
-            m_text = "Please Indicate the extent to which you feel happy or sad currently."
-            m_ticks = [1,2,3,4,5,6,7]
-            m_labels = ["Extremely Sad", "", "", "Neutral", "", "", "Extremely Happy"]
-            m_style = "rating"
-            m_size = [1.0, 0.1]
-            m_pos = (0.0, 0.0)
-            m_flip = False
-
-        elif type == "mult_choice":
-
-            m_text = mult_choice_data["InstructionText"]
-            m_question_text = mult_choice_data["QuestionText"]
-            m_ticks = [1,2,3,4]
-            question_answers = [mult_choice_data["CorrectAnswer"],
-                                mult_choice_data["AnswerOption2"],
-                                mult_choice_data["AnswerOption3"],
-                                mult_choice_data["AnswerOption4"]]
-            random.shuffle(question_answers)
-            m_labels = question_answers
-            m_style = "myRadio"
-            m_size = [0.06, 0.6]
-            m_pos = (-0.9, -0.5)
-            m_flip = True
-
-        elif type == "mind_wandering":
-
-            m_text = "Please indicate how much you were zoning out while reading the text."
-            m_ticks = [1, 2]
-            m_labels = ["Yes", "No"]
-            m_style = "rating"
-            m_size = [1.0, 0.1]
-            m_pos = (0.0, 0.0)
-            m_flip = False
-
-        text_stim = visual.TextStim(win=self.task_presentor.window,
-                                    text=m_text, pos=(0, .8))
-        slider = visual.Slider(win=self.task_presentor.window,
-                               ticks=m_ticks,
-                               labels=m_labels,
-                               style=m_style,
-                               size=m_size,
-                               pos=m_pos,
-                               flip=m_flip)
-
-        slider.markerPos = random.choice(m_ticks)
-
-        if m_question_text:
-            question_text_stim = visual.TextStim(win=self.task_presentor.window,
-                                                 text=m_question_text, pos=(-0.2, .3))
-            stim_list = [question_text_stim, text_stim, slider]
+        if type == "mult_choice":
+            self.question_factory.create_question(type, mult_choice_data=mult_choice_data)
         else:
-            stim_list = [text_stim, slider]
+            self.question_factory.create_question(type)
 
-        self.task_presentor.display_stims(stim_list)
+        slider_reset_time = self.question_timeouts[f"slider {type}"]
+        self.question_timer.reset(slider_reset_time)
 
-        while not slider.getRating():
-            core.wait(.1)
-            y_change =  self.mouse.getWheelRel()[1]
-            if y_change != 0.0:
-                slider.markerPos += y_change
-                self.task_presentor.display_stims(stim_list)
-            if self.mouse.getPressed()[0] == 1:
-                slider.recordRating(slider.markerPos)
-                selection = slider.getRating()
-                if type == "mult_choice":
-                    score = self.score_mult_choice(selection,
-                                                   question_answers,
-                                                   mult_choice_data)
-                    _question_text = m_question_text
-                    type_text = f"mult_choice_{mult_choice_data['Text']}_page_{mult_choice_data['PageNum']}"
-                else:
-                    type_text = type
-                    score = -1
-                    _question_text = m_text
-                self.task_presentor.logger.write_data_row([self.subject_id,
-                                                           time.time(),
-                                                           slider.getRT(),
-                                                           block_num,
-                                                           type_text,
-                                                           _question_text,
-                                                           m_ticks,
-                                                           m_labels,
-                                                           selection,
-                                                           m_labels[int(selection)-1],
-                                                           score])
-
+        self.question_factory.display_question(self.question_timer)
+        self.task_presentor.logger.write_data_row(self.question_factory.get_data_line(self.subject_id, block_num))
 
 
     def display_affect_induction(self, affect_string):
@@ -194,19 +118,18 @@ class AffectReadingTask(object):
 
     def run_page(self, page_text, block_num, text_name, start_time, timer, page_num):
 
-        event.clearEvents()
-
         size_mult = 0.8
 
         display_text = visual.TextStim(self.task_presentor.window,
                                        text=page_text,
-                                       height=(0.1*size_mult))
+                                       height=(0.1*size_mult),
+                                       color=self.task_presentor.globals.default_text_color)
         self.task_presentor.display_drawer.add_to_draw_list(display_text)
         self.task_presentor.display_drawer.add_to_draw_list(self.task_presentor.advance_text)
         self.task_presentor.display_drawer.draw_all()
         self.task_presentor.window.flip()
-        while not event.getKeys(keyList=['space']):
-            continue
+
+        self.task_presentor.input_handler.handle_button_input("default", timer=timer)
 
         page_time = start_time - timer.getTime()
 
@@ -234,6 +157,9 @@ class AffectReadingTask(object):
         while total_reading_timer.getTime() > 0: # While they still have time to read the ENTIRE text.
             for indx, page in enumerate(text_lines):
                 self.run_page(page, block_num, text_name, total_reading_timer.getTime(),total_reading_timer, indx)
+                print(total_reading_timer.getTime())
+                if total_reading_timer.getTime() < 0:
+                    break
             # Finish Early.
             break
 

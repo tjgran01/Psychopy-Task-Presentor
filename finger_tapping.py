@@ -55,11 +55,19 @@ class FingerTappingTask(object):
 
         trigger_int = self.determine_trigger_int(bpm, hand_condition)
 
-        tap_text = visual.TextStim(self.task_presentor.window, text="TAP")
+        tap_text = visual.TextStim(self.task_presentor.window,
+                                   text="TAP",
+                                   color=self.task_presentor.globals.default_text_color)
         if hand_condition == "both":
-            top_text = visual.TextStim(self.task_presentor.window, text=f"TAP {hand_condition.upper()} INDEX FINGERS IN TIME WITH THE BEAT", pos=(0.0, 0.8))
+            top_text = visual.TextStim(self.task_presentor.window,
+                                       text=f"TAP {hand_condition.upper()} INDEX FINGERS IN TIME WITH THE BEAT",
+                                       pos=(0.0, 0.8),
+                                       color=self.task_presentor.globals.default_text_color)
         else:
-            top_text = visual.TextStim(self.task_presentor.window, text=f"TAP {hand_condition.upper()} INDEX FINGER IN TIME WITH THE BEAT", pos=(0.0, 0.8))
+            top_text = visual.TextStim(self.task_presentor.window,
+                                       text=f"TAP {hand_condition.upper()} INDEX FINGER IN TIME WITH THE BEAT",
+                                       pos=(0.0, 0.8),
+                                       color=self.task_presentor.globals.default_text_color)
 
         trial_timer = core.CountdownTimer(60.0 / bpm)
         block_timer = core.CountdownTimer(self.block_time)
@@ -76,7 +84,10 @@ class FingerTappingTask(object):
 
         while block_timer.getTime() > 0:
             current_time = str(int(block_timer.getTime()))
-            timer_text = visual.TextStim(self.task_presentor.window, text=current_time, pos=(-0.9, 0.9))
+            timer_text = visual.TextStim(self.task_presentor.window,
+                                         text=current_time,
+                                         pos=(-0.9, 0.9),
+                                         color=self.task_presentor.globals.default_text_color)
             while trial_timer.getTime() > 0:
                 pass
             trial_timer.reset()
@@ -128,7 +139,9 @@ class FingerTappingTask(object):
 
         to_draw = [
                    self.task_presentor.advance_text,
-                   visual.TextStim(self.task_presentor.window, text=f"For this condition you will be tapping your {condition_string.upper()} hand.")
+                   visual.TextStim(self.task_presentor.window,
+                                   text=f"For this condition you will be tapping your {condition_string.upper()} hand.",
+                                   color=self.task_presentor.globals.default_text_color)
                   ]
 
         self.task_presentor.draw_and_wait_for_input(what_to_draw=to_draw)
