@@ -10,8 +10,9 @@ class AffectReadingTask(object):
     def __init__(self, subject_id, task_presentor, num_blocks=4, affect_order=["happy", "none", "happy", "none"],
                  max_reading_time=180, readings=["hypotheses", "causalclaims", "validity", "variables"],
                  mult_choice_question_num=4, question_mode="likert", snap_questions=False,
-                 randomize_question_presentation=True, movie_size_mult=2):
-        self.testing = True
+                 randomize_question_presentation=True, movie_size_mult=2, text_size_mult=0.7,
+                 affect_induction_time=150):
+        self.testing = False
         self.task_name = "affect_reading"
         self.subject_id = subject_id
         self.task_presentor = task_presentor
@@ -24,13 +25,15 @@ class AffectReadingTask(object):
         # Ensure that we have enough blocks for the number of readings --- can probably just infer some variables eventually.
         assert (self.num_blocks == len(self.readings)) and (self.num_blocks == len(self.affect_order))
 
-        #### These need to be added to param dict.
         self.question_mode = question_mode
-        self.text_size_mult = 0.7
-        self.randomize_mult_choice_presentation = True
+        self.text_size_mult = text_size_mult
+        self.randomize_mult_choice_presentation = randomize_question_presentation
         self.snap_questions = snap_questions
         self.randomize_question_presentation = randomize_question_presentation
-        self.movie_size_mult = 2.5
+        self.movie_size_mult = movie_size_mult
+
+        #### These need to be added to param dict.
+        self.affect_induction_time = affect_induction_time
 
         self.question_factory = QuestionFactory(self.task_presentor,
                                                 mode=self.question_mode,
@@ -93,7 +96,6 @@ class AffectReadingTask(object):
     def display_sliding_scale(self, type="alert", block_num=0,
                               mult_choice_data={}):
 
-
         if type == "mult_choice":
             self.question_factory.create_question(type, mult_choice_data=mult_choice_data)
         else:
@@ -116,10 +118,13 @@ class AffectReadingTask(object):
         movie_stim.size = [movie_stim.size[0] * self.movie_size_mult, movie_stim.size[1] * self.movie_size_mult]
 
         movie_clock = core.CountdownTimer(movie_stim.duration)
+        affect_clock = core.CountdownTimer(self.affect_induction_time)
 
-        while movie_clock.getTime() > 0:
+        while movie_clock.getTime() > 0 and affect_clock.getTime() > 0:
 
             self.task_presentor.display_stim(movie_stim)
+
+
 
 
     def parse_text_from_file(self, text_name):
@@ -218,7 +223,7 @@ class AffectReadingTask(object):
 
         self.display_affect_induction("happy")
 
-        # self.display_sliding_scale(type="alert", block_num=block_num)
+        self.display_sliding_scale(type="alert", block_num=block_num)
         # self.display_sliding_scale(type="affect",block_num=block_num)
         # self.display_sliding_scale(type="affect", block_num=block_num)
         # self.display_sliding_scale(type="alert", block_num=block_num)
@@ -226,3 +231,10 @@ class AffectReadingTask(object):
         # self.display_sliding_scale(type="mind_wandering", block_num=block_num)
         # self.run_mult_choice_block(block_num, reading, randomize_presentation=True)
         # self.task_presentor.run_isi(random.choice([1, 2]))
+
+
+    def run_slider_tut(self):
+
+        self.display_sliding_scale(type="alert", block_num=0)
+        self.display_sliding_scale(type="affect",block_num=0)
+        self.run_mult_choice_block(0, "causalclaims",randomize_presentation=self.randomize_question_presentation)

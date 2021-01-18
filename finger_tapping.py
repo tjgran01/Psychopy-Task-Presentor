@@ -5,7 +5,7 @@ import time
 
 class FingerTappingTask(object):
     def __init__(self, sub_id, task_presentor, num_blocks=12, block_time=15, ibi_time=15,
-                 is_sound=False, tap_window=.250):
+                 is_sound=False, tap_window=.250, conditions=[[120, "left"]]):
         self.task_name = "finger_tapping"
         self.sub_id = sub_id
         self.task_presentor = task_presentor
@@ -14,20 +14,7 @@ class FingerTappingTask(object):
         self.ibi_time = ibi_time
         self.is_sound = is_sound
 
-        self.conditions_list = [
-                                 [120, "right"],
-                                 [80, "right"],
-                                 [120, "left"],
-                                 [80, "left"],
-                                 [120, "both"],
-                                 [80, "both"],
-                                 [120, "right"],
-                                 [80, "right"],
-                                 [120, "left"],
-                                 [80, "left"],
-                                 [120, "both"],
-                                 [80, "both"],
-                               ]
+        self.conditions_list = conditions
 
         if is_sound:
 

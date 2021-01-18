@@ -17,7 +17,7 @@ def main():
     if not myDlg.OK:  # or if ok_data is not None
         sys.exit()
 
-    tp = TaskPresentor(sub_id[0])
+    tp = TaskPresentor(sub_id[0], task_list=["finger_tapping", "stroop", "affect_reading", "end"])
 
 if __name__ == "__main__":
     main()

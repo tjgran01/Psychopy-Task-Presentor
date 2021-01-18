@@ -16,7 +16,8 @@ from parameters.trigger_dict import trigger_dict, trigger_string_dict
 import sys
 
 class TaskPresentor(object):
-    def __init__(self, subject_id, task_list=["affect_reading", "end"], present_method="mri"):
+    def __init__(self, subject_id, task_list=["stroop", "end"],
+                 present_method="mri", run_task_list=True):
         self.subject_id = subject_id
         self.task_list = task_list
         self.globals = PsychopyGlobals()
@@ -29,15 +30,21 @@ class TaskPresentor(object):
         self.fixation_cross = self.globals.fixation_cross
         self.logger = DataLogger(self.subject_id, self.task_list[0])
 
+        if run_task_list:
 
-        for task in task_list:
-            if task == "end":
-                self.run_end()
-            task_obj = self.task_factory.create_task(task)
-            self.logger.set_current_task(task)
-            task_obj.run_full_task()
-            del task_obj
-            self.draw_wait_for_scanner()
+            for task in task_list:
+                if task == "end":
+                    self.run_end()
+                task_obj = self.task_factory.create_task(task)
+                self.logger.set_current_task(task)
+                task_obj.run_full_task()
+                del task_obj
+                self.draw_wait_for_scanner()
+
+        else:
+            self.task_obj = self.task_factory.create_task(task_list[0])
+            self.logger.set_current_task(task_list[0])
+
 
 
     def run_end(self):
@@ -152,7 +159,12 @@ class TaskPresentor(object):
             shape = fixation_time
             scale = fixation_time / 2
             dist = np.random.gamma(shape, scale, 1000)
-            return list(np.random.choice(dist, size=isi_amt))
+        else:
+            shape = fixation_time
+            scale = fixation_time / 2
+            dist = np.random.normal(shape, scale, 1000)
+        return list(np.random.choice(dist, size=isi_amt))
+
 
 
 ### Big Brain Stuff ------------------------------------------------------------

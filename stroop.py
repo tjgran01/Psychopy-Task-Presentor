@@ -8,9 +8,13 @@ import random
 
 import csv
 
+
+
 class StroopTask(object):
-    def __init__(self, subject_id, task_presentor, num_blocks=2, fixation_time=2, congruence_rate=.2,
-                 num_trials=10, ibi_time=10, variable_isi=True, scoring_method="color_correct", response_timeout=5):
+    def __init__(self, subject_id, task_presentor, num_blocks=5,
+                 fixation_time=2, congruence_rate=.5,
+                 num_trials=10, ibi_time=10, variable_isi=True,
+                 scoring_method="congruence", response_timeout=5):
         # scoring methods "congruence" and "color_select"
         self.task_name = "stroop"
         self.subject_id = subject_id
@@ -97,6 +101,25 @@ class StroopTask(object):
         return trials
 
 
+    def score_trial_response(self, input, answer, trial_type):
+
+        if self.scoring_method == "color_correct":
+            if input == answer:
+                return "correct"
+            return "incorrect"
+        else:
+            if trial_type == "congruent":
+                if input == "1":
+                    return "correct"
+                return "incorrect"
+            else:
+                if input == "2":
+                    return "correct"
+                return "incorrect"
+
+
+
+
     def run_block(self, block_num=0):
 
         # create all the trials that will be used.
@@ -104,34 +127,46 @@ class StroopTask(object):
         #
         if self.variable_isi:
             isi_list = self.task_presentor.create_variable_isi_list(len(trial_list), self.fixation_time, how="gamma")
-            print(isi_list)
         else:
             isi_list = [self.fixation_time for elm in trial_list]
 
         for indx, trial in enumerate(trial_list):
-            self.response_timer.reset()
             self.trial_timer.reset()
-            self.task_presentor.display_stim(trial[0])
+            self.response_timer.reset()
+            while self.trial_timer.getTime() > 0:
+                self.task_presentor.display_stim(trial[0])
 
-            key = event.waitKeys(keyList=['right', 'down', 'left'])
+                key = event.getKeys(keyList=['right', 'down', 'left', '1', '2'])
 
-            rt = self.response_timer.getTime()
+                if key:
+                    rt = self.response_timer.getTime()
 
-            if key[0] == trial[1]:
-                response = "correct"
-            else:
-                response = "incorrect"
+                    response = self.score_trial_response(key[0], trial[1], trial[-1])
 
 
-            self.task_presentor.logger.write_data_row([self.subject_id,
-                                                       time.time(),
-                                                       block_num,
-                                                       indx,
-                                                       trial[2],
-                                                       trial[3],
-                                                       trial[4],
-                                                       response,
-                                                       rt * 1000])
+                    self.task_presentor.logger.write_data_row([self.subject_id,
+                                                           time.time(),
+                                                           block_num,
+                                                           indx,
+                                                           trial[2],
+                                                           trial[3],
+                                                           trial[4],
+                                                           response,
+                                                           rt * 1000])
+
+                    break
+
+            if self.trial_timer.getTime() < 0:
+                self.task_presentor.logger.write_data_row([self.subject_id,
+                                                           time.time(),
+                                                           block_num,
+                                                           indx,
+                                                           trial[2],
+                                                           trial[3],
+                                                           trial[4],
+                                                           "TIMEOUT",
+                                                           self.response_timeout * 1000])
+
 
             # Run ITI
             self.task_presentor.run_isi(isi_list[indx])
