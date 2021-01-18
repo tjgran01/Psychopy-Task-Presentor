@@ -14,8 +14,11 @@ TODO
 
 ~1. Change background to black with slightly grey font color.~
 
-2. Make Sliders continuous as opposed to discrete.
-3. Create new Input_Handler to work with button box and trackball. (1,2) for index / middle.
+~2. Make Sliders continuous as opposed to discrete.~
+
+~3. Create new Input_Handler to work with button box~
+
+~3. ... and trackball. (1,2) for index / middle.~
 
 ~4. Set Pages that wait for TTL from MRI (5)~
 
@@ -26,6 +29,8 @@ TODO
 7. Link up triggers for all stim.
 8. Write a TTL Pulse class for EEG trig.
 9. Look into connecting EyeLink. I need some information on this.
+10. Make Stroop use congruence rather than color choice.
+11. Finger tapping - add response logging.
 
 
 #### Data
@@ -48,7 +53,9 @@ num_blocks=2, fixation_time=2, congruence_rate=.2, num_trials=10, ibi_time=10
 
 Texts:
   - `./resources/affect_reading_texts`
+
 Video:
     `./resources/affect_videos`
+
 Question files:
     `./resources/affect_reading_questions`

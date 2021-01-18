@@ -9,7 +9,8 @@ from psychopy_questions import QuestionFactory
 class AffectReadingTask(object):
     def __init__(self, subject_id, task_presentor, num_blocks=4, affect_order=["happy", "none", "happy", "none"],
                  max_reading_time=180, readings=["hypotheses", "causalclaims", "validity", "variables"],
-                 mult_choice_question_num=4, question_mode="likert"):
+                 mult_choice_question_num=4, question_mode="likert", snap_questions=False,
+                 randomize_question_presentation=True, movie_size_mult=2):
         self.testing = True
         self.task_name = "affect_reading"
         self.subject_id = subject_id
@@ -19,11 +20,21 @@ class AffectReadingTask(object):
         self.max_reading_time = max_reading_time
         self.readings = readings
         self.mult_choice_question_num = mult_choice_question_num
+
+        # Ensure that we have enough blocks for the number of readings --- can probably just infer some variables eventually.
+        assert (self.num_blocks == len(self.readings)) and (self.num_blocks == len(self.affect_order))
+
+        #### These need to be added to param dict.
         self.question_mode = question_mode
+        self.text_size_mult = 0.7
+        self.randomize_mult_choice_presentation = True
+        self.snap_questions = snap_questions
+        self.randomize_question_presentation = randomize_question_presentation
+        self.movie_size_mult = 2.5
 
-        self.question_factory = QuestionFactory(self.task_presentor, mode=self.question_mode)
-
-        self.max_reading_time = 10
+        self.question_factory = QuestionFactory(self.task_presentor,
+                                                mode=self.question_mode,
+                                                snap_for_all=self.snap_questions)
 
         self.question_timeouts = {"slider alert": 6,
                                   "slider affect": 6,
@@ -32,8 +43,6 @@ class AffectReadingTask(object):
 
         self.question_timer = core.CountdownTimer(self.question_timeouts["slider alert"])
 
-        assert (self.num_blocks == len(self.readings)) and (self.num_blocks == len(self.affect_order))
-
         self.instructions = self.task_presentor.read_instructions_from_file(self.task_name)
         self.mouse = event.Mouse()
         self.question_dict = self.read_question_dfs(self.readings)
@@ -41,7 +50,7 @@ class AffectReadingTask(object):
 
     def run_full_task(self):
 
-        self.task_presentor.display_instructions(self.instructions)
+        self.task_presentor.display_instructions(self.instructions, input_method="mouse")
 
         for block in range(self.num_blocks):
             if self.testing:
@@ -84,6 +93,7 @@ class AffectReadingTask(object):
     def display_sliding_scale(self, type="alert", block_num=0,
                               mult_choice_data={}):
 
+
         if type == "mult_choice":
             self.question_factory.create_question(type, mult_choice_data=mult_choice_data)
         else:
@@ -99,7 +109,11 @@ class AffectReadingTask(object):
     def display_affect_induction(self, affect_string):
 
         fpath = f"./resources/affect_videos/{affect_string}.mp4"
-        movie_stim = visual.MovieStim3(win=self.task_presentor.window, filename=fpath)
+        movie_stim = visual.MovieStim3(win=self.task_presentor.window,
+                                       filename=fpath)
+
+        #set size.
+        movie_stim.size = [movie_stim.size[0] * self.movie_size_mult, movie_stim.size[1] * self.movie_size_mult]
 
         movie_clock = core.CountdownTimer(movie_stim.duration)
 
@@ -118,18 +132,17 @@ class AffectReadingTask(object):
 
     def run_page(self, page_text, block_num, text_name, start_time, timer, page_num):
 
-        size_mult = 0.8
-
         display_text = visual.TextStim(self.task_presentor.window,
                                        text=page_text,
-                                       height=(0.1*size_mult),
+                                       height=(0.1*self.text_size_mult),
                                        color=self.task_presentor.globals.default_text_color)
         self.task_presentor.display_drawer.add_to_draw_list(display_text)
-        self.task_presentor.display_drawer.add_to_draw_list(self.task_presentor.advance_text)
+        # self.task_presentor.display_drawer.add_to_draw_list(self.task_presentor.advance_text)
         self.task_presentor.display_drawer.draw_all()
         self.task_presentor.window.flip()
 
-        self.task_presentor.input_handler.handle_button_input("default", timer=timer)
+        # Needs to be changed to MOUSE.
+        self.task_presentor.input_handler.handle_mouse_input("left", timer=timer)
 
         page_time = start_time - timer.getTime()
 
@@ -146,13 +159,10 @@ class AffectReadingTask(object):
                                                    -1])
 
 
-
-
     def run_reading_task(self, text_name, block_num):
 
         text_lines = self.parse_text_from_file(text_name)
         total_reading_timer = core.CountdownTimer(self.max_reading_time)
-
 
         while total_reading_timer.getTime() > 0: # While they still have time to read the ENTIRE text.
             for indx, page in enumerate(text_lines):
@@ -190,22 +200,29 @@ class AffectReadingTask(object):
             self.display_affect_induction(affect_condition)
 
         self.task_presentor.run_isi(random.choice([4, 2])) # Runs a fixation.
-        self.display_sliding_scale(type="affect")
-        self.display_sliding_scale(type="alert")
-        self.run_reading_task(reading)
+
+        # If No affect condition --- don't re-prompt.
+        if affect_condition != "none":
+            self.display_sliding_scale(type="affect")
+            self.display_sliding_scale(type="alert")
+
+        self.run_reading_task(reading, block_num)
         self.task_presentor.run_isi(random.choice([3, 5])) # Runs a fixation.
         self.display_sliding_scale(type="mind_wandering")
-        self.run_mult_choice_block(block_num, reading, randomize_presentation=True)
+        self.run_mult_choice_block(block_num, reading,
+                                   randomize_presentation=self.randomize_question_presentation)
         self.task_presentor.run_isi(random.choice([4, 2]))
 
 
     def run_test(self, affect_condition="happy", block_num=0, reading=""):
 
-        self.display_sliding_scale(type="alert", block_num=block_num)
-        self.display_sliding_scale(type="affect",block_num=block_num)
-        self.display_sliding_scale(type="affect", block_num=block_num)
-        self.display_sliding_scale(type="alert", block_num=block_num)
-        self.run_reading_task(reading, block_num)
-        self.display_sliding_scale(type="mind_wandering", block_num=block_num)
-        self.run_mult_choice_block(block_num, reading, randomize_presentation=True)
-        self.task_presentor.run_isi(random.choice([1, 2]))
+        self.display_affect_induction("happy")
+
+        # self.display_sliding_scale(type="alert", block_num=block_num)
+        # self.display_sliding_scale(type="affect",block_num=block_num)
+        # self.display_sliding_scale(type="affect", block_num=block_num)
+        # self.display_sliding_scale(type="alert", block_num=block_num)
+        # self.run_reading_task(reading, block_num)
+        # self.display_sliding_scale(type="mind_wandering", block_num=block_num)
+        # self.run_mult_choice_block(block_num, reading, randomize_presentation=True)
+        # self.task_presentor.run_isi(random.choice([1, 2]))

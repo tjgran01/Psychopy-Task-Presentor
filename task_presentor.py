@@ -55,7 +55,7 @@ class TaskPresentor(object):
         while not event.getKeys():
             continue
 
-        # sys.exit()
+        sys.exit()
 
 
 ### Insturctions ---------------------------------------------------------------
@@ -70,7 +70,7 @@ class TaskPresentor(object):
 
 
     def display_instructions(self, instructions, return_complete=False,
-                             reading_task=False):
+                             reading_task=False, input_method="key"):
 
         size_mult = 1.0
 
@@ -83,7 +83,11 @@ class TaskPresentor(object):
             self.display_drawer.add_to_draw_list(self.advance_text)
             self.display_drawer.draw_all()
             self.window.flip()
-            self.input_handler.handle_button_input("default")
+            if input_method == "mouse":
+                self.input_handler.handle_mouse_input("left")
+            else:
+                self.input_handler.handle_button_input("default")
+
 
         if return_complete:
             return True
@@ -167,6 +171,8 @@ class TaskPresentor(object):
 
 
     def draw_and_wait_for_input(self, what_to_draw=[]):
+
+        event.clearEvents()
 
         what_to_draw.append(self.advance_text)
         for stim in what_to_draw:

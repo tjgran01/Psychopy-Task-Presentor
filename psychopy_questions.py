@@ -1,15 +1,14 @@
 from psychopy import visual, core, event
 import random
 
-import pylink
-
 import time
 
 class QuestionFactory(object):
-    def __init__(self, task_presentor, mode="likert"):
+    def __init__(self, task_presentor, mode="likert", snap_for_all=True):
         self.task_presentor = task_presentor
         self.mode = mode
         self.mouse = event.Mouse()
+        self.snap_for_all = snap_for_all
 
 
     def get_data_line(self, subject_id, block_num):
@@ -21,11 +20,14 @@ class QuestionFactory(object):
 
         if self.timeout:
             rt = None
-            selection = "TIMEOUT"
+            selection = -1
             score = -2
+            selection_string = "TIMEOUT"
+
         else:
             rt = self.slider.getRT()
-            selection = self.selction
+            selection = self.selection
+            selection_string = self.m_labels[int(self.selection)-1]
 
 
         return [subject_id,
@@ -37,7 +39,7 @@ class QuestionFactory(object):
                 self.m_ticks,
                 self.m_labels,
                 selection,
-                self.m_labels[int(self.selection)-1],
+                selection_string,
                 score]
 
 
@@ -113,7 +115,8 @@ class QuestionFactory(object):
 
 
 
-    def create_vas_question(self, labels):
+    def create_vas_question(self, type, text, ticks, labels, style,
+                            size, pos, flip, m_question_text=None):
 
         pass
 
@@ -149,21 +152,47 @@ class QuestionFactory(object):
             self.stims = [self.slider, self.text_stim]
 
 
+
     def display_question(self, question_timer):
+
+        self.mouse.setVisible(False)
+
+        if self.type == "mult_choice":
+            mouse_indx = 1
+            snapping = True
+        else:
+            mouse_indx = 0
+            snapping = False
+
+        if self.snap_for_all:
+            snapping = True
 
         self.task_presentor.display_stims(self.stims)
 
         while not self.slider.getRating() and question_timer.getTime() > 0:
-            core.wait(.1)
-            y_change =  self.mouse.getWheelRel()[1]
-            self.task_presentor.display_stims(self.stims)
+            # See if mouse moved.
+            y_change =  self.mouse.getRel()[mouse_indx]
+
+            # If Mouse moved update the screen.
             if y_change != 0.0:
-                self.slider.markerPos += y_change
+                if snapping:
+                    self.slider.markerPos = round((self.mouse.getPos()[mouse_indx] + .5) * len(self.m_ticks))
+                else:
+                    self.slider.markerPos = (self.mouse.getPos()[mouse_indx] + .5) * len(self.m_ticks)
+                # Update.
                 self.task_presentor.display_stims(self.stims)
+
+            # If They Submit answer.
             if self.mouse.getPressed()[0] == 1:
                 self.timeout = False
                 self.slider.recordRating(self.slider.markerPos)
-                self.selection = self.slider.getRating()
+
+                if snapping:
+                    self.selection = self.slider.getRating()
+                else:
+                    # normalize between 0 - 1
+                    self.selection = (self.slider.getRating() - 1) / (len(self.m_ticks) - 1)
+
                 if type == "mult_choice":
                     self._question_text = m_question_text
                     self.type_text = f"mult_choice_{self.mult_choice_data['Text']}_page_{self.mult_choice_data['PageNum']}"
@@ -171,5 +200,6 @@ class QuestionFactory(object):
                     self.type_text = self.type
                     self.score = -1
                     self._question_text = self.m_text
+                return
 
         self.timeout = True

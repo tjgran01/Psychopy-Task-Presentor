@@ -5,7 +5,7 @@ import time
 
 class FingerTappingTask(object):
     def __init__(self, sub_id, task_presentor, num_blocks=12, block_time=15, ibi_time=15,
-                 is_sound=False):
+                 is_sound=False, tap_window=.250):
         self.task_name = "finger_tapping"
         self.sub_id = sub_id
         self.task_presentor = task_presentor
@@ -40,6 +40,9 @@ class FingerTappingTask(object):
             self.instructions = self.task_presentor.read_instructions_from_file(self.task_name)
         else:
             self.instructions = self.task_presentor.read_instructions_from_file(f"{self.task_name}_no_sound")
+
+
+        self.tap_timer = core.CountdownTimer(tap_window)
 
 
     def run_full_task(self):
@@ -83,6 +86,7 @@ class FingerTappingTask(object):
         block_timer.reset()
 
         while block_timer.getTime() > 0:
+            responded = False
             current_time = str(int(block_timer.getTime()))
             timer_text = visual.TextStim(self.task_presentor.window,
                                          text=current_time,
@@ -100,7 +104,32 @@ class FingerTappingTask(object):
             tap_text.draw()
             timer_text.draw()
             self.task_presentor.window.flip()
-            core.wait(0.2)
+            self.task_presentor.logger.write_data_row([self.sub_id,
+                                                       time.time(),
+                                                       block_num,
+                                                       hand_condition,
+                                                       bpm,
+                                                       "tap_prompted"])
+
+            self.tap_timer.reset()
+            while self.tap_timer.getTime() > 0:
+                if self.task_presentor.input_handler.handle_button_input("default", timer=self.tap_timer):
+                    self.task_presentor.logger.write_data_row([self.sub_id,
+                                                               time.time(),
+                                                               block_num,
+                                                               hand_condition,
+                                                               bpm,
+                                                               "tap_registered"])
+                    responded = True
+
+            if not responded:
+                self.task_presentor.logger.write_data_row([self.sub_id,
+                                                           time.time(),
+                                                           block_num,
+                                                           hand_condition,
+                                                           bpm,
+                                                           "tap_missed"])
+
             self.task_presentor.fixation_cross.draw()
             top_text.draw()
             timer_text.draw()
