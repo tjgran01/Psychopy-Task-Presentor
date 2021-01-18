@@ -1,0 +1,3 @@
+subject_id,timestamp,response_time,block_num,question_type,question_text,response_numbers,response_strings,response_value,response_string,is_correct
+5678,1610928599.4794617,3.479548079005326,0,alert,Please indicate your current level of alertness at this time.,"[1, 2, 3, 4, 5, 6, 7]","['Extremely Sleepy', '', '', 'Neutral', '', '', 'Extremely Alert']",0.0,Extremely Alert,-1
+5678,1610928601.7922587,2.2922280890052207,0,affect,Please Indicate the extent to which you feel happy or sad currently.,"[1, 2, 3, 4, 5, 6, 7]","['Extremely Sad', '', '', 'Neutral', '', '', 'Extremely Happy']",1.0,Extremely Sad,-1
