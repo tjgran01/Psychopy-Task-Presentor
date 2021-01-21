@@ -9,8 +9,8 @@ class DataLogger(object):
         self.task_name = task_name
         self.current_time = str(datetime.datetime.now())
         # So windows doesn't cry.
-        self.current_time = self.current_time.replace(":", "_")
-        self.current_time = self.current_time.replace(" ", "_")
+        for sep in [":", " ", "."]:
+            self.current_time = self.current_time.replace(sep, "_")
 
 
     def set_current_task(self, task):
@@ -23,7 +23,7 @@ class DataLogger(object):
         if not os.path.exists(f"{self.root_data_dir}{self.task_name}"):
             os.mkdir(f"{self.root_data_dir}{self.task_name}")
 
-        with open(f"{self.root_data_dir}{self.task_name}/{self.subject_id}_{self.task_name}_{self.current_time}", "w") as out_csv:
+        with open(f"{self.root_data_dir}{self.task_name}/{self.subject_id}_{self.task_name}_{self.current_time}.csv", "w") as out_csv:
             writer = csv.writer(out_csv, delimiter=",")
 
             writer.writerow(self.get_data_header())
@@ -33,7 +33,7 @@ class DataLogger(object):
 
         assert len(data_row) == len(self.get_data_header())
 
-        with open(f"{self.root_data_dir}{self.task_name}/{self.subject_id}_{self.task_name}_{self.current_time}", "a") as out_csv:
+        with open(f"{self.root_data_dir}{self.task_name}/{self.subject_id}_{self.task_name}_{self.current_time}.csv", "a") as out_csv:
             writer = csv.writer(out_csv, delimiter=",")
 
             writer.writerow(data_row)
@@ -64,3 +64,10 @@ class DataLogger(object):
                     "trial_type",
                     "response_accuracy",
                     "response_time"]
+        elif self.task_name == "finger_tapping":
+            return ["subject_id",
+                    "timestamp",
+                    "block_num",
+                    "hand_condition",
+                    "bpm",
+                    "event"]

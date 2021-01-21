@@ -8,6 +8,7 @@ from psychopy import prefs
 from task_factory import TaskFactory
 from globals import PsychopyGlobals
 from data_logger import DataLogger
+from input_handler import InputHandler
 
 from lsl_trigger import LSLTriggerHandler
 from parameters.trigger_dict import trigger_dict, trigger_string_dict
@@ -15,38 +16,50 @@ from parameters.trigger_dict import trigger_dict, trigger_string_dict
 import sys
 
 class TaskPresentor(object):
-    def __init__(self, subject_id, task_list=["affect_reading", "finger_tapping", "stroop", "end"]):
+    def __init__(self, subject_id, task_list=["stroop", "end"],
+                 present_method="mri", run_task_list=True):
         self.subject_id = subject_id
         self.task_list = task_list
         self.globals = PsychopyGlobals()
         self.task_factory = TaskFactory(self.subject_id, self)
         self.trigger_handler = LSLTriggerHandler()
+        self.input_handler = InputHandler(mode=present_method)
         self.window = self.globals.window
         self.display_drawer = self.globals.the_drawer
         self.advance_text = self.globals.advance_text
         self.fixation_cross = self.globals.fixation_cross
         self.logger = DataLogger(self.subject_id, self.task_list[0])
 
+        if run_task_list:
 
-        for task in task_list:
-            if task == "end":
-                self.run_end()
-            task_obj = self.task_factory.create_task(task)
-            self.logger.set_current_task(task)
-            task_obj.run_full_task()
-            del task_obj
-            del self.logger
+            for task in task_list:
+                if task == "end":
+                    self.run_end()
+                task_obj = self.task_factory.create_task(task)
+                self.logger.set_current_task(task)
+                task_obj.run_full_task()
+                del task_obj
+                self.draw_wait_for_scanner()
+
+        else:
+            self.task_obj = self.task_factory.create_task(task_list[0])
+            self.logger.set_current_task(task_list[0])
+
 
 
     def run_end(self):
 
-        end_text = visual.TextStim(self.window, text="Thank you for completing all of the tasks")
+        event.clearEvents()
+
+        end_text = visual.TextStim(self.window,
+                                   text="Thank you for completing all of the tasks",
+                                   color=self.globals.default_text_color)
         self.display_drawer.add_to_draw_list(end_text)
         self.display_drawer.add_to_draw_list(self.advance_text)
         self.display_drawer.draw_all()
         self.window.flip()
 
-        while event.getKeys():
+        while not event.getKeys():
             continue
 
         sys.exit()
@@ -64,18 +77,24 @@ class TaskPresentor(object):
 
 
     def display_instructions(self, instructions, return_complete=False,
-                             reading_task=False):
+                             reading_task=False, input_method="key"):
 
         size_mult = 1.0
 
         for text_prompt in instructions:
-            display_text = visual.TextStim(self.window, text=text_prompt, height=(0.1*size_mult))
+            display_text = visual.TextStim(self.window,
+                                           text=text_prompt,
+                                           height=(0.1*size_mult),
+                                           color=self.globals.default_text_color)
             self.display_drawer.add_to_draw_list(display_text)
             self.display_drawer.add_to_draw_list(self.advance_text)
             self.display_drawer.draw_all()
             self.window.flip()
-            while not event.getKeys(keyList=['space']):
-                continue
+            if input_method == "mouse":
+                self.input_handler.handle_mouse_input("left")
+            else:
+                self.input_handler.handle_button_input("default")
+
 
         if return_complete:
             return True
@@ -119,7 +138,9 @@ class TaskPresentor(object):
 
         if resting:
             self.trigger_handler.send_int_trigger(trigger_string_dict["Rest_Start"])
-        visual.TextStim(self.win, text=instead_focus).draw()
+        visual.TextStim(self.win,
+                        text=instead_focus,
+                        color=self.globals.default_text_color).draw()
         self.win.flip()
         if self.focus_time > 0:
             core.wait(self.focus_time)
@@ -138,7 +159,12 @@ class TaskPresentor(object):
             shape = fixation_time
             scale = fixation_time / 2
             dist = np.random.gamma(shape, scale, 1000)
-            return list(np.random.choice(dist, size=isi_amt))
+        else:
+            shape = fixation_time
+            scale = fixation_time / 2
+            dist = np.random.normal(shape, scale, 1000)
+        return list(np.random.choice(dist, size=isi_amt))
+
 
 
 ### Big Brain Stuff ------------------------------------------------------------
@@ -158,6 +184,8 @@ class TaskPresentor(object):
 
     def draw_and_wait_for_input(self, what_to_draw=[]):
 
+        event.clearEvents()
+
         what_to_draw.append(self.advance_text)
         for stim in what_to_draw:
             self.display_drawer.add_to_draw_list(stim)
@@ -167,6 +195,19 @@ class TaskPresentor(object):
         while not event.getKeys():
             pass
         return
+
+
+    def draw_wait_for_scanner(self):
+
+        scanner_wait_text =  visual.TextStim(self.window,
+                                             text="Waiting for scanner event...",
+                                             color=self.globals.default_text_color)
+        self.display_drawer.add_to_draw_list(scanner_wait_text)
+        self.display_drawer.draw_all()
+        self.window.flip()
+
+        while not event.getKeys(keyList=["5"]):
+            continue
 
 
 if __name__ == "__main__":

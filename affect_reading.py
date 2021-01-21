@@ -4,11 +4,15 @@ from psychopy import visual, core, event
 import time
 import pandas as pd
 
+from psychopy_questions import QuestionFactory
+
 class AffectReadingTask(object):
     def __init__(self, subject_id, task_presentor, num_blocks=4, affect_order=["happy", "none", "happy", "none"],
                  max_reading_time=180, readings=["hypotheses", "causalclaims", "validity", "variables"],
-                 mult_choice_question_num=4):
-        self.testing = True
+                 mult_choice_question_num=4, question_mode="likert", snap_questions=False,
+                 randomize_question_presentation=True, movie_size_mult=2, text_size_mult=0.7,
+                 affect_induction_time=150):
+        self.testing = False
         self.task_name = "affect_reading"
         self.subject_id = subject_id
         self.task_presentor = task_presentor
@@ -18,7 +22,29 @@ class AffectReadingTask(object):
         self.readings = readings
         self.mult_choice_question_num = mult_choice_question_num
 
+        # Ensure that we have enough blocks for the number of readings --- can probably just infer some variables eventually.
         assert (self.num_blocks == len(self.readings)) and (self.num_blocks == len(self.affect_order))
+
+        self.question_mode = question_mode
+        self.text_size_mult = text_size_mult
+        self.randomize_mult_choice_presentation = randomize_question_presentation
+        self.snap_questions = snap_questions
+        self.randomize_question_presentation = randomize_question_presentation
+        self.movie_size_mult = movie_size_mult
+
+        #### These need to be added to param dict.
+        self.affect_induction_time = affect_induction_time
+
+        self.question_factory = QuestionFactory(self.task_presentor,
+                                                mode=self.question_mode,
+                                                snap_for_all=self.snap_questions)
+
+        self.question_timeouts = {"slider alert": 6,
+                                  "slider affect": 6,
+                                  "slider mind_wandering": 6,
+                                  "slider mult_choice": 30}
+
+        self.question_timer = core.CountdownTimer(self.question_timeouts["slider alert"])
 
         self.instructions = self.task_presentor.read_instructions_from_file(self.task_name)
         self.mouse = event.Mouse()
@@ -27,7 +53,7 @@ class AffectReadingTask(object):
 
     def run_full_task(self):
 
-        self.task_presentor.display_instructions(self.instructions)
+        self.task_presentor.display_instructions(self.instructions, input_method="mouse")
 
         for block in range(self.num_blocks):
             if self.testing:
@@ -38,8 +64,6 @@ class AffectReadingTask(object):
                 self.run_block(affect_condition=self.affect_order[block],
                                block_num=block,
                                reading=self.readings[block])
-
-        self.export_data()
 
 
     def parse_question_df(self, df):
@@ -55,7 +79,7 @@ class AffectReadingTask(object):
 
         question_dict = {}
         for r in readings:
-            df = pd.read_csv(f"./resources/affect_reading_questions/{r}_rote_questions.csv", sep="\t")
+            df = pd.read_csv(f"./resources/affect_reading_questions/{r}_rote_questions.csv")
             question_dict[r] = self.parse_question_df(df)
 
         return question_dict
@@ -72,114 +96,35 @@ class AffectReadingTask(object):
     def display_sliding_scale(self, type="alert", block_num=0,
                               mult_choice_data={}):
 
-        m_question_text = ""
-
-        if type == "alert":
-
-            m_text = "Please indicate your current level of alertness at this time."
-            m_ticks = [1,2,3,4,5,6,7]
-            m_labels = ["Extremely Sleepy", "", "", "Neutral", "", "", "Extremely Alert"]
-            m_style = "triangleMarker"
-            m_size = [1.0, 0.1]
-            m_pos = (0.0, 0.0)
-            m_flip = False
-
-        elif type == "affect":
-
-            m_text = "Please Indicate the extent to which you feel happy or sad currently."
-            m_ticks = [1,2,3,4,5,6,7]
-            m_labels = ["Extremely Sad", "", "", "Neutral", "", "", "Extremely Happy"]
-            m_style = "rating"
-            m_size = [1.0, 0.1]
-            m_pos = (0.0, 0.0)
-            m_flip = False
-
-        elif type == "mult_choice":
-
-            m_text = mult_choice_data["InstructionText"]
-            m_question_text = mult_choice_data["QuestionText"]
-            m_ticks = [1,2,3,4]
-            question_answers = [mult_choice_data["CorrectAnswer"],
-                                mult_choice_data["AnswerOption2"],
-                                mult_choice_data["AnswerOption3"],
-                                mult_choice_data["AnswerOption4"]]
-            random.shuffle(question_answers)
-            m_labels = question_answers
-            m_style = "myRadio"
-            m_size = [0.06, 0.6]
-            m_pos = (-0.9, -0.5)
-            m_flip = True
-
-        elif type == "mind_wandering":
-
-            m_text = "Please indicate how much you were zoning out while reading the text."
-            m_ticks = [1, 2]
-            m_labels = ["Yes", "No"]
-            m_style = "rating"
-            m_size = [1.0, 0.1]
-            m_pos = (0.0, 0.0)
-            m_flip = False
-
-        text_stim = visual.TextStim(win=self.task_presentor.window,
-                                    text=m_text, pos=(0, .8))
-        slider = visual.Slider(win=self.task_presentor.window,
-                               ticks=m_ticks,
-                               labels=m_labels,
-                               style=m_style,
-                               size=m_size,
-                               pos=m_pos,
-                               flip=m_flip)
-
-        slider.markerPos = random.choice(m_ticks)
-
-        if m_question_text:
-            question_text_stim = visual.TextStim(win=self.task_presentor.window,
-                                                 text=m_question_text, pos=(-0.2, .3))
-            stim_list = [question_text_stim, text_stim, slider]
+        if type == "mult_choice":
+            self.question_factory.create_question(type, mult_choice_data=mult_choice_data)
         else:
-            stim_list = [text_stim, slider]
+            self.question_factory.create_question(type)
 
-        self.task_presentor.display_stims(stim_list)
+        slider_reset_time = self.question_timeouts[f"slider {type}"]
+        self.question_timer.reset(slider_reset_time)
 
-        while not slider.getRating():
-            core.wait(.1)
-            y_change =  self.mouse.getWheelRel()[1]
-            if y_change != 0.0:
-                slider.markerPos += y_change
-                self.task_presentor.display_stims(stim_list)
-            if self.mouse.getPressed()[0] == 1:
-                slider.recordRating(slider.markerPos)
-                selection = slider.getRating()
-                if type == "mult_choice":
-                    score = self.score_mult_choice(selection,
-                                                   question_answers,
-                                                   mult_choice_data)
-                else:
-                    score = -1
-                self.task_presentor.logger.write_data_row([self.subject_id,
-                                                           time.time(),
-                                                           slider.getRT(),
-                                                           block_num,
-                                                           type,
-                                                           m_question_text,
-                                                           m_ticks,
-                                                           m_labels,
-                                                           selection,
-                                                           m_labels[int(selection)-1],
-                                                           score])
-
+        self.question_factory.display_question(self.question_timer)
+        self.task_presentor.logger.write_data_row(self.question_factory.get_data_line(self.subject_id, block_num))
 
 
     def display_affect_induction(self, affect_string):
 
         fpath = f"./resources/affect_videos/{affect_string}.mp4"
-        movie_stim = visual.MovieStim3(win=self.task_presentor.window, filename=fpath)
+        movie_stim = visual.MovieStim3(win=self.task_presentor.window,
+                                       filename=fpath)
+
+        #set size.
+        movie_stim.size = [movie_stim.size[0] * self.movie_size_mult, movie_stim.size[1] * self.movie_size_mult]
 
         movie_clock = core.CountdownTimer(movie_stim.duration)
+        affect_clock = core.CountdownTimer(self.affect_induction_time)
 
-        while movie_clock.getTime() > 0:
+        while movie_clock.getTime() > 0 and affect_clock.getTime() > 0:
 
             self.task_presentor.display_stim(movie_stim)
+
+
 
 
     def parse_text_from_file(self, text_name):
@@ -190,19 +135,19 @@ class AffectReadingTask(object):
             return in_file.readlines()
 
 
-    def run_page(self, page_text, block_num, text_name, start_time, timer):
-
-        size_mult = 0.8
+    def run_page(self, page_text, block_num, text_name, start_time, timer, page_num):
 
         display_text = visual.TextStim(self.task_presentor.window,
                                        text=page_text,
-                                       height=(0.1*size_mult))
+                                       height=(0.1*self.text_size_mult),
+                                       color=self.task_presentor.globals.default_text_color)
         self.task_presentor.display_drawer.add_to_draw_list(display_text)
-        self.task_presentor.display_drawer.add_to_draw_list(self.task_presentor.advance_text)
+        # self.task_presentor.display_drawer.add_to_draw_list(self.task_presentor.advance_text)
         self.task_presentor.display_drawer.draw_all()
         self.task_presentor.window.flip()
-        while not event.getKeys(keyList=['space']):
-            continue
+
+        # Needs to be changed to MOUSE.
+        self.task_presentor.input_handler.handle_mouse_input("left", timer=timer)
 
         page_time = start_time - timer.getTime()
 
@@ -210,15 +155,13 @@ class AffectReadingTask(object):
                                                    time.time(),
                                                    page_time,
                                                    block_num,
-                                                   f"reading_{text_name}",
+                                                   f"reading_{text_name}_page_{page_num + 1}",
                                                    page_text,
                                                    [],
                                                    [],
-                                                   [],
-                                                   [],
+                                                   -1,
+                                                   "None",
                                                    -1])
-
-
 
 
     def run_reading_task(self, text_name, block_num):
@@ -226,10 +169,12 @@ class AffectReadingTask(object):
         text_lines = self.parse_text_from_file(text_name)
         total_reading_timer = core.CountdownTimer(self.max_reading_time)
 
-
         while total_reading_timer.getTime() > 0: # While they still have time to read the ENTIRE text.
-            for page in text_lines:
-                self.run_page(page, block_num, text_name, total_reading_timer.getTime(),total_reading_timer)
+            for indx, page in enumerate(text_lines):
+                self.run_page(page, block_num, text_name, total_reading_timer.getTime(),total_reading_timer, indx)
+                print(total_reading_timer.getTime())
+                if total_reading_timer.getTime() < 0:
+                    break
             # Finish Early.
             break
 
@@ -260,22 +205,36 @@ class AffectReadingTask(object):
             self.display_affect_induction(affect_condition)
 
         self.task_presentor.run_isi(random.choice([4, 2])) # Runs a fixation.
-        self.display_sliding_scale(type="affect")
-        self.display_sliding_scale(type="alert")
-        self.run_reading_task(reading)
+
+        # If No affect condition --- don't re-prompt.
+        if affect_condition != "none":
+            self.display_sliding_scale(type="affect")
+            self.display_sliding_scale(type="alert")
+
+        self.run_reading_task(reading, block_num)
         self.task_presentor.run_isi(random.choice([3, 5])) # Runs a fixation.
         self.display_sliding_scale(type="mind_wandering")
-        self.run_mult_choice_block(block_num, reading, randomize_presentation=True)
+        self.run_mult_choice_block(block_num, reading,
+                                   randomize_presentation=self.randomize_question_presentation)
         self.task_presentor.run_isi(random.choice([4, 2]))
 
 
     def run_test(self, affect_condition="happy", block_num=0, reading=""):
 
+        self.display_affect_induction("happy")
+
         self.display_sliding_scale(type="alert", block_num=block_num)
-        self.display_sliding_scale(type="affect",block_num=block_num)
-        self.display_sliding_scale(type="affect", block_num=block_num)
-        self.display_sliding_scale(type="alert", block_num=block_num)
-        self.run_reading_task(reading, block_num)
-        self.display_sliding_scale(type="mind_wandering", block_num=block_num)
-        self.run_mult_choice_block(block_num, reading, randomize_presentation=True)
-        self.task_presentor.run_isi(random.choice([1, 2]))
+        # self.display_sliding_scale(type="affect",block_num=block_num)
+        # self.display_sliding_scale(type="affect", block_num=block_num)
+        # self.display_sliding_scale(type="alert", block_num=block_num)
+        # self.run_reading_task(reading, block_num)
+        # self.display_sliding_scale(type="mind_wandering", block_num=block_num)
+        # self.run_mult_choice_block(block_num, reading, randomize_presentation=True)
+        # self.task_presentor.run_isi(random.choice([1, 2]))
+
+
+    def run_slider_tut(self):
+
+        self.display_sliding_scale(type="alert", block_num=0)
+        self.display_sliding_scale(type="affect",block_num=0)
+        self.run_mult_choice_block(0, "causalclaims",randomize_presentation=self.randomize_question_presentation)

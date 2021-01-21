@@ -1,10 +1,11 @@
 from psychopy import visual, core
 
 from parameters.trigger_dict import trigger_dict, trigger_string_dict
+import time
 
 class FingerTappingTask(object):
-    def __init__(self, sub_id, task_presentor, num_blocks=6, block_time=15, ibi_time=15,
-                 is_sound=False):
+    def __init__(self, sub_id, task_presentor, num_blocks=12, block_time=15, ibi_time=15,
+                 is_sound=False, tap_window=.250, conditions=[[120, "left"]]):
         self.task_name = "finger_tapping"
         self.sub_id = sub_id
         self.task_presentor = task_presentor
@@ -13,14 +14,7 @@ class FingerTappingTask(object):
         self.ibi_time = ibi_time
         self.is_sound = is_sound
 
-        self.conditions_list = [
-                                 [120, "right"],
-                                 [80, "right"],
-                                 [120, "left"],
-                                 [80, "left"],
-                                 [120, "both"],
-                                 [80, "both"],
-                               ]
+        self.conditions_list = conditions
 
         if is_sound:
 
@@ -35,6 +29,9 @@ class FingerTappingTask(object):
             self.instructions = self.task_presentor.read_instructions_from_file(f"{self.task_name}_no_sound")
 
 
+        self.tap_timer = core.CountdownTimer(tap_window)
+
+
     def run_full_task(self):
 
         self.task_presentor.display_instructions(self.instructions)
@@ -43,18 +40,24 @@ class FingerTappingTask(object):
             self.run_block(block_num=block, bpm=self.conditions_list[block][0], hand_condition=self.conditions_list[block][1])
             self.task_presentor.run_ibi(self.ibi_time)
 
-        self.export_data()
-
 
     def run_block(self, bpm, hand_condition, block_num=0):
 
         trigger_int = self.determine_trigger_int(bpm, hand_condition)
 
-        tap_text = visual.TextStim(self.task_presentor.window, text="TAP")
+        tap_text = visual.TextStim(self.task_presentor.window,
+                                   text="TAP",
+                                   color=self.task_presentor.globals.default_text_color)
         if hand_condition == "both":
-            top_text = visual.TextStim(self.task_presentor.window, text=f"TAP {hand_condition.upper()} INDEX FINGERS IN TIME WITH THE BEAT", pos=(0.0, 0.8))
+            top_text = visual.TextStim(self.task_presentor.window,
+                                       text=f"TAP {hand_condition.upper()} INDEX FINGERS IN TIME WITH THE BEAT",
+                                       pos=(0.0, 0.8),
+                                       color=self.task_presentor.globals.default_text_color)
         else:
-            top_text = visual.TextStim(self.task_presentor.window, text=f"TAP {hand_condition.upper()} INDEX FINGER IN TIME WITH THE BEAT", pos=(0.0, 0.8))
+            top_text = visual.TextStim(self.task_presentor.window,
+                                       text=f"TAP {hand_condition.upper()} INDEX FINGER IN TIME WITH THE BEAT",
+                                       pos=(0.0, 0.8),
+                                       color=self.task_presentor.globals.default_text_color)
 
         trial_timer = core.CountdownTimer(60.0 / bpm)
         block_timer = core.CountdownTimer(self.block_time)
@@ -66,11 +69,16 @@ class FingerTappingTask(object):
 
         core.wait(.1)
         self.task_presentor.trigger_handler.send_int_trigger(trigger_int)
+        self.task_presentor.logger.write_data_row([self.sub_id, time.time(), block_num, hand_condition, bpm, "start"])
         block_timer.reset()
-        
+
         while block_timer.getTime() > 0:
+            responded = False
             current_time = str(int(block_timer.getTime()))
-            timer_text = visual.TextStim(self.task_presentor.window, text=current_time, pos=(-0.9, 0.9))
+            timer_text = visual.TextStim(self.task_presentor.window,
+                                         text=current_time,
+                                         pos=(-0.9, 0.9),
+                                         color=self.task_presentor.globals.default_text_color)
             while trial_timer.getTime() > 0:
                 pass
             trial_timer.reset()
@@ -83,7 +91,32 @@ class FingerTappingTask(object):
             tap_text.draw()
             timer_text.draw()
             self.task_presentor.window.flip()
-            core.wait(0.2)
+            self.task_presentor.logger.write_data_row([self.sub_id,
+                                                       time.time(),
+                                                       block_num,
+                                                       hand_condition,
+                                                       bpm,
+                                                       "tap_prompted"])
+
+            self.tap_timer.reset()
+            while self.tap_timer.getTime() > 0:
+                if self.task_presentor.input_handler.handle_button_input("default", timer=self.tap_timer):
+                    self.task_presentor.logger.write_data_row([self.sub_id,
+                                                               time.time(),
+                                                               block_num,
+                                                               hand_condition,
+                                                               bpm,
+                                                               "tap_registered"])
+                    responded = True
+
+            if not responded:
+                self.task_presentor.logger.write_data_row([self.sub_id,
+                                                           time.time(),
+                                                           block_num,
+                                                           hand_condition,
+                                                           bpm,
+                                                           "tap_missed"])
+
             self.task_presentor.fixation_cross.draw()
             top_text.draw()
             timer_text.draw()
@@ -93,6 +126,7 @@ class FingerTappingTask(object):
 
         # 3 means task ended.
         self.task_presentor.trigger_handler.send_int_trigger(trigger_string_dict["Task_End"])
+        self.task_presentor.logger.write_data_row([self.sub_id, time.time(), block_num, hand_condition, bpm, "end"])
         core.wait(.2)
         return
 
@@ -121,11 +155,9 @@ class FingerTappingTask(object):
 
         to_draw = [
                    self.task_presentor.advance_text,
-                   visual.TextStim(self.task_presentor.window, text=f"For this condition you will be tapping your {condition_string.upper()} hand.")
+                   visual.TextStim(self.task_presentor.window,
+                                   text=f"For this condition you will be tapping your {condition_string.upper()} hand.",
+                                   color=self.task_presentor.globals.default_text_color)
                   ]
 
         self.task_presentor.draw_and_wait_for_input(what_to_draw=to_draw)
-
-
-    def export_data(self):
-        pass

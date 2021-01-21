@@ -2,15 +2,40 @@
 
 #### Installing
 
-1. Clone this repo.
-2. Make a python environment `python3.8 -m venv venv`
+1. Clone this repository.
+2. Make a python environment in root directory (folder where you are reading this from :)) `python3.8 -m venv venv`
 3. Activate environment `source venv/bin/activate`
 4. Install requirements `pip install -r requirements.txt`
 5. run `python ./scripts/main.py`
 
+####
+
+TODO
+
+~1. Change background to black with slightly grey font color.~
+
+~2. Make Sliders continuous as opposed to discrete.~
+
+~3. Create new Input_Handler to work with button box~
+
+~3. ... and trackball. (1,2) for index / middle.~
+
+~4. Set Pages that wait for TTL from MRI (5)~
+
+~5. Add timeouts to questions.~
+
+~6. Definitely need a refactor :)~
+
+7. Link up triggers for all stim.
+8. Write a TTL Pulse class for EEG trig.
+9. Look into connecting EyeLink. I need some information on this.
+10. Make Stroop use congruence rather than color choice.
+11. Finger tapping - add response logging.
+
+
 #### Data
 
-Data should be exported into `./data/{id_number}_{year}_{month}_{day}.csv`
+Data should be exported into `./data/{task}/{id_number}_{year}_{month}_{day}.csv`
 
 #### Changing Parameters.
 
@@ -24,11 +49,13 @@ num_blocks=2, fixation_time=2, congruence_rate=.2, num_trials=10, ibi_time=10
 
 #### Where to put things.
 
+##### Affect Reading.
+
 Texts:
   - `./resources/affect_reading_texts`
+
 Video:
     `./resources/affect_videos`
+
 Question files:
     `./resources/affect_reading_questions`
-Scale information:
-    `./resources/affect_`

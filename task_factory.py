@@ -4,6 +4,8 @@ from stroop import StroopTask
 from finger_tapping import FingerTappingTask
 from affect_reading import AffectReadingTask
 
+import pickle
+
 class TaskFactory(object):
     def __init__(self, sub_id, task_presentor):
         self.sub_id = sub_id
@@ -61,9 +63,38 @@ class TaskFactory(object):
 
     def create_default_task(self, task_string):
 
+        prefs = pickle.load(open(f"./preferences/saved_defaults/{task_string}_defaults.pkl", "rb"))
+
+        print(prefs)
+
         if task_string == "stroop":
-            return StroopTask(self.sub_id, self.task_presentor)
+
+            return StroopTask(self.sub_id, self.task_presentor,
+                              num_blocks=prefs["num_blocks"],
+                              fixation_time=prefs["fixation_time"],
+                              congruence_rate=prefs["congruence_rate"],
+                              num_trials=prefs["num_trials"],
+                              ibi_time=prefs["ibi_time"],
+                              variable_isi=prefs["variable_isi"],
+                              scoring_method=prefs["scoring_method"],
+                              response_timeout=prefs["response_timeout"])
         elif task_string == "finger_tapping":
-            return FingerTappingTask(self.sub_id, self.task_presentor)
+            return FingerTappingTask(self.sub_id, self.task_presentor,
+                                     num_blocks=prefs["num_blocks"],
+                                     block_time=prefs["block_time"],
+                                     ibi_time=prefs["ibi_time"],
+                                     is_sound=prefs["is_sound"],
+                                     conditions=prefs["conditions"])
         elif task_string == "affect_reading":
-            return AffectReadingTask(self.sub_id, self.task_presentor)
+            return AffectReadingTask(self.sub_id, self.task_presentor,
+                                     num_blocks=prefs["num_blocks"],
+                                     affect_order=prefs["affect_order"],
+                                     max_reading_time=prefs["max_reading_time"],
+                                     readings=prefs["readings"],
+                                     mult_choice_question_num=prefs["mult_choice_question_num"],
+                                     question_mode=prefs["question_mode"],
+                                     snap_questions=prefs["snap_questions"],
+                                     text_size_mult=prefs["text_size_mult"],
+                                     randomize_question_presentation=prefs["randomize_question_presentation"],
+                                     movie_size_mult=prefs["movie_size_mult"],
+                                     affect_induction_time=prefs["affect_induction_time"])
