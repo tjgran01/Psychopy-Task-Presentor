@@ -24,13 +24,12 @@ class PsychopyGlobals(object):
         if platform.system() == "Windows":
             self.window = visual.Window(size=[1920 / 2 , 1080 / 2], monitor='testMonitor',
                                             color="black", fullscr=full_screen,
-                                            screen=2, allowGUI=True)
+                                            screen=2, allowGUI=True, mouseVisible=False)
         else:
             self.window = visual.Window(size=[3840, 2160], monitor='testMonitor',
                                 color="black", fullscr=full_screen,
-                                screen=2, allowGUI=True)
+                                screen=2, allowGUI=True, mouseVisible=False)
 
-        # self.window.mouseVisible = False
 
         self.the_drawer = DisplayDrawer()
         self.default_text_color = [0,0,0]

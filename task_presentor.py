@@ -25,6 +25,7 @@ class TaskPresentor(object):
         self.trigger_handler = LSLTriggerHandler()
         self.input_handler = InputHandler(mode=present_method)
         self.window = self.globals.window
+        self.window.mouseVisible = False
         self.display_drawer = self.globals.the_drawer
         self.advance_text = self.globals.advance_text
         self.fixation_cross = self.globals.fixation_cross

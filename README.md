@@ -19,6 +19,20 @@ If wxPython is still giving you trouble. Check [here](https://www.wxpython.org/p
 
 ## Notes on running.
 
+### Inputs.
+
+#### "Waiting for Scanner Event":
+
+Press "5" on the keyboard to advance.
+
+#### Stroop and Finger Tapping.
+
+`stroop` and `finger_tapping` are expecting button box inputs. As such "Index Finger Button" refers to "1" on the keyboard. "Middle Finger Button" refers to "1" on the keyboard.
+
+#### Affect Reading.
+
+`Affect Reading` are expecting trackball inputs. Therefore use the mouse. "Index finger Button" refers to a LEFT CLICK. "Scroll Left/Right" mean move mouse left right. "Scroll Up/Down" means move mouse up and down.
+
 ### Editing task order.
 
 If you want to just run one task on into `main.py` and edit the `task_list` variable. (Line 24 as of 1/29/20).
