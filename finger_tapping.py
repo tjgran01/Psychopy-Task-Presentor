@@ -5,7 +5,7 @@ import time
 
 class FingerTappingTask(object):
     def __init__(self, sub_id, task_presentor, num_blocks=12, block_time=15, ibi_time=15,
-                 is_sound=False, tap_window=.250, conditions=[[120, "left"]]):
+                 is_sound=False, tap_window=.10, conditions=[[120, "left"]]):
         self.task_name = "finger_tapping"
         self.sub_id = sub_id
         self.task_presentor = task_presentor
@@ -35,6 +35,7 @@ class FingerTappingTask(object):
     def run_full_task(self):
 
         self.task_presentor.display_instructions(self.instructions)
+        self.task_presentor.draw_wait_for_scanner()
 
         for block in range(self.num_blocks):
             self.run_block(block_num=block, bpm=self.conditions_list[block][0], hand_condition=self.conditions_list[block][1])
@@ -46,8 +47,10 @@ class FingerTappingTask(object):
         trigger_int = self.determine_trigger_int(bpm, hand_condition)
 
         tap_text = visual.TextStim(self.task_presentor.window,
-                                   text="TAP",
+                                   text="+",
                                    color=self.task_presentor.globals.default_text_color)
+        tap_circle = visual.Circle(self.task_presentor.window, lineWidth=10, size=(.05 * 9, .05 * 16),
+                                   interpolate=True, radius=.3)
         if hand_condition == "both":
             top_text = visual.TextStim(self.task_presentor.window,
                                        text=f"TAP {hand_condition.upper()} INDEX FINGERS IN TIME WITH THE BEAT",
@@ -62,10 +65,10 @@ class FingerTappingTask(object):
         trial_timer = core.CountdownTimer(60.0 / bpm)
         block_timer = core.CountdownTimer(self.block_time)
 
-        self.display_condition_prompt(condition_string=hand_condition)
+        # self.display_condition_prompt(condition_string=hand_condition)
 
-        top_text.draw()
-        self.task_presentor.window.flip()
+        # top_text.draw()
+        # self.task_presentor.window.flip()
 
         core.wait(.1)
         self.task_presentor.trigger_handler.send_int_trigger(trigger_int)
@@ -89,6 +92,7 @@ class FingerTappingTask(object):
                     self.beat_count = 0
             top_text.draw()
             tap_text.draw()
+            tap_circle.draw()
             timer_text.draw()
             self.task_presentor.window.flip()
             self.task_presentor.logger.write_data_row([self.sub_id,

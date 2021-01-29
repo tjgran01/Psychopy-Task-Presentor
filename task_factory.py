@@ -65,19 +65,20 @@ class TaskFactory(object):
 
         prefs = pickle.load(open(f"./preferences/saved_defaults/{task_string}_defaults.pkl", "rb"))
 
-        print(prefs)
-
         if task_string == "stroop":
 
             return StroopTask(self.sub_id, self.task_presentor,
                               num_blocks=prefs["num_blocks"],
                               fixation_time=prefs["fixation_time"],
-                              congruence_rate=prefs["congruence_rate"],
+                              congruence_rate_congruent=prefs["congruence_rate_congruent"],
+                              congruence_rate_incongruent=prefs["congruence_rate_incongruent"],
                               num_trials=prefs["num_trials"],
                               ibi_time=prefs["ibi_time"],
                               variable_isi=prefs["variable_isi"],
                               scoring_method=prefs["scoring_method"],
-                              response_timeout=prefs["response_timeout"])
+                              response_timeout=prefs["response_timeout"],
+                              block_time=prefs["block_time"],
+                              conditions=prefs["conditions"])
         elif task_string == "finger_tapping":
             return FingerTappingTask(self.sub_id, self.task_presentor,
                                      num_blocks=prefs["num_blocks"],
@@ -97,4 +98,8 @@ class TaskFactory(object):
                                      text_size_mult=prefs["text_size_mult"],
                                      randomize_question_presentation=prefs["randomize_question_presentation"],
                                      movie_size_mult=prefs["movie_size_mult"],
-                                     affect_induction_time=prefs["affect_induction_time"])
+                                     affect_induction_time=prefs["affect_induction_time"],
+                                     default_fixation_time=prefs["default_fixation_time"],
+                                     question_timeouts=prefs["question_timeouts"],
+                                     testing=prefs["testing"],
+                                     use_padding=prefs["use_padding"])

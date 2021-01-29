@@ -1,5 +1,5 @@
 Finger Tapping Task
-In this task you will be asked to tap your index finger on either your right or left hand.
+In this task you will be asked to tap your index finger on either your right hand.
 While tapping your finger in this way, try match the rate at which your finger is tapping by looking at the "TAP" cue displayed in the center of the screen.
 There will be a countdown timer in the bottom left corner of the screen which will tell you how much time is left before moving on to the next task.
 Once you finish the task, you will be given a period of rest before beginning the next task.

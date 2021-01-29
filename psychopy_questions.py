@@ -61,22 +61,28 @@ class QuestionFactory(object):
         if type == "alert":
 
             self.m_text = "Please indicate your current level of alertness at this time."
-            self.m_ticks = [1,2,3,4,5,6,7]
-            self.m_labels = ["Extremely Sleepy", "", "", "Neutral", "", "", "Extremely Alert"]
+            self.m_ticks = [1, 2, 3]
+            self.m_labels = ["Extremely Sleepy", "Neutral" ,"Extremely Alert"]
             self.m_style = "triangleMarker"
             self.m_size = [1.0, 0.1]
             self.m_pos = (0.0, 0.0)
             self.m_flip = False
+
+            self.m_text_pos = (0, .8)
+            self.m_text_width = 1.5
 
         elif type == "affect":
 
             self.m_text = "Please Indicate the extent to which you feel happy or sad currently."
-            self.m_ticks = [1,2,3,4,5,6,7]
-            self.m_labels = ["Extremely Sad", "", "", "Neutral", "", "", "Extremely Happy"]
+            self.m_ticks = [1, 2, 3]
+            self.m_labels = ["Extremely Sad", "Neutral", "Extremely Happy"]
             self.m_style = "triangleMarker"
             self.m_size = [1.0, 0.1]
             self.m_pos = (0.0, 0.0)
             self.m_flip = False
+
+            self.m_text_pos = (0, .8)
+            self.m_text_width = 1.5
 
         elif type == "mult_choice":
 
@@ -95,16 +101,58 @@ class QuestionFactory(object):
             self.m_flip = True
             self._question_text = self.m_question_text
 
+            self.m_text_pos = (0, .8)
+            self.m_text_width = 1.5
+
         elif type == "mind_wandering":
 
-            self.m_text = "Please indicate the extent to which you were 'zoning out' while reading the text."
+            self.m_text = "How much were you 'zoning out' while reading the text."
             self.m_ticks = [1, 2]
-            self.m_labels = ["Yes", "No"]
+            self.m_labels = ["Not at all", "Most"]
             self.m_style = "triangleMarker"
             self.m_size = [1.0, 0.1]
             self.m_pos = (0.0, 0.0)
             self.m_flip = False
             self._question_text = self.m_question_text
+
+            self.m_text_pos = (0, .8)
+            self.m_text_width = 1.5
+
+        elif type == "practice_slider":
+
+            self.m_text = "While doing this task you will see some questions that require you to use the trackball on the device in your hand. When you see questions of this type scroll the trackball left and right to make your selection. Click the left button to make your selection and continue."
+            self.m_ticks = [1, 2]
+            self.m_labels = ["Left", "Right"]
+            self.m_style = "triangleMarker"
+            self.m_size = [1.0, 0.1]
+            self.m_pos = (0.0, 0.0)
+            self.m_text_pos = (0.0, 0.6)
+            self.m_flip = False
+            self._question_text = self.m_question_text
+
+            self.m_text_pos = (0.0, 0.6)
+            self.m_text_width = 1.5
+
+        elif type == "practice_mult_choice":
+
+            self.m_text = "You will sometimes see multiple choice questions in this task."
+            self.m_question_text = "When you see questions like this displayed on the screen please move the trackball UP and DOWN in order to highlight your selection. When you have the reponse you wish to submit highlighed, click the left button to make your selection and continue."
+            self.m_ticks = [1,2,3,4]
+            self.question_answers = ["Answer Option 4",
+                                     "Answer Option 3",
+                                     "Answer Option 2",
+                                     "Answer Option 1"]
+            self.m_labels = self.question_answers
+            self.m_style = "myRadio"
+            self.m_size = [0.06, 0.6]
+            self.m_pos = (-0.9, -0.5)
+            self.m_flip = True
+            self._question_text = self.m_question_text
+
+            self.m_text_pos = (0, .8)
+            self.m_text_width = 1.5
+
+
 
         if self.mode == "likert":
             stims = self.create_likert_question(type, self.m_text, self.m_ticks, self.m_labels,
@@ -131,8 +179,9 @@ class QuestionFactory(object):
             self._question_text = text
 
         self.text_stim = visual.TextStim(win=self.task_presentor.window,
-                                         text=text, pos=(0, .8),
-                                         color=self.task_presentor.globals.default_text_color)
+                                         text=text, pos=self.m_text_pos,
+                                         color=self.task_presentor.globals.default_text_color,
+                                         wrapWidth=self.m_text_width)
         self.slider = visual.Slider(win=self.task_presentor.window,
                                     ticks=ticks,
                                     labels=labels,
@@ -157,7 +206,7 @@ class QuestionFactory(object):
 
         self.mouse.setVisible(False)
 
-        if self.type == "mult_choice":
+        if self.type in ["mult_choice", "practice_mult_choice"]:
             mouse_indx = 1
             snapping = True
         else:

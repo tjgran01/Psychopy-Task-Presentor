@@ -16,7 +16,7 @@ from parameters.trigger_dict import trigger_dict, trigger_string_dict
 import sys
 
 class TaskPresentor(object):
-    def __init__(self, subject_id, task_list=["stroop", "end"],
+    def __init__(self, subject_id, task_list=["finger_tapping", "end"],
                  present_method="mri", run_task_list=True):
         self.subject_id = subject_id
         self.task_list = task_list
@@ -39,7 +39,6 @@ class TaskPresentor(object):
                 self.logger.set_current_task(task)
                 task_obj.run_full_task()
                 del task_obj
-                self.draw_wait_for_scanner()
 
         else:
             self.task_obj = self.task_factory.create_task(task_list[0])
@@ -198,6 +197,8 @@ class TaskPresentor(object):
 
 
     def draw_wait_for_scanner(self):
+
+        event.clearEvents()
 
         scanner_wait_text =  visual.TextStim(self.window,
                                              text="Waiting for scanner event...",

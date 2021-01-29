@@ -71,3 +71,9 @@ class DataLogger(object):
                     "hand_condition",
                     "bpm",
                     "event"]
+        elif self.task_name == "timing_data":
+            return ["id",
+                    "timestamp",
+                    "event_type",
+                    "time_left",
+                    "block_num"]
