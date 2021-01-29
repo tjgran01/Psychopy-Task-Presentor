@@ -119,7 +119,7 @@ class AffectReadingTask(object):
 
     def display_affect_induction(self, affect_string):
 
-        fpath = f"./resources/affect_videos/{affect_string}.mp4"
+        fpath = f"./resources/affect_videos/{affect_string}1.mp4"
         movie_stim = visual.MovieStim3(win=self.task_presentor.window,
                                        filename=fpath)
 
