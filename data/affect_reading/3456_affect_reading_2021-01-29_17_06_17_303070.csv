@@ -1,0 +1,12 @@
+subject_id,timestamp,response_time,block_num,question_type,question_text,response_numbers,response_strings,response_value,response_string,is_correct
+3456,1611965180.2934282,0.2080671000003349,0,affect,Please Indicate the extent to which you feel happy or sad currently.,"[1, 2, 3]","['Extremely Sad', 'Neutral', 'Extremely Happy']",0.41718750000000004,Extremely Happy,-1
+3456,1611965193.9935346,1.9035416839979007,0,reading_hypotheses_page_1,"Good scientific practice is more, of course, than an exercise in deliberate observation and the use of adequate control groups to expose and assess bias.",[],[],-1,None,-1
+3456,1611965194.3475394,0.3539223750012752,0,reading_hypotheses_page_2,"Whether a program of research will 'pay off' by casting new light on some difficult problem or perplexing aspect of behavior will also depend on the quality of the scientist's research ideas, or hypotheses.",[],[],-1,None,-1
+3456,1611965194.507571,0.1599638670013519,0,reading_hypotheses_page_3,"The scientist views facts not as isolated or separate entities or events, but as meaningfully connected.",[],[],-1,None,-1
+3456,1611965194.8085322,0.3008664940025483,0,reading_hypotheses_page_4,"The scientist's hypotheses are the starting points for approaching this sort of connectedness, by making a theoretical guess as to the significance or meaning of a given fact.
+",[],[],-1,None,-1
+3456,1611965194.9715724,0.16294734600160155,0,reading_hypotheses_page_5,"Any research project begins with selecting and narrowing the question originally asked, to make it manageable for study within the available resources.",[],[],-1,None,-1
+3456,1611965195.1385639,0.16692791099922033,0,reading_hypotheses_page_6,Extensive preparation is crucial.,[],[],-1,None,-1
+3456,1611965195.4665835,0.3279342909991101,0,reading_hypotheses_page_7,"The literature should be carefully reviewed, and the task should be thought about at length.",[],[],-1,None,-1
+3456,1611965195.6786227,0.21194732200092403,0,reading_hypotheses_page_8,One must select the most fundamental elements that will constitute the crux of the hypotheses.,[],[],-1,None,-1
+3456,1611965195.8666427,0.18793646800259012,0,reading_hypotheses_page_9,"A classic principle of this intellectual ruminative and winnowing process is known as Occam's razor, named after the philosopher William of Occam.",[],[],-1,None,-1

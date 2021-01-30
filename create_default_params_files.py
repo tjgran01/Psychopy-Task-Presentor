@@ -3,7 +3,7 @@ import pickle
 #### EDIT THIS TO EDIT DEFAULT PARAMETERS.
 
 stroop_defaults = {
-                   "num_blocks": 10,
+                   "num_blocks": 6,
                    "fixation_time": 2, # How long between trials.
                    "conditions": ["congruent",
                                   "incongruent",
@@ -13,7 +13,7 @@ stroop_defaults = {
                                   "incongruent"],
                    "congruence_rate_congruent": 1,
                    "congruence_rate_incongruent": .33,
-                   "num_trials": 20,
+                   "num_trials": 20, # overridden if block_time != 0.
                    "ibi_time": 15,
                    "variable_isi": False, # Will use 'fixation_time as mean.'
                    "scoring_method": "congruence",

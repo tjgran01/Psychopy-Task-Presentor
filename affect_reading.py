@@ -167,8 +167,8 @@ class AffectReadingTask(object):
                                        text=page_text,
                                        height=(0.1*self.text_size_mult),
                                        color=self.task_presentor.globals.default_text_color,
-                                       alignHoriz="left",
-                                       pos=(-0.5, 0.0))
+                                       alignText="left",
+                                       pos=(0.0, 0.0))
         self.task_presentor.display_drawer.add_to_draw_list(display_text)
         # self.task_presentor.display_drawer.add_to_draw_list(self.task_presentor.advance_text)
         self.task_presentor.display_drawer.draw_all()
