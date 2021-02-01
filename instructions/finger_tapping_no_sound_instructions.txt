@@ -1,4 +1,4 @@
-Finger Tapping Task
-In this task you will be asked to tap your index finger on either your right hand.
-While tapping your finger in this way, try to match the rate at which your finger is tapping by matching it to the circle cue displayed in the center of the screen.
-When the circle stops flashing - please focus on the cross (+) in the center of the screen and wait for the circle to begin flashing again. When it does. Resume tapping your finger to match the rate of the circle.
+FINGER TAPPING TASK
+You will be asked to tap your right index finger.
+Try to match your tapping rate to the flashing circle cue displayed in the center of the screen.
+When the circle stops flashing, please focus on the cross (+) in the center of the screen and wait for the circle to begin flashing again. 

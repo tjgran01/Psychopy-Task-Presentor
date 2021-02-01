@@ -60,7 +60,7 @@ class QuestionFactory(object):
 
         if type == "alert":
 
-            self.m_text = "Please indicate your current level of alertness at this time."
+            self.m_text = "How sleepy vs. alert are you at this moment?"
             self.m_ticks = [1, 2, 3]
             self.m_labels = ["Extremely Sleepy", "Neutral" ,"Extremely Alert"]
             self.m_style = "triangleMarker"
@@ -73,7 +73,7 @@ class QuestionFactory(object):
 
         elif type == "affect":
 
-            self.m_text = "Please Indicate the extent to which you feel happy or sad currently."
+            self.m_text = "How sad vs. happy are you at this moment?"
             self.m_ticks = [1, 2, 3]
             self.m_labels = ["Extremely Sad", "Neutral", "Extremely Happy"]
             self.m_style = "triangleMarker"
@@ -106,7 +106,7 @@ class QuestionFactory(object):
 
         elif type == "mind_wandering":
 
-            self.m_text = "How much were you 'zoning out' while reading the text."
+            self.m_text = "How much were you 'zoning out' while reading the text?"
             self.m_ticks = [1, 2]
             self.m_labels = ["Not at all", "Most"]
             self.m_style = "triangleMarker"
@@ -120,7 +120,7 @@ class QuestionFactory(object):
 
         elif type == "practice_slider":
 
-            self.m_text = "While doing this task you will see some questions that require you to use the trackball on the device in your hand. When you see questions of this type scroll the trackball left and right to make your selection. Click the left button to make your selection and continue."
+            self.m_text = "For the next task, you will see some questions that you will answer with the trackball in your hand. Scroll the trackball left and right to make your selection. Click the left button to make your selection and continue."
             self.m_ticks = [1, 2]
             self.m_labels = ["Left", "Right"]
             self.m_style = "triangleMarker"
@@ -136,7 +136,7 @@ class QuestionFactory(object):
         elif type == "practice_mult_choice":
 
             self.m_text = "You will sometimes see multiple choice questions in this task."
-            self.m_question_text = "When you see questions like this displayed on the screen please move the trackball UP and DOWN in order to highlight your selection. When you have the reponse you wish to submit highlighed, click the left button to make your selection and continue."
+            self.m_question_text = "To respond, please move the trackball UP and DOWN in order to highlight your selection. Click the left button to submit your response."
             self.m_ticks = [1,2,3,4]
             self.question_answers = ["Answer Option 4",
                                      "Answer Option 3",

@@ -1,0 +1,31 @@
+subject_id,timestamp,block_num,trial_num,display_text,display_color,trial_type,response_accuracy,response_time
+XXXX,1612142108.5482109,0,0,blue,blue,congruent,TIMEOUT,5000
+XXXX,1612142115.5714407,0,1,blue,blue,congruent,TIMEOUT,5000
+XXXX,1612142122.5980341,0,2,yellow,yellow,congruent,TIMEOUT,5000
+XXXX,1612142129.6203852,0,3,yellow,yellow,congruent,TIMEOUT,5000
+XXXX,1612142133.5586483,0,4,blue,blue,congruent,Block Timeout,-1
+XXXX,1612142155.7175996,1,0,blue,yellow,incongruent,TIMEOUT,5000
+XXXX,1612142162.7408874,1,1,blue,yellow,incongruent,TIMEOUT,5000
+XXXX,1612142169.7649395,1,2,blue,yellow,incongruent,TIMEOUT,5000
+XXXX,1612142176.7898602,1,3,red,red,congruent,TIMEOUT,5000
+XXXX,1612142180.712687,1,4,blue,red,incongruent,Block Timeout,-1
+XXXX,1612142202.8025,2,0,red,red,congruent,TIMEOUT,5000
+XXXX,1612142209.82595,2,1,red,red,congruent,TIMEOUT,5000
+XXXX,1612142216.8505914,2,2,yellow,yellow,congruent,TIMEOUT,5000
+XXXX,1612142223.8748252,2,3,red,red,congruent,TIMEOUT,5000
+XXXX,1612142227.8135796,2,4,red,red,congruent,Block Timeout,-1
+XXXX,1612142249.9035783,3,0,red,yellow,incongruent,TIMEOUT,5000
+XXXX,1612142256.9281375,3,1,blue,red,incongruent,TIMEOUT,5000
+XXXX,1612142263.9525123,3,2,yellow,yellow,congruent,TIMEOUT,5000
+XXXX,1612142270.9772494,3,3,red,blue,incongruent,TIMEOUT,5000
+XXXX,1612142274.8978567,3,4,yellow,blue,incongruent,Block Timeout,-1
+XXXX,1612142296.9888086,4,0,blue,blue,congruent,TIMEOUT,5000
+XXXX,1612142304.01317,4,1,blue,blue,congruent,TIMEOUT,5000
+XXXX,1612142311.0378132,4,2,yellow,yellow,congruent,TIMEOUT,5000
+XXXX,1612142318.062555,4,3,yellow,yellow,congruent,TIMEOUT,5000
+XXXX,1612142322.0002494,4,4,yellow,yellow,congruent,Block Timeout,-1
+XXXX,1612142344.0911877,5,0,red,red,congruent,TIMEOUT,5000
+XXXX,1612142351.1150262,5,1,yellow,red,incongruent,TIMEOUT,5000
+XXXX,1612142358.1397214,5,2,red,red,congruent,TIMEOUT,5000
+XXXX,1612142365.1638541,5,3,yellow,red,incongruent,TIMEOUT,5000
+XXXX,1612142369.0849135,5,4,red,red,congruent,Block Timeout,-1
