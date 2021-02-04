@@ -1,2 +1,0 @@
-subject_id,timestamp,response_time,block_num,question_type,question_text,response_numbers,response_strings,response_value,response_string,is_correct
-3456,1611960889.3523817,1.0421184560000256,0,affect,Please Indicate the extent to which you feel happy or sad currently.,"[1, 2, 3]","['Extremely Sad', 'Neutral', 'Extremely Happy']",0.37031250000000004,Extremely Happy,-1

@@ -78,7 +78,8 @@ class TaskFactory(object):
                               scoring_method=prefs["scoring_method"],
                               response_timeout=prefs["response_timeout"],
                               block_time=prefs["block_time"],
-                              conditions=prefs["conditions"])
+                              conditions=prefs["conditions"],
+                              shuffle_conditions=prefs["shuffle_conditions"])
         elif task_string == "finger_tapping":
             return FingerTappingTask(self.sub_id, self.task_presentor,
                                      num_blocks=prefs["num_blocks"],

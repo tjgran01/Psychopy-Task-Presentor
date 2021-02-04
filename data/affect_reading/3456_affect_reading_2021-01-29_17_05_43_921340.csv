@@ -1,4 +1,0 @@
-subject_id,timestamp,response_time,block_num,question_type,question_text,response_numbers,response_strings,response_value,response_string,is_correct
-3456,1611965146.35701,0.3569186310014629,0,affect,Please Indicate the extent to which you feel happy or sad currently.,"[1, 2, 3]","['Extremely Sad', 'Neutral', 'Extremely Happy']",0.5,Extremely Happy,-1
-3456,1611965159.4392138,1.4331991049984936,0,reading_hypotheses_page_1,"Good scientific practice is more, of course, than an exercise in deliberate observation and the use of adequate control groups to expose and assess bias.",[],[],-1,None,-1
-3456,1611965160.7521753,1.3128765479996218,0,reading_hypotheses_page_2,"Whether a program of research will 'pay off' by casting new light on some difficult problem or perplexing aspect of behavior will also depend on the quality of the scientist's research ideas, or hypotheses.",[],[],-1,None,-1

@@ -8,9 +8,12 @@ class DataLogger(object):
         self.subject_id = subject_id
         self.task_name = task_name
         self.current_time = str(datetime.datetime.now())
+        self.day = str(datetime.date.today())
         # So windows doesn't cry.
         for sep in [":", " ", "."]:
             self.current_time = self.current_time.replace(sep, "_")
+        for sep in [":", " ", ".", "/"]:
+            self.day = self.day.replace(sep, "_")
 
 
     def set_current_task(self, task):
@@ -20,10 +23,10 @@ class DataLogger(object):
 
     def create_export_file(self):
 
-        if not os.path.exists(f"{self.root_data_dir}{self.task_name}"):
-            os.mkdir(f"{self.root_data_dir}{self.task_name}")
+        if not os.path.exists(f"{self.root_data_dir}/{self.task_name}/{self.day}"):
+            os.mkdir(f"{self.root_data_dir}{self.task_name}/{self.day}")
 
-        with open(f"{self.root_data_dir}{self.task_name}/{self.subject_id}_{self.task_name}_{self.current_time}.csv", "w") as out_csv:
+        with open(f"{self.root_data_dir}{self.task_name}/{self.day}/{self.subject_id}_{self.task_name}_{self.current_time}.csv", "w") as out_csv:
             writer = csv.writer(out_csv, delimiter=",")
 
             writer.writerow(self.get_data_header())
@@ -33,7 +36,7 @@ class DataLogger(object):
 
         assert len(data_row) == len(self.get_data_header())
 
-        with open(f"{self.root_data_dir}{self.task_name}/{self.subject_id}_{self.task_name}_{self.current_time}.csv", "a") as out_csv:
+        with open(f"{self.root_data_dir}{self.task_name}/{self.day}/{self.subject_id}_{self.task_name}_{self.current_time}.csv", "a") as out_csv:
             writer = csv.writer(out_csv, delimiter=",")
 
             writer.writerow(data_row)

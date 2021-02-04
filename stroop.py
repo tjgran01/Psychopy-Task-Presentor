@@ -12,7 +12,7 @@ class StroopTask(object):
                  congruence_rate_incongruent=.33,
                  num_trials=10, ibi_time=10, variable_isi=True,
                  scoring_method="congruence", response_timeout=5,
-                 block_time=0, conditions=[]):
+                 block_time=0, conditions=[], shuffle_conditions=True):
         # scoring methods "congruence" and "color_select"
         self.task_name = "stroop"
         self.subject_id = subject_id
@@ -29,6 +29,10 @@ class StroopTask(object):
         self.instructions = self.task_presentor.read_instructions_from_file(self.task_name)
         self.block_time = block_time
         self.conditions = conditions
+        self.shuffle_conditions = shuffle_conditions
+
+        if self.shuffle_conditions:
+            random.shuffle(self.conditions)
 
         self.response_timer = core.Clock()
         self.trial_timer = core.CountdownTimer(self.response_timeout)

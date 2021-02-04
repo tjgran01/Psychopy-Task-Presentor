@@ -19,6 +19,7 @@ stroop_defaults = {
                    "scoring_method": "congruence",
                    "response_timeout": 5,
                    "block_time": 30,
+                   "shuffle_conditions": True,
                    "name": "stroop_defaults",
                    }
 

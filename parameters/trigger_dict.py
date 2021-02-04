@@ -21,7 +21,7 @@ trigger_dict = {
                 20: "Stroop_Stim_Response_Correct",
                 21: "Stroop_Stim_Response_Incorrect",
                 22: "Slider_Question_Presented",
-                23: "Slider_Question_Answered_Subjective",
+                23: "Slider_Question_Answered_NoCorrectAnswer",
                 24: "Slider_Question_Answered_Correct",
                 25: "Slider_Question_Answered_Incorrect",
                 26: "Page_Turn",
@@ -31,7 +31,10 @@ trigger_dict = {
                 30: "Mult_Choice_Question_Answered_Correct",
                 31: "Mult_Choice_Question_Answered_Incorrect",
                 32: "Page_Turn_Instructions",
-                33: "Scanner_Start_Received"
+                33: "Scanner_Start_Received",
+                34: "Reading_Section_Began",
+                35: "Reading_Section_Ended",
+                36: "Slider_Question_Answered"
                }
 
 
@@ -68,5 +71,8 @@ trigger_string_dict = {
                         "Mult_Choice_Question_Answered_Correct": 30,
                         "Mult_Choice_Question_Answered_Incorrect": 31,
                         "Page_Turn_Instructions": 32,
-                        "Scanner_Start_Received": 33
+                        "Scanner_Start_Received": 33,
+                        "Reading_Section_Began": 34,
+                        "Reading_Section_Ended": 35,
+                        "Slider_Question_Answered": 36
                       }

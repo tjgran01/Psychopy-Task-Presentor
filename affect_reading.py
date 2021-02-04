@@ -104,16 +104,20 @@ class AffectReadingTask(object):
 
         if type == "mult_choice":
             self.question_factory.create_question(type, mult_choice_data=mult_choice_data)
+            self.task_presentor.trigger_handler.send_string_trigger("Mult_Choice_Question_Presented")
         else:
+            self.task_presentor.trigger_handler.send_string_trigger("Slider_Question_Presented")
             self.question_factory.create_question(type)
 
         slider_reset_time = self.question_timeouts[f"slider {type}"]
         self.question_timer.reset(slider_reset_time)
 
         self.question_factory.display_question(self.question_timer)
-        if not practice:
 
+        if not practice:
             self.task_presentor.logger.write_data_row(self.question_factory.get_data_line(self.subject_id, block_num))
+
+        self.task_presentor.trigger_handler.send_string_trigger("Slider_Question_Answered")
 
         return self.question_timer.getTime()
 
@@ -130,9 +134,12 @@ class AffectReadingTask(object):
         movie_clock = core.CountdownTimer(movie_stim.duration)
         affect_clock = core.CountdownTimer(self.affect_induction_time)
 
+        self.task_presentor.trigger_handler.send_string_trigger("Affect_Induction_Start")
         while movie_clock.getTime() > 0 and affect_clock.getTime() > 0:
 
             self.task_presentor.display_stim(movie_stim)
+
+        self.task_presentor.trigger_handler.send_string_trigger("Affect_Induction_End")
 
 
     def parse_text_from_file(self, text_name):
@@ -178,6 +185,8 @@ class AffectReadingTask(object):
         # Needs to be changed to MOUSE.
         self.task_presentor.input_handler.handle_mouse_input("left", timer=timer)
 
+        self.task_presentor.trigger_handler.send_string_trigger("Page_Turn")
+
         page_time = start_time - timer.getTime()
 
         self.task_presentor.logger.write_data_row([self.subject_id,
@@ -198,6 +207,8 @@ class AffectReadingTask(object):
         text_lines = self.parse_text_from_file(text_name)
         total_reading_timer = core.CountdownTimer(self.max_reading_time)
 
+        self.task_presentor.trigger_handler.send_string_trigger("Reading_Section_Began")
+
         while total_reading_timer.getTime() > 0: # While they still have time to read the ENTIRE text.
             for indx, page in enumerate(text_lines):
                 self.run_page(page, block_num, text_name, total_reading_timer.getTime(),total_reading_timer, indx)
@@ -205,6 +216,8 @@ class AffectReadingTask(object):
                     break
             # Finish Early.
             break
+
+        self.task_presentor.trigger_handler.send_string_trigger("Reading_Section_Ended")
 
         return total_reading_timer.getTime()
 
@@ -223,7 +236,7 @@ class AffectReadingTask(object):
             scale_time = self.display_sliding_scale(type="mult_choice",
                                                     block_num=block_num,
                                                     mult_choice_data=self.question_dict[reading_name][question])
-            time_left += scale_time
+
             self.timing_logger.write_row([self.subject_id, "mult-choice", scale_time, block_num])
 
         return time_left

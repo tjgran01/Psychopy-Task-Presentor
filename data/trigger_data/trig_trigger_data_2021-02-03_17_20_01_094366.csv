@@ -1,8 +1,0 @@
-id,timestamp,trigger,trigger_string
-trig,1612398001.0979059,1,Instructions_Displayed
-trig,1612398005.3910143,32,Page_Turn_Instructions
-trig,1612398005.7789404,32,Page_Turn_Instructions
-trig,1612398006.1189363,32,Page_Turn_Instructions
-trig,1612398006.5479314,32,Page_Turn_Instructions
-trig,1612398007.6079373,33,Scanner_Start_Received
-trig,1612398007.6080499,16,Stroop_Block_Start
