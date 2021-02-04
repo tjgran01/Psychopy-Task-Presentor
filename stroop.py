@@ -123,6 +123,14 @@ class StroopTask(object):
                 return "incorrect"
 
 
+    def send_response_trigger(self, response):
+
+        if response == "correct":
+            self.task_presentor.trigger_handler.send_string_trigger("Stroop_Stim_Response_Correct")
+        else:
+            self.task_presentor.trigger_handler.send_string_trigger("Stroop_Stim_Response_Incorrect")
+
+
     def run_block_of_trials(self, trial_list, isi_list, block_num=0):
 
         for indx, trial in enumerate(trial_list):
@@ -134,6 +142,8 @@ class StroopTask(object):
         event.clearEvents()
         self.trial_timer.reset()
         self.response_timer.reset()
+
+        self.task_presentor.trigger_handler.send_string_trigger(f"Stroop_Stim_Displayed_{trial[-1].capitalize()}")
         while self.trial_timer.getTime() > 0:
 
             if self.block_timer.getTime() == 0:
@@ -143,12 +153,14 @@ class StroopTask(object):
 
             self.task_presentor.display_stim(trial[0])
 
+
             key = event.getKeys(keyList=['right', 'down', 'left', '1', '2'])
 
             if key:
                 rt = self.response_timer.getTime()
 
                 response = self.score_trial_response(key[0], trial[1], trial[-1])
+                self.send_response_trigger(response)
 
 
                 self.task_presentor.logger.write_data_row([self.subject_id,
@@ -197,8 +209,10 @@ class StroopTask(object):
     def run_block(self, block_num=0, condition="incongruent"):
 
         # create all the trials that will be used.
+        self.task_presentor.trigger_handler.send_string_trigger("Stroop_Block_Start")
+
         trial_list = self.create_trial_list(condition)
-        #
+
         if self.variable_isi:
             isi_list = self.task_presentor.create_variable_isi_list(len(trial_list), self.fixation_time, how="gamma")
         else:
@@ -212,3 +226,5 @@ class StroopTask(object):
             while(self.block_timer.getTime()) > 0:
                 self.run_single_trial(trial_list[trial_indx], isi_list[trial_indx], trial_indx, block_num=block_num)
                 trial_indx+=1
+
+        self.task_presentor.trigger_handler.send_string_trigger("Stroop_Block_End")

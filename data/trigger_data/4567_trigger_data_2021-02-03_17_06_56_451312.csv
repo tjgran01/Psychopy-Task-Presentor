@@ -1,0 +1,11 @@
+id,timestamp,trigger,trigger_string
+4567,1612397216.5636554,1,Instructions_Displayed
+4567,1612397218.2073839,1,Instructions_Displayed
+4567,1612397224.620195,1,Instructions_Displayed
+4567,1612397225.968201,1,Instructions_Displayed
+4567,1612397229.341258,1,Instructions_Displayed
+4567,1612397233.4573016,1,Instructions_Displayed
+4567,1612397236.1573327,33,Scanner_Start_Recieved
+4567,1612397236.1574335,16,Stroop_Block_Start
+4567,1612397268.1537821,17,Stroop_Block_End
+4567,1612397283.181604,16,Stroop_Block_Start

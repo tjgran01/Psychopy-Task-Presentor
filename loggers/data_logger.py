@@ -77,3 +77,10 @@ class DataLogger(object):
                     "event_type",
                     "time_left",
                     "block_num"]
+        elif self.task_name == "trigger_data":
+            return ["id",
+                    "timestamp",
+                    "boot_time",
+                    "time_since_boot_time",
+                    "trigger",
+                    "trigger_string"]

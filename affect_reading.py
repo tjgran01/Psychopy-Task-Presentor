@@ -5,7 +5,7 @@ import time
 import pandas as pd
 
 from psychopy_questions import QuestionFactory
-from timing_logger import TimingLogger
+from loggers.timing_logger import TimingLogger
 
 class AffectReadingTask(object):
     def __init__(self, subject_id, task_presentor, num_blocks=4, affect_order=["happy", "none", "happy", "none"],
@@ -112,6 +112,7 @@ class AffectReadingTask(object):
 
         self.question_factory.display_question(self.question_timer)
         if not practice:
+
             self.task_presentor.logger.write_data_row(self.question_factory.get_data_line(self.subject_id, block_num))
 
         return self.question_timer.getTime()

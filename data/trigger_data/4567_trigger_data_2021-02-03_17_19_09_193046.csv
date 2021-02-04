@@ -1,0 +1,6 @@
+id,timestamp,trigger,trigger_string
+4567,1612397949.1963902,1,Instructions_Displayed
+4567,1612397956.3104594,32,Page_Turn_Instructions
+4567,1612397957.9553256,32,Page_Turn_Instructions
+4567,1612397959.680325,32,Page_Turn_Instructions
+4567,1612397961.7492533,32,Page_Turn_Instructions

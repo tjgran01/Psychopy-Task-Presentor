@@ -1,5 +1,4 @@
 COLOR TASK
 You will be shown a series of color names, one at a time, displayed in the center of the screen. The words themselves will be displayed in colored text.
-
 If the color of the text MATCHES the meaning of the word, press the INDEX Finger Button.
-If they DO NOT MATCH, ress the MIDDLE Finger Button.
+If they DO NOT MATCH, press the MIDDLE Finger Button.

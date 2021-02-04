@@ -1,4 +1,4 @@
-from data_logger import DataLogger
+from loggers.data_logger import DataLogger
 import time
 
 class TimingLogger(DataLogger):

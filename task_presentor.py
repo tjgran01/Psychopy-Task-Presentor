@@ -7,7 +7,8 @@ from psychopy import prefs
 # My imports.
 from task_factory import TaskFactory
 from globals import PsychopyGlobals
-from data_logger import DataLogger
+from loggers.data_logger import DataLogger
+from loggers.trigger_logger import TriggerLogger
 from input_handler import InputHandler
 
 from lsl_trigger import LSLTriggerHandler
@@ -22,7 +23,6 @@ class TaskPresentor(object):
         self.task_list = task_list
         self.globals = PsychopyGlobals()
         self.task_factory = TaskFactory(self.subject_id, self)
-        self.trigger_handler = LSLTriggerHandler()
         self.input_handler = InputHandler(mode=present_method)
         self.window = self.globals.window
         self.window.mouseVisible = False
@@ -30,6 +30,8 @@ class TaskPresentor(object):
         self.advance_text = self.globals.advance_text
         self.fixation_cross = self.globals.fixation_cross
         self.logger = DataLogger(self.subject_id, self.task_list[0])
+        self.trigger_logger = TriggerLogger(self.subject_id)
+        self.trigger_handler = LSLTriggerHandler(logger=self.trigger_logger)
 
         if run_task_list:
 
@@ -60,6 +62,8 @@ class TaskPresentor(object):
         self.window.flip()
 
         while not event.getKeys():
+            if self.input_handler.handle_mouse_input("left"):
+                break
             continue
 
         sys.exit()
@@ -81,6 +85,8 @@ class TaskPresentor(object):
 
         size_mult = 1.0
 
+        self.trigger_handler.send_string_trigger("Instructions_Displayed")
+
         for text_prompt in instructions:
             display_text = visual.TextStim(self.window,
                                            text=text_prompt,
@@ -92,8 +98,10 @@ class TaskPresentor(object):
             self.window.flip()
             if input_method == "mouse":
                 self.input_handler.handle_mouse_input("left")
+                self.trigger_handler.send_string_trigger("Page_Turn_Instructions")
             else:
                 self.input_handler.handle_button_input("default")
+                self.trigger_handler.send_string_trigger("Page_Turn_Instructions")
 
 
         if return_complete:
@@ -210,6 +218,9 @@ class TaskPresentor(object):
 
         while not event.getKeys(keyList=["5"]):
             continue
+
+        self.trigger_handler.send_string_trigger("Scanner_Start_Received")
+
 
 
 if __name__ == "__main__":

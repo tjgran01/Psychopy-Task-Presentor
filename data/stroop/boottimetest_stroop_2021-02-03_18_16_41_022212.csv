@@ -1,0 +1,8 @@
+subject_id,timestamp,block_num,trial_num,display_text,display_color,trial_type,response_accuracy,response_time
+boottimetest,1612401410.3360658,0,0,red,red,congruent,correct,1089.9306629999046
+boottimetest,1612401412.7361135,0,1,blue,blue,congruent,correct,382.4147909999738
+boottimetest,1612401415.069446,0,2,yellow,yellow,congruent,correct,315.74398599877895
+boottimetest,1612401417.5028124,0,3,blue,blue,congruent,correct,414.7855139999592
+boottimetest,1612401424.5362744,0,4,blue,blue,congruent,TIMEOUT,5000
+boottimetest,1612401431.5694666,0,5,yellow,yellow,congruent,TIMEOUT,5000
+boottimetest,1612401438.6030912,0,6,yellow,yellow,congruent,TIMEOUT,5000

@@ -19,7 +19,19 @@ trigger_dict = {
                 18: "Stroop_Stim_Displayed_Congruent",
                 19: "Stroop_Stim_Displayed_Incongruent",
                 20: "Stroop_Stim_Response_Correct",
-                21: "Stroop_Stim_Response_Incorrect"
+                21: "Stroop_Stim_Response_Incorrect",
+                22: "Slider_Question_Presented",
+                23: "Slider_Question_Answered_Subjective",
+                24: "Slider_Question_Answered_Correct",
+                25: "Slider_Question_Answered_Incorrect",
+                26: "Page_Turn",
+                27: "Affect_Induction_Start",
+                28: "Affect_Induction_End",
+                29: "Mult_Choice_Question_Presented",
+                30: "Mult_Choice_Question_Answered_Correct",
+                31: "Mult_Choice_Question_Answered_Incorrect",
+                32: "Page_Turn_Instructions",
+                33: "Scanner_Start_Received"
                }
 
 
@@ -44,5 +56,17 @@ trigger_string_dict = {
                         "Stroop_Stim_Displayed_Congruent": 18,
                         "Stroop_Stim_Displayed_Incongruent": 19,
                         "Stroop_Stim_Response_Correct": 20,
-                        "Stroop_Stim_Response_Incorrect": 21
+                        "Stroop_Stim_Response_Incorrect": 21,
+                        "Slider_Question_Presented": 22,
+                        "Slider_Question_Answered_Subjective": 23,
+                        "Slider_Question_Answered_Correct": 24,
+                        "Slider_Question_Answered_Incorrect": 25,
+                        "Page_Turn": 26,
+                        "Affect_Induction_Start": 27,
+                        "Affect_Induction_End": 28,
+                        "Mult_Choice_Question_Presented": 29,
+                        "Mult_Choice_Question_Answered_Correct": 30,
+                        "Mult_Choice_Question_Answered_Incorrect": 31,
+                        "Page_Turn_Instructions": 32,
+                        "Scanner_Start_Received": 33
                       }
