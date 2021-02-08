@@ -31,6 +31,8 @@ class StroopTask(object):
         self.conditions = conditions
         self.shuffle_conditions = shuffle_conditions
 
+        self.text_size_mult = 1.2
+
         if self.shuffle_conditions:
             random.shuffle(self.conditions)
 
@@ -52,6 +54,8 @@ class StroopTask(object):
 
     def run_full_task(self):
 
+        self.task_presentor.display_experimenter_wait_screen("experimenter")
+
         self.task_presentor.display_instructions(self.instructions)
         self.task_presentor.draw_wait_for_scanner()
 
@@ -63,7 +67,7 @@ class StroopTask(object):
     def create_congruent_trial(self):
 
         color = random.choice(["red", "yellow", "blue"])
-        return [visual.TextStim(self.task_presentor.window, text=color, pos=(0.0, 0.0),
+        return [visual.TextStim(self.task_presentor.window, text=color, pos=(0.0, 0.0), height=(0.1*self.text_size_mult),
                 color=self._colors[color][0]),
                 self._colors[color][1],
                 color,
@@ -80,7 +84,7 @@ class StroopTask(object):
         color_list.remove(text)
         color = random.choice(color_list)
 
-        return [visual.TextStim(self.task_presentor.window, text=text, pos=(0.0, 0.0),
+        return [visual.TextStim(self.task_presentor.window, text=text, pos=(0.0, 0.0), height=(0.1*self.text_size_mult),
                 color=self._colors[color][0]),
                 self._colors[text][1],
                 text,

@@ -5,7 +5,7 @@ import psutil
 from parameters.trigger_dict import trigger_dict, trigger_string_dict
 
 class LSLTriggerHandler(object):
-    def __init__(self, stream_name="default_stream", logger=None):
+    def __init__(self, stream_name="fenix_triggers_psychopy", logger=None):
         self.info = StreamInfo(name=stream_name, type='Markers', channel_count=1,
                   channel_format='int32', source_id='1321')
         self.trigger_mapping = trigger_dict

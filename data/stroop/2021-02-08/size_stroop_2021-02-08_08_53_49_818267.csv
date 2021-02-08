@@ -1,0 +1,4 @@
+subject_id,timestamp,block_num,trial_num,display_text,display_color,trial_type,response_accuracy,response_time
+size,1612799639.5984874,0,0,blue,blue,congruent,correct,1629.5443799972418
+size,1612799643.048561,0,1,yellow,yellow,congruent,correct,1431.5629870034172
+size,1612799646.0319142,0,2,blue,blue,congruent,correct,964.8713529968518

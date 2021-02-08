@@ -9,7 +9,8 @@ class InputHandler(object):
             self.response_key_dict = {"default": ["1"],
                                       "response_1": ["1"],
                                       "response_2": ["2"],
-                                      "response_all": ["1", "2"]}
+                                      "response_all": ["1", "2"],
+                                      "experimenter": ["e"]}
             self.response_mouse_dict = {"left": 0,
                                         "middle": 1,
                                         "right": 2}
@@ -17,7 +18,8 @@ class InputHandler(object):
             self.response_key_dict = {"default": ["space"],
                                       "response_1": ["left"],
                                       "repsonse_2": ["right"],
-                                      "response_all": ["left", "right"]}
+                                      "response_all": ["left", "right"],
+                                      "experimenter": ["e"]}
             self.response_mouse_dict = {"left": 0,
                                         "middle": 1,
                                         "right": 2}

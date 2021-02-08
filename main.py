@@ -21,6 +21,6 @@ def main(task_list):
 
 if __name__ == "__main__":
 
-    task_list = ["affect_reading", "end"]
+    task_list = ["finger_tapping", "end"]
 
     main(task_list)

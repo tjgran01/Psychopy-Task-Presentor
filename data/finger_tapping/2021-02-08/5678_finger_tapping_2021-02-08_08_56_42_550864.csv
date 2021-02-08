@@ -1,0 +1,8 @@
+subject_id,timestamp,block_num,hand_condition,bpm,event
+5678,1612799819.4575207,0,right,80,start
+5678,1612799820.1346326,0,right,80,tap_prompted
+5678,1612799820.234721,0,right,80,tap_missed
+5678,1612799820.867965,0,right,80,tap_prompted
+5678,1612799820.9680746,0,right,80,tap_missed
+5678,1612799821.6179688,0,right,80,tap_prompted
+5678,1612799821.718049,0,right,80,tap_missed

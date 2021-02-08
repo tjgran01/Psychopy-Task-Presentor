@@ -56,6 +56,8 @@ class AffectReadingTask(object):
 
     def run_full_task(self):
 
+        self.task_presentor.display_experimenter_wait_screen("experimenter")
+
         self.display_sliding_scale(type="practice_slider", practice=True)
         self.display_sliding_scale(type="practice_mult_choice", practice=True)
         self.task_presentor.display_instructions(self.instructions, input_method="mouse")

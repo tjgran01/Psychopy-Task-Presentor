@@ -34,6 +34,8 @@ class FingerTappingTask(object):
 
     def run_full_task(self):
 
+        self.task_presentor.display_experimenter_wait_screen("experimenter")
+
         self.task_presentor.display_instructions(self.instructions)
         self.task_presentor.draw_wait_for_scanner()
 

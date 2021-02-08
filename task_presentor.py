@@ -108,6 +108,28 @@ class TaskPresentor(object):
             return True
 
 
+    def display_experimenter_wait_screen(self, key):
+
+        size_mult = 1.0
+
+        self.trigger_handler.send_string_trigger("Experimenter_Screen_Displayed")
+
+        text_prompt = "The next task will begin shortly, please wait for the experimenter to advance to the next task."
+
+        display_text = visual.TextStim(self.window,
+                                       text=text_prompt,
+                                       height=(0.1*size_mult),
+                                       color=self.globals.default_text_color)
+        self.display_drawer.add_to_draw_list(display_text)
+        self.display_drawer.draw_all()
+        self.window.flip()
+
+        self.input_handler.handle_button_input(key)
+
+        self.trigger_handler.send_string_trigger("Experimenter_Screen_Ended")
+
+
+
 ### Basic Stim Display ---------------------------------------------------------
 
 
