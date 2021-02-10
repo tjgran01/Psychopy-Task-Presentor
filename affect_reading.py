@@ -37,7 +37,7 @@ class AffectReadingTask(object):
         #### These need to be added to param dict.
         self.affect_induction_time = affect_induction_time
         self.default_fixation_time = default_fixation_time
-        self.testing = True
+        self.testing = testing
         self.use_padding = use_padding
         self.template_var = template_var
 
