@@ -1,0 +1,5 @@
+subject_id,timestamp,block_num,trial_num,display_text,display_color,trial_type,response_accuracy,response_time
+4567,1612998109.0903082,0,0,blue,blue,congruent,correct,1104.5257000077982
+4567,1612998113.6740432,0,1,blue,yellow,incongruent,correct,2567.513499991037
+4567,1612998117.0909007,0,2,red,blue,incongruent,correct,1400.7625000085682
+4567,1612998120.991492,0,3,red,red,congruent,correct,1884.1654999996535

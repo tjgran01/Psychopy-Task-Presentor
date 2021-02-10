@@ -1,0 +1,15 @@
+subject_id,timestamp,block_num,trial_num,display_text,display_color,trial_type,response_accuracy,response_time
+420,1612996881.6564014,0,0,blue,yellow,incongruent,incorrect,1533.5347999935038
+420,1612996884.4559102,0,1,blue,yellow,incongruent,incorrect,783.5123999975622
+420,1612996887.5566132,0,2,yellow,blue,incongruent,incorrect,1083.2067000155803
+420,1612996890.2902987,0,3,red,red,congruent,incorrect,717.0508000126574
+420,1612996893.123717,0,4,red,yellow,incongruent,incorrect,816.8017999851145
+420,1612996896.307199,0,5,red,yellow,incongruent,incorrect,1166.8898000207264
+420,1612996899.0737965,0,6,yellow,yellow,congruent,incorrect,750.1954000035767
+420,1612996901.5741067,0,7,red,red,congruent,incorrect,483.7361999962013
+420,1612996904.1571937,0,8,blue,yellow,incongruent,incorrect,565.994899981888
+420,1612996907.4913027,0,9,red,yellow,incongruent,incorrect,1317.3797999916133
+420,1612996910.0075405,0,10,red,yellow,incongruent,correct,501.0453999857418
+420,1612996927.759069,1,0,red,red,congruent,correct,671.7097999935504
+420,1612996930.092798,1,1,red,red,congruent,incorrect,318.22690000990406
+420,1612996932.6260183,1,2,blue,blue,congruent,incorrect,516.4972000056878

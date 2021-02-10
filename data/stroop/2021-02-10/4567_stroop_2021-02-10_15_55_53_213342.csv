@@ -1,0 +1,11 @@
+subject_id,timestamp,block_num,trial_num,display_text,display_color,trial_type,response_accuracy,response_time
+4567,1612997755.955034,0,0,blue,red,incongruent,incorrect,1114.9805000168271
+4567,1612997759.688017,0,1,red,yellow,incongruent,correct,1715.6897999811918
+4567,1612997762.504509,0,2,yellow,red,incongruent,correct,800.4817999899387
+4567,1612997766.3554084,0,3,yellow,yellow,congruent,incorrect,1834.2201999912504
+4567,1612997769.6057112,0,4,blue,red,incongruent,correct,1232.5075000117067
+4567,1612997772.9058523,0,5,yellow,red,incongruent,correct,1284.419200004777
+4567,1612997775.82205,0,6,yellow,red,incongruent,correct,901.0079999861773
+4567,1612997779.4554973,0,7,red,yellow,incongruent,correct,1616.5533000021242
+4567,1612997782.4564466,0,8,red,blue,incongruent,correct,984.1566999966744
+4567,1612997784.8550196,0,9,blue,yellow,incongruent,Block Timeout,-1

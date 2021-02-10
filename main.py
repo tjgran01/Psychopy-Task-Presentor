@@ -27,6 +27,6 @@ def main(task_list):
 
 if __name__ == "__main__":
 
-    task_list = ["affect_reading", "end"]
-
+    task_list = ["stroop","finger_tapping","affect_reading", "end"]
+    # task_list = ["affect_reading", "end"]
     main(task_list)

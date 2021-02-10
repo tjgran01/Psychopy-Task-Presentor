@@ -47,6 +47,17 @@ class StroopTask(object):
                        }
 
 
+        self.congruent_key_reponses = {"mri": {"congruent": "1",
+                                               "incongruent": "2"},
+                                       "nirs": {"congruent": "left",
+                                                "incongruent": "right"}}
+
+        self.valid_key_responses = {"mri": {"congruence": ["1", "2"],
+                                            "color_select": ["1", "2", "3"]},
+                                    "nirs": {"congruence": ["right", "left"],
+                                             "color_select": ["right", "down", "left"]}}
+
+
         # If you are using BLOCK TIME rather than trial number --- generate more trials than you will need (i.e. gen a trial per second).
         if self.block_time != 0:
             self.num_trials = self.block_time
@@ -116,17 +127,19 @@ class StroopTask(object):
 
     def score_trial_response(self, input, answer, trial_type):
 
+        modality = self.task_presentor.present_method
+
         if self.scoring_method == "color_correct":
             if input == answer:
                 return "correct"
             return "incorrect"
         else:
             if trial_type == "congruent":
-                if input == "1":
+                if input == self.congruent_key_reponses[modality]["congruent"]:
                     return "correct"
                 return "incorrect"
             else:
-                if input == "2":
+                if input == self.congruent_key_reponses[modality]["incongruent"]:
                     return "correct"
                 return "incorrect"
 
@@ -162,7 +175,7 @@ class StroopTask(object):
             self.task_presentor.display_stim(trial[0])
 
 
-            key = event.getKeys(keyList=['right', 'down', 'left', '1', '2'])
+            key = event.getKeys(keyList=self.valid_key_responses[self.task_presentor.present_method][self.scoring_method])
 
             if key:
                 rt = self.response_timer.getTime()
