@@ -1,0 +1,3 @@
+id,timestamp,boot_time,time_since_boot_time,trigger,trigger_string
+test,1612918532.0830317,1612916572.0,1960.0830318927765,37,Experimenter_Screen_Displayed
+test,1612918539.4899037,1612916572.0,1967.4899039268494,38,Experimenter_Screen_Ended

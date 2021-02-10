@@ -18,7 +18,7 @@ import sys
 
 class TaskPresentor(object):
     def __init__(self, subject_id, task_list=["finger_tapping", "end"],
-                 present_method="mri", run_task_list=True):
+                 present_method="mri", run_task_list=True, task_template=None):
         self.subject_id = subject_id
         self.task_list = task_list
         self.globals = PsychopyGlobals()
@@ -33,9 +33,15 @@ class TaskPresentor(object):
         self.trigger_logger = TriggerLogger(self.subject_id)
         self.trigger_handler = LSLTriggerHandler(logger=self.trigger_logger)
 
+        self.present_method = present_method
+        self.task_template = task_template
+
+        self.current_task = ""
+
         if run_task_list:
 
             for task in task_list:
+                self.current_task = task
                 if task == "end":
                     self.run_end()
                 task_obj = self.task_factory.create_task(task)
@@ -46,7 +52,6 @@ class TaskPresentor(object):
         else:
             self.task_obj = self.task_factory.create_task(task_list[0])
             self.logger.set_current_task(task_list[0])
-
 
 
     def run_end(self):
@@ -71,10 +76,30 @@ class TaskPresentor(object):
 
 ### Insturctions ---------------------------------------------------------------
 
+    def set_advance_text(self):
+
+        if self.present_method == 'mri':
+            if self.current_task != "affect_reading":
+                m_text = "Press Index Finger Button to Continue."
+            else:
+                m_text = "Press Thumb Button to Continue."
+        else:
+            if self.current_task != "affect_reading":
+                m_text = "Press Spacebar Key to Continue."
+            else:
+                m_text = "Click Left Mouse Button to Continue."
+
+        self.advance_text = visual.TextStim(self.window,
+                                            text=m_text,
+                                            colorSpace='rgb',
+                                            color=(1.0, 0.0, 0.0),
+                                            pos=(0.0, -0.6))
+
+
 
     def read_instructions_from_file(self, task):
 
-        fname = f"./instructions/{task}_instructions.txt"
+        fname = f"./instructions/{task}_instructions_{self.present_method}.txt"
 
         with open (fname, 'r') as in_file:
             return in_file.readlines()
@@ -82,6 +107,8 @@ class TaskPresentor(object):
 
     def display_instructions(self, instructions, return_complete=False,
                              reading_task=False, input_method="key"):
+
+        m_advance_text = self.set_advance_text()
 
         size_mult = 1.0
 
@@ -110,23 +137,25 @@ class TaskPresentor(object):
 
     def display_experimenter_wait_screen(self, key):
 
-        size_mult = 1.0
+        if self.present_method == "mri":
 
-        self.trigger_handler.send_string_trigger("Experimenter_Screen_Displayed")
+            size_mult = 1.0
 
-        text_prompt = "The next task will begin shortly, please wait for the experimenter to advance to the next task."
+            self.trigger_handler.send_string_trigger("Experimenter_Screen_Displayed")
 
-        display_text = visual.TextStim(self.window,
-                                       text=text_prompt,
-                                       height=(0.1*size_mult),
-                                       color=self.globals.default_text_color)
-        self.display_drawer.add_to_draw_list(display_text)
-        self.display_drawer.draw_all()
-        self.window.flip()
+            text_prompt = "The next task will begin shortly, please wait for the experimenter to advance to the next task."
 
-        self.input_handler.handle_button_input(key)
+            display_text = visual.TextStim(self.window,
+                                           text=text_prompt,
+                                           height=(0.1*size_mult),
+                                           color=self.globals.default_text_color)
+            self.display_drawer.add_to_draw_list(display_text)
+            self.display_drawer.draw_all()
+            self.window.flip()
 
-        self.trigger_handler.send_string_trigger("Experimenter_Screen_Ended")
+            self.input_handler.handle_button_input(key)
+
+            self.trigger_handler.send_string_trigger("Experimenter_Screen_Ended")
 
 
 
@@ -206,7 +235,6 @@ class TaskPresentor(object):
         for repeat in range(repeat_amt):
             random.shuffle(conditions_list)
             shuffled_list.append(conditions_list)
-
         flattened = [item for sublist in shuffled_list for item in sublist]
 
         return flattened
@@ -231,17 +259,19 @@ class TaskPresentor(object):
 
         event.clearEvents()
 
-        scanner_wait_text =  visual.TextStim(self.window,
-                                             text="Waiting for scanner event...",
-                                             color=self.globals.default_text_color)
-        self.display_drawer.add_to_draw_list(scanner_wait_text)
-        self.display_drawer.draw_all()
-        self.window.flip()
+        if self.present_method == "mri":
 
-        while not event.getKeys(keyList=["5"]):
-            continue
+            scanner_wait_text =  visual.TextStim(self.window,
+                                                 text="Waiting for scanner event...",
+                                                 color=self.globals.default_text_color)
+            self.display_drawer.add_to_draw_list(scanner_wait_text)
+            self.display_drawer.draw_all()
+            self.window.flip()
 
-        self.trigger_handler.send_string_trigger("Scanner_Start_Received")
+            while not event.getKeys(keyList=["5"]):
+                continue
+
+            self.trigger_handler.send_string_trigger("Scanner_Start_Received")
 
 
 

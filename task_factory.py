@@ -103,4 +103,6 @@ class TaskFactory(object):
                                      default_fixation_time=prefs["default_fixation_time"],
                                      question_timeouts=prefs["question_timeouts"],
                                      testing=prefs["testing"],
-                                     use_padding=prefs["use_padding"])
+                                     use_padding=prefs["use_padding"],
+                                     video_text_timer_prompt=prefs["video_text_timer_prompt"],
+                                     reading_text_timer_prompt=prefs["reading_text_timer_prompt"])

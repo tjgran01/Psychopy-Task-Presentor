@@ -13,7 +13,8 @@ class AffectReadingTask(object):
                  mult_choice_question_num=4, question_mode="likert", snap_questions=False,
                  randomize_question_presentation=True, movie_size_mult=2, text_size_mult=0.7,
                  affect_induction_time=150, default_fixation_time=2, question_timeouts={},
-                 testing=False, use_padding=False):
+                 testing=False, use_padding=False, video_text_timer_prompt=3, reading_text_timer_prompt=3,
+                 template_var="A"):
         self.task_name = "affect_reading"
         self.subject_id = subject_id
         self.task_presentor = task_presentor
@@ -36,8 +37,9 @@ class AffectReadingTask(object):
         #### These need to be added to param dict.
         self.affect_induction_time = affect_induction_time
         self.default_fixation_time = default_fixation_time
-        self.testing = testing
+        self.testing = True
         self.use_padding = use_padding
+        self.template_var = template_var
 
         self.question_factory = QuestionFactory(self.task_presentor,
                                                 mode=self.question_mode,
@@ -47,11 +49,35 @@ class AffectReadingTask(object):
 
         self.question_timer = core.CountdownTimer(self.question_timeouts["slider alert"])
 
+        self.video_text_timer = core.CountdownTimer(video_text_timer_prompt)
+        self.reading_text_timer = core.CountdownTimer(reading_text_timer_prompt)
+
         self.instructions = self.task_presentor.read_instructions_from_file(self.task_name)
         self.mouse = event.Mouse()
         self.question_dict = self.read_question_dfs(self.readings)
 
         self.timing_logger = TimingLogger(self.subject_id)
+
+        self.movies = self.load_movies()
+        self.movie_indx = 0
+
+
+    def load_movies(self):
+
+        movies = []
+        for elm in self.affect_order:
+            if elm != "none":
+                print(f"Loading Movie File: ./resources/affect_videos/{elm}{self.template_var}.mp4")
+                fpath = f"./resources/affect_videos/{elm}{self.template_var}.mp4"
+                movie_stim = visual.MovieStim3(win=self.task_presentor.window,
+                                               filename=fpath)
+
+                #set size.
+                movie_stim.size = [movie_stim.size[0] * self.movie_size_mult, movie_stim.size[1] * self.movie_size_mult]
+                movies.append(movie_stim)
+
+        return movies
+
 
 
     def run_full_task(self):
@@ -124,14 +150,37 @@ class AffectReadingTask(object):
         return self.question_timer.getTime()
 
 
+    def display_timed_prompt(self, type=""):
+
+        if type == "video":
+            fname = f"./instructions/video_instructions.txt"
+            m_timer = self.video_text_timer
+        else:
+            fname = f"./instructions/reading_instructions.txt"
+            m_timer = self.reading_text_timer
+
+        m_timer.reset()
+
+        with open (fname, 'r') as in_file:
+            lines = in_file.read()
+
+        display_stim = visual.TextStim(self.task_presentor.window,
+                                            text=lines,
+                                            colorSpace='rgb')
+
+        self.task_presentor.display_drawer.add_to_draw_list(display_stim)
+        self.task_presentor.display_drawer.draw_all()
+        self.task_presentor.window.flip()
+
+        while m_timer.getTime() > 0:
+            continue
+
+
     def display_affect_induction(self, affect_string):
 
-        fpath = f"./resources/affect_videos/{affect_string}1.mp4"
-        movie_stim = visual.MovieStim3(win=self.task_presentor.window,
-                                       filename=fpath)
+        self.display_timed_prompt(type="video")
 
-        #set size.
-        movie_stim.size = [movie_stim.size[0] * self.movie_size_mult, movie_stim.size[1] * self.movie_size_mult]
+        movie_stim = self.movies[self.movie_indx]
 
         movie_clock = core.CountdownTimer(movie_stim.duration)
         affect_clock = core.CountdownTimer(self.affect_induction_time)
@@ -208,6 +257,8 @@ class AffectReadingTask(object):
 
         text_lines = self.parse_text_from_file(text_name)
         total_reading_timer = core.CountdownTimer(self.max_reading_time)
+
+        self.display_timed_prompt(type="reading")
 
         self.task_presentor.trigger_handler.send_string_trigger("Reading_Section_Began")
 
@@ -293,7 +344,8 @@ class AffectReadingTask(object):
 
         if affect_condition != "none":
             self.display_affect_induction(affect_condition)
-        #
+
+
         # self.display_sliding_scale(type="alert", block_num=block_num)
         # self.display_sliding_scale(type="affect",block_num=block_num)
         # self.display_sliding_scale(type="affect", block_num=block_num)

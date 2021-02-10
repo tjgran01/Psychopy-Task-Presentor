@@ -19,7 +19,7 @@ class PsychopyGlobals(object):
         None
     """
 
-    def __init__(self, full_screen=True, presentation_mode="MRI"):
+    def __init__(self, full_screen=True, presentation_mode="mri"):
         # PsychoPy Stuff.
         if platform.system() == "Windows":
             self.window = visual.Window(size=[1920 / 2 , 1080 / 2], monitor='testMonitor',
@@ -28,13 +28,13 @@ class PsychopyGlobals(object):
         else:
             self.window = visual.Window(size=[3840, 2160], monitor='testMonitor',
                                 color="black", fullscr=full_screen,
-                                screen=2, allowGUI=True, mouseVisible=False)
+                                screen=1, allowGUI=True, mouseVisible=False)
 
 
         self.the_drawer = DisplayDrawer()
         self.default_text_color = [0,0,0]
 
-        if presentation_mode == "MRI":
+        if presentation_mode == "mri":
             self.advance_btn_str = "Index Finger Button"
         else:
             self.advance_btn_str = "SPACEBAR"

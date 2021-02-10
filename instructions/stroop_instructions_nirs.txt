@@ -1,0 +1,5 @@
+COLOR TASK
+You will be shown a series of color names, one at a time, displayed in the center of the screen. The words themselves will be displayed in colored text.
+If the color of the text MATCHES the meaning of the word, press the LEFT arrow key on the keyboard.
+If they DO NOT MATCH, press the RIGHT arrow key on the keyboard.
+The task will begin as soon as you press the SPACEBAR to continue.

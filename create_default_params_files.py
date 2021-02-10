@@ -62,6 +62,8 @@ affect_reading_defaults = {
                                                  "slider practice_mult_choice": 30},
                            "testing": False,
                            "use_padding": True,
+                           "video_text_timer_prompt": 3,
+                           "reading_text_timer_prompt": 3,
                            "name": "affect_reading_defaults"
                            }
 
