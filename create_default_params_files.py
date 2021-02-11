@@ -52,7 +52,7 @@ affect_reading_defaults = {
                            "randomize_mult_choice_presentation": True,
                            "snap_questions": False,
                            "randomize_question_presentation": True,
-                           "movie_size_mult": 1,
+                           "movie_size_mult": .7,
                            "affect_induction_time": 150, # in seconds.
                            "default_fixation_time": 2,
                            "question_timeouts": {"slider alert": 10,
