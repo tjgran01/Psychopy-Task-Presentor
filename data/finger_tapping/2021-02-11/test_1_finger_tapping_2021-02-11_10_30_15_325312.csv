@@ -1,0 +1,12 @@
+subject_id,timestamp,block_num,hand_condition,bpm,event
+test_1,1613064623.4060779,0,right,80,start
+test_1,1613064624.082379,0,right,80,tap_prompted
+test_1,1613064624.1827211,0,right,80,tap_missed
+test_1,1613064624.816488,0,right,80,tap_prompted
+test_1,1613064624.916708,0,right,80,tap_missed
+test_1,1613064625.565612,0,right,80,tap_prompted
+test_1,1613064625.665907,0,right,80,tap_missed
+test_1,1613064626.3157618,0,right,80,tap_prompted
+test_1,1613064626.415997,0,right,80,tap_missed
+test_1,1613064627.0653708,0,right,80,tap_prompted
+test_1,1613064627.165579,0,right,80,tap_missed
