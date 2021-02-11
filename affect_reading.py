@@ -24,9 +24,6 @@ class AffectReadingTask(object):
         self.readings = readings
         self.mult_choice_question_num = mult_choice_question_num
 
-        # Ensure that we have enough blocks for the number of readings --- can probably just infer some variables eventually.
-        assert (self.num_blocks == len(self.readings)) and (self.num_blocks == len(self.affect_order))
-
         self.question_mode = question_mode
         self.text_size_mult = text_size_mult
         self.randomize_mult_choice_presentation = randomize_question_presentation
@@ -39,7 +36,16 @@ class AffectReadingTask(object):
         self.default_fixation_time = default_fixation_time
         self.testing = testing
         self.use_padding = use_padding
-        self.template_var = template_var
+        self.template_var = self.task_presentor.task_template
+
+
+        if self.task_presentor.present_method == "nirs":
+            if self.template_var[0] == "A":
+                self.template_var = "B"
+            elif self.template_var[0] == "B":
+                self.template_var ="A"
+
+        self.readings = self.readings[self.template_var]
 
         self.question_factory = QuestionFactory(self.task_presentor,
                                                 mode=self.question_mode,
@@ -60,6 +66,8 @@ class AffectReadingTask(object):
 
         self.movies = self.load_movies()
         self.movie_indx = 0
+
+
 
 
     def load_movies(self):
@@ -184,6 +192,8 @@ class AffectReadingTask(object):
 
         movie_clock = core.CountdownTimer(movie_stim.duration)
         affect_clock = core.CountdownTimer(self.affect_induction_time)
+
+        print(f"MOVIE DURATION: {movie_stim.duration}")
 
         self.task_presentor.trigger_handler.send_string_trigger("Affect_Induction_Start")
         while movie_clock.getTime() > 0 and affect_clock.getTime() > 0:

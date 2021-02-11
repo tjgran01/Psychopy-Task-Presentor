@@ -1,0 +1,2 @@
+id,timestamp,boot_time,time_since_boot_time,trigger,trigger_string
+9876,1613078791.151027,1613004444.747779,74346.40324807167,22,Slider_Question_Presented
