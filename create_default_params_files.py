@@ -44,7 +44,7 @@ affect_reading_defaults = {
                            "num_blocks": 2,
                            "affect_order": ["none", "sad"],
                            "max_reading_time": 150,
-                           "readings": ["hypotheses", "causalclaims"],
+                           "readings": ["validity", "variables"],
                            "mult_choice_question_num": 3,
                            "question_mode": "likert",
                            "text_size_mult": 1,

@@ -1,0 +1,2 @@
+id,timestamp,boot_time,time_since_boot_time,trigger,trigger_string
+6789,1613001364.327828,1612812956.3018968,188408.02593111992,1,Instructions_Displayed
