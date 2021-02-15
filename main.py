@@ -17,6 +17,8 @@ def main(task_list):
     myDlg.addField('Presentation Method', choices=["mri", "nirs"])
     myDlg.addText('What template will this participant be running through.')
     myDlg.addField('Task Template', choices=["A", "B"])
+    myDlg.addText('Is this a test? (Answering Yes will not save output data.)')
+    myDlg.addField('Testing?', choices=["Yes", "No"])
 
 
     sub_id = myDlg.show()  # show dialog and wait for OK or Cancel

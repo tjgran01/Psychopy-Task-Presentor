@@ -1,4 +1,0 @@
-id,timestamp,boot_time,time_since_boot_time,trigger,trigger_string
-new_key,1613426608.207188,1613004444.2022011,422164.004986763,37,Experimenter_Screen_Displayed
-new_key,1613426611.1951983,1613004444.2022011,422166.9929971695,38,Experimenter_Screen_Ended
-new_key,1613426611.1961956,1613004444.2022011,422166.9939944744,39,Resting_State_Start
