@@ -1,0 +1,4 @@
+id,timestamp,boot_time,time_since_boot_time,trigger,trigger_string
+testing_nirs,1613426468.7491467,1613004444.7431614,422024.00598526,37,Experimenter_Screen_Displayed
+testing_nirs,1613426470.698932,1613004444.7431614,422025.95577049255,38,Experimenter_Screen_Ended
+testing_nirs,1613426470.6999285,1613004444.7431614,422025.9567670822,39,Resting_State_Start

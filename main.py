@@ -23,10 +23,12 @@ def main(task_list):
     if not myDlg.OK:  # or if ok_data is not None
         sys.exit()
 
+    if sub_id[1] == "nirs":
+        task_list.insert(0, "resting_state")
+
     tp = TaskPresentor(sub_id[0], task_list=task_list, present_method=sub_id[1], task_template=sub_id[2])
 
 if __name__ == "__main__":
-
-    # task_list = ["resting_state", "finger_tapping", "stroop", "affect_reading", "end"]
-    task_list = ["affect_reading", "end"]
+    task_list = ["finger_tapping", "stroop", "affect_reading", "end"]
+    # task_list = ["affect_reading", "end"]
     main(task_list)

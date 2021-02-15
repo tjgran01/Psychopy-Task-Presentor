@@ -81,7 +81,7 @@ class TaskPresentor(object):
 
         event.clearEvents()
 
-        self.display_experimenter_wait_screen("default", force=True)
+        self.display_experimenter_wait_screen("experimenter", force=True)
 
         self.run_isi((60 * 5), trigger=True)
 

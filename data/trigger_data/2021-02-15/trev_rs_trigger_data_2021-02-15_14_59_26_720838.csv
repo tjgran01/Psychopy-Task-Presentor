@@ -1,0 +1,4 @@
+id,timestamp,boot_time,time_since_boot_time,trigger,trigger_string
+trev_rs,1613426366.7278225,1613004444.7218359,421922.0059866905,37,Experimenter_Screen_Displayed
+trev_rs,1613426372.3550973,1613004444.7218359,421927.6332614422,38,Experimenter_Screen_Ended
+trev_rs,1613426372.356094,1613004444.7218359,421927.63425803185,39,Resting_State_Start
