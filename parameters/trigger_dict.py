@@ -36,7 +36,9 @@ trigger_dict = {
                 35: "Reading_Section_Ended",
                 36: "Slider_Question_Answered",
                 37: "Experimenter_Screen_Displayed",
-                38: "Experimenter_Screen_Ended"
+                38: "Experimenter_Screen_Ended",
+                39: "Resting_State_Start",
+                40: "Resting_State_End"
                }
 
 
@@ -77,6 +79,8 @@ trigger_string_dict = {
                         "Reading_Section_Began": 34,
                         "Reading_Section_Ended": 35,
                         "Slider_Question_Answered": 36,
-                        "Experimenter_Screen_Displayed": 37, 
-                        "Experimenter_Screen_Ended": 38
+                        "Experimenter_Screen_Displayed": 37,
+                        "Experimenter_Screen_Ended": 38,
+                        "Resting_State_Start": 39,
+                        "Resting_State_End": 40
                       }

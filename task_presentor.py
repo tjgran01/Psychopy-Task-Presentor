@@ -44,6 +44,9 @@ class TaskPresentor(object):
                 self.current_task = task
                 if task == "end":
                     self.run_end()
+                if task == "resting_state":
+                    self.run_resting_state()
+                    continue
                 task_obj = self.task_factory.create_task(task)
                 self.logger.set_current_task(task)
                 task_obj.run_full_task()
@@ -72,6 +75,16 @@ class TaskPresentor(object):
             continue
 
         sys.exit()
+
+
+    def run_resting_state(self):
+
+        event.clearEvents()
+
+        self.display_experimenter_wait_screen("default", force=True)
+
+        self.run_isi((60 * 5), trigger=True)
+
 
 
 ### Insturctions ---------------------------------------------------------------
@@ -135,9 +148,9 @@ class TaskPresentor(object):
             return True
 
 
-    def display_experimenter_wait_screen(self, key):
+    def display_experimenter_wait_screen(self, key, force=False):
 
-        if self.present_method == "mri":
+        if self.present_method == "mri" or force:
 
             size_mult = 1.0
 
@@ -170,12 +183,18 @@ class TaskPresentor(object):
         core.wait(ibi_time)
 
 
-    def run_isi(self, isi_time):
+    def run_isi(self, isi_time, trigger=False):
+
+        if trigger:
+            self.trigger_handler.send_string_trigger("Resting_State_Start")
 
         self.display_drawer.add_to_draw_list(self.fixation_cross)
         self.display_drawer.draw_all()
         self.window.flip()
         core.wait(isi_time)
+
+        if trigger:
+            self.trigger_handler.send_string_trigger("Resting_State_End")
 
 
     def display_stim(self, stim):

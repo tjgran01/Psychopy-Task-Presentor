@@ -1,0 +1,2 @@
+id,timestamp,boot_time,time_since_boot_time,trigger,trigger_string
+tttt,1613085725.4816496,1613004444.4766636,81281.00498604774,39,Resting_State_Start

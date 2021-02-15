@@ -1,0 +1,4 @@
+id,timestamp,boot_time,time_since_boot_time,trigger,trigger_string
+tttt,1613085806.20399,1613004444.1990037,81362.00498628616,37,Experimenter_Screen_Displayed
+tttt,1613085807.9413445,1613004444.1990037,81363.74234080315,38,Experimenter_Screen_Ended
+tttt,1613085807.9413445,1613004444.1990037,81363.74234080315,39,Resting_State_Start
