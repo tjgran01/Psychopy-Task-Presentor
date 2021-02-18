@@ -1,5 +1,5 @@
 FINGER TAPPING TASK
-You will be asked to tap your right index finger on the button below the finger.
+You will be asked to tap your right index finger on the left arrow key on the keyboard.
 Try to match your tapping rate to the flashing circle cue displayed in the center of the screen.
 When the circle stops flashing, please focus on the cross (+) in the center of the screen and wait for the circle to begin flashing again.
 The task will begin as soon as you press the SPACEBAR to continue.
