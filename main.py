@@ -32,5 +32,5 @@ def main(task_list):
 
 if __name__ == "__main__":
     task_list = ["finger_tapping", "stroop", "affect_reading", "end"]
-    # task_list = ["affect_reading", "end"]
+    #task_list = ["affect_reading", "end"]
     main(task_list)
