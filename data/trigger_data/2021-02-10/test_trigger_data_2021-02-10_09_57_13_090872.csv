@@ -1,2 +1,0 @@
-id,timestamp,boot_time,time_since_boot_time,trigger,trigger_string
-test,1612976233.1197715,1612812956.0918565,163277.02791500092,37,Experimenter_Screen_Displayed

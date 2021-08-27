@@ -1,4 +1,0 @@
-id,timestamp,boot_time,time_since_boot_time,trigger,trigger_string
-rest,1613085656.5943098,1613004444.588326,81212.0059838295,37,Experimenter_Screen_Displayed
-rest,1613085663.3811634,1613004444.588326,81218.79283738136,38,Experimenter_Screen_Ended
-rest,1613085663.38216,1613004444.588326,81218.79383397102,39,Resting_State_Start
