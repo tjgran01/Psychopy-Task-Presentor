@@ -66,7 +66,6 @@ class StroopTask(object):
     def run_full_task(self):
 
         self.task_presentor.display_experimenter_wait_screen("experimenter")
-
         self.task_presentor.display_instructions(self.instructions)
         self.task_presentor.draw_wait_for_scanner()
 
@@ -229,9 +228,9 @@ class StroopTask(object):
 
     def run_block(self, block_num=0, condition="incongruent"):
 
-        # create all the trials that will be used.
         self.task_presentor.trigger_handler.send_string_trigger("Stroop_Block_Start")
 
+        # create all the trials that will be used.
         trial_list = self.create_trial_list(condition)
 
         if self.variable_isi:

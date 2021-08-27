@@ -38,9 +38,19 @@ trigger_dict = {
                 37: "Experimenter_Screen_Displayed",
                 38: "Experimenter_Screen_Ended",
                 39: "Resting_State_Start",
-                40: "Resting_State_End"
+                40: "Resting_State_End",
+                # Update for emotional_anticipation_task
+                41: "Emotional_Anticipation_Block_Start",
+                42: "Emotional_Anticipation_Block_End",
+                43: "Emotional_Anticipation_Affect_Question_Displayed",
+                44: "Emotional_Anticipation_Affect_Question_Response",
+                45: "Emotional_Anticipation_Cue_Displayed",
+                46: "Emotional_Anticipation_Cue_Removed",
+                47: "Emotional_Anticipation_Video_Displayed",
+                48: "Emotional_Anticipation_Video_End",
+                49: "Emotional_Anticipation_Fix_Dot_Start",
+                50: "Emotional_Anticipation_Fix_Dot_End",
                }
-
 
 trigger_string_dict = {
                         "Instructions_Displayed": 1,
@@ -82,5 +92,16 @@ trigger_string_dict = {
                         "Experimenter_Screen_Displayed": 37,
                         "Experimenter_Screen_Ended": 38,
                         "Resting_State_Start": 39,
-                        "Resting_State_End": 40
+                        "Resting_State_End": 40,
+                        # Update for emotional_anticipation_task
+                        "Emotional_Anticipation_Block_Start": 41,
+                        "Emotional_Anticipation_Block_End": 42,
+                        "Emotional_Anticipation_Affect_Question_Displayed": 43,
+                        "Emotional_Anticipation_Affect_Question_Response": 44,
+                        "Emotional_Anticipation_Cue_Displayed": 45,
+                        "Emotional_Anticipation_Cue_Removed": 46,
+                        "Emotional_Anticipation_Video_Displayed": 47,
+                        "Emotional_Anticipation_Video_End": 48,
+                        "Emotional_Anticipation_Fix_Dot_Start": 49,
+                        "Emotional_Anticipation_Fix_Dot_End": 50,
                       }

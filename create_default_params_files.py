@@ -68,7 +68,25 @@ affect_reading_defaults = {
                            "name": "affect_reading_defaults"
                            }
 
-defaults_dicts = [stroop_defaults, finger_tapping_defaults, affect_reading_defaults]
+emotional_anticipation_defaults = {
+                                   "num_blocks": 1,
+                                   "ibi_time": 15, # Not used since there is only one block.
+                                   "fixation_time": 2, # How long between cue and stim.
+                                   "iti_time": 6, # Time between individual stimulus presentations
+                                   "cue_time": 1, # How long cue stays on screen.
+                                   "movie_time": 6.9, # How long the video plays
+                                   "num_trials": 96, # overridden if block_time != 0. PROBABLY UNUSED CURRENTLY.
+                                   "variable_isi": False, # Will use 'fixation_time as mean.'
+                                   "question_timeouts": {"slider affect": 5},
+                                   "conditions": ["darker",
+                                                  "lighter"],
+                                   "name": "emotional_anticipation_defaults",
+                                   }
+
+defaults_dicts = [stroop_defaults,
+                  finger_tapping_defaults,
+                  affect_reading_defaults,
+                  emotional_anticipation_defaults]
 
 for defaults in defaults_dicts:
     fname = defaults.pop("name")

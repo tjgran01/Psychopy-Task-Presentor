@@ -67,9 +67,6 @@ class AffectReadingTask(object):
         self.movies = self.load_movies()
         self.movie_indx = 0
 
-
-
-
     def load_movies(self):
 
         movies = []

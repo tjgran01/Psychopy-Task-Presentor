@@ -3,6 +3,7 @@ import pandas as pd
 from stroop import StroopTask
 from finger_tapping import FingerTappingTask
 from affect_reading import AffectReadingTask
+from emotional_anticipation import EmotionalAnticipationTask
 
 import pickle
 
@@ -57,7 +58,6 @@ class TaskFactory(object):
                                      block_time=prefs["block_time"],
                                      ibi_time=prefs["ibi_time"],
                                      is_sound=prefs["is_sound"])
-
         return task
 
 
@@ -106,3 +106,15 @@ class TaskFactory(object):
                                      use_padding=prefs["use_padding"],
                                      video_text_timer_prompt=prefs["video_text_timer_prompt"],
                                      reading_text_timer_prompt=prefs["reading_text_timer_prompt"])
+        elif task_string == "emotional_anticipation":
+            return EmotionalAnticipationTask(self.sub_id, self.task_presentor,
+                                             num_blocks=prefs["num_blocks"],
+                                             conditions=prefs["conditions"],
+                                             fixation_time=prefs["fixation_time"],
+                                             iti_time=prefs["iti_time"],
+                                             cue_time=prefs["cue_time"],
+                                             movie_time=prefs["movie_time"],
+                                             num_trials=prefs["num_trials"],
+                                             ibi_time=prefs["ibi_time"],
+                                             variable_isi=prefs["variable_isi"],
+                                             question_timeouts=prefs["question_timeouts"])

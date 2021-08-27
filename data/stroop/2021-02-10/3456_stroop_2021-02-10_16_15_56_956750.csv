@@ -1,4 +1,0 @@
-subject_id,timestamp,block_num,trial_num,display_text,display_color,trial_type,response_accuracy,response_time
-3456,1612998971.8219738,0,0,red,yellow,incongruent,incorrect,3689.723999996204
-3456,1612998974.3053572,0,1,blue,yellow,incongruent,correct,466.04860000661574
-3456,1612998977.5885746,0,2,yellow,yellow,congruent,correct,1267.173800006276

@@ -1,0 +1,9 @@
+indx,cue_number,video,video_affect,video_time
+Ear_Test_1,1,Ear_Test_1.avi,6,.1,6.9
+Ear_Test_1,1,None,6,.1,6.9
+Motorcycle_Accident_1,2,Motorcycle_Accident_1.avi,6,.1,6.9
+Motorcycle_Accident_1,2,None,6,.1,6.9
+Origami_Snake_1,3,Origami_Snake_1.avi,6,.1,6.9
+Origami_Snake_1,3,None,6,.1,6.9
+Snake_1,4,Snake_1.avi,6,.1,6.9
+Snake_1,4,None,6,.1,6.9

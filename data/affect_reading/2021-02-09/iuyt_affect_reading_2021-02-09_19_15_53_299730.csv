@@ -1,2 +1,0 @@
-subject_id,timestamp,response_time,block_num,question_type,question_text,response_numbers,response_strings,response_value,response_string,is_correct
-iuyt,1612923363.8202457,0.7711251099999572,0,affect,How sad vs. happy are you at this moment?,"[1, 2, 3]","['Extremely Sad', 'Neutral', 'Extremely Happy']",0.79296875,Extremely Happy,-1

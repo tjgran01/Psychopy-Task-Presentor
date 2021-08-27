@@ -74,6 +74,18 @@ class DataLogger(object):
                     "hand_condition",
                     "bpm",
                     "event"]
+        elif self.task_name == "emotional_anticipation":
+            return ["subject_id",
+                    "cue_onset",
+                    "cue_offset",
+                    "cue_durration",
+                    "cue_value",
+                    "block_num",
+                    "video_name",
+                    "video_onset",
+                    "video_off",
+                    "video_duration",
+                    "valence_level_reported"]
         elif self.task_name == "timing_data":
             return ["id",
                     "timestamp",

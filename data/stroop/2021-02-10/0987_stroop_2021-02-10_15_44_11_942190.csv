@@ -1,9 +1,0 @@
-subject_id,timestamp,block_num,trial_num,display_text,display_color,trial_type,response_accuracy,response_time
-0987,1612997059.6824791,0,0,blue,blue,congruent,incorrect,1035.5136999860406
-0987,1612997063.0494692,0,1,blue,blue,congruent,incorrect,1350.649500003783
-0987,1612997065.5826907,0,2,blue,blue,congruent,incorrect,517.1604999923147
-0987,1612997068.1338649,0,3,yellow,yellow,congruent,correct,532.542699977057
-0987,1612997070.5165102,0,4,blue,blue,congruent,correct,367.31940001482144
-0987,1612997074.234541,0,5,red,red,congruent,incorrect,1701.3299000100233
-0987,1612997077.350204,0,6,red,red,congruent,incorrect,1098.4131000004709
-0987,1612997079.550317,0,7,yellow,yellow,congruent,incorrect,183.88820000109263

@@ -18,10 +18,14 @@ import sys
 
 class TaskPresentor(object):
     def __init__(self, subject_id, task_list=["finger_tapping", "end"],
-                 present_method="mri", run_task_list=True, task_template=None):
+                 present_method="mri", run_task_list=True, task_template=None,
+                 full_screen=True):
         self.subject_id = subject_id
         self.task_list = task_list
-        self.globals = PsychopyGlobals()
+        self.full_screen = True
+        if full_screen == "No":
+            self.full_screen = False
+        self.globals = PsychopyGlobals(full_screen=self.full_screen)
         self.task_factory = TaskFactory(self.subject_id, self)
         self.input_handler = InputHandler(mode=present_method)
         self.window = self.globals.window
