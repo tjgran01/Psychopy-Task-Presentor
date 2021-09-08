@@ -27,7 +27,7 @@ class PsychopyGlobals(object):
                                             screen=2, allowGUI=True, mouseVisible=False)
         else:
             self.window = visual.Window(size=[500, 500], monitor='testMonitor',
-                                color="black", fullscr=full_screen,
+                                color="black", fullscr=False,
                                 screen=1, allowGUI=True)
 
 
