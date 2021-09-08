@@ -16,7 +16,8 @@ import random
 class EmotionalAnticipationTask(object):
     def __init__(self, subject_id, task_presentor, conditions=[], num_blocks=1,
                  fixation_time=2, iti_time=6, cue_time=1, movie_time=6.9,
-                 num_trials=10, ibi_time=10, variable_isi=False, question_timeouts={}):
+                 num_trials=10, ibi_time=10, variable_isi=False, question_timeouts={},
+                 preload_stims=True):
         self.task_name = "emotional_anticipation"
         self.trial_fpath = Path("./resources/emotional_anticipation_trials/")
         self.cue_fpath = Path("./resources/emotional_anticipation_cues/")
@@ -37,7 +38,9 @@ class EmotionalAnticipationTask(object):
         self.variable_isi = variable_isi
         self.question_timeouts = question_timeouts
 
-        self.stim_dictionary = self.create_stim_dictionary()
+        # this is used for testing purposes only.
+        if preload_stims:
+            self.stim_dictionary = self.create_stim_dictionary()
 
         # Keeping track of state
         self._block_num=0
@@ -45,7 +48,7 @@ class EmotionalAnticipationTask(object):
         self.instructions = self.task_presentor.read_instructions_from_file(self.task_name)
         self.question_factory = QuestionFactory(self.task_presentor,
                                                 mode="likert",
-                                                snap_for_all=False)
+                                                snap_for_all=True)
 
         # Timers
         self.cue_timer = core.CountdownTimer(self.cue_time)
@@ -168,7 +171,7 @@ class EmotionalAnticipationTask(object):
 
         ### Has video flag should change the text for the question (will update in question factory).
         self.question_timer.reset()
-        self.question_factory.create_question("affect")
+        self.question_factory.create_question("emotional_SAM")
         self.question_factory.display_question(self.question_timer)
         return self.question_factory.get_data_line(self.subject_id, self._block_num)
 

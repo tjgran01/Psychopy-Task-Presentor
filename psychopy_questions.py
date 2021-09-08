@@ -2,6 +2,7 @@ from psychopy import visual, core, event
 import random
 
 import time
+import os
 
 class QuestionFactory(object):
     def __init__(self, task_presentor, mode="likert", snap_for_all=True):
@@ -153,6 +154,25 @@ class QuestionFactory(object):
             self.m_text_width = 1.5
 
 
+        elif type == "emotional_SAM":
+
+            self.m_text = "This is placeholder text."
+            self.m_question_text = ""
+            self.m_ticks = [1,2,3,4,5]
+            self.question_answers = ["",
+                                     "",
+                                     "",
+                                     ""]
+            self.m_labels = self.question_answers
+            self.m_style = "rating"
+            self.m_size = [0.75, 0.1]
+            self.m_pos = (0.0, -0.3)
+            self.m_flip = False
+            self._question_text = self.m_question_text
+            self.image_path = f"{os.getcwd()}/resources/sam_images/sam_full.png"
+            self.m_text_pos = (0, .8)
+            self.m_text_width = 1.5
+
 
         if self.mode == "likert":
             stims = self.create_likert_question(type, self.m_text, self.m_ticks, self.m_labels,
@@ -199,6 +219,15 @@ class QuestionFactory(object):
             self.stims = [self.slider, self.question_text_stim, self.text_stim]
         else:
             self.stims = [self.slider, self.text_stim]
+
+
+        # Adding images
+        if self.image_path:
+            self.image_stim = visual.ImageStim(win=self.task_presentor.window,
+                                               image=self.image_path,
+                                               pos=(0.0, 0.0),
+                                               size=(0.9, 0.4))
+            self.stims.append(self.image_stim)
 
 
 
