@@ -24,7 +24,7 @@ class DataLogger(object):
     def create_export_file(self):
 
         if not os.path.exists(f"{self.root_data_dir}/{self.task_name}/{self.day}"):
-            os.mkdir(f"{self.root_data_dir}{self.task_name}/{self.day}")
+            os.makedirs(f"{self.root_data_dir}{self.task_name}/{self.day}")
 
         with open(f"{self.root_data_dir}{self.task_name}/{self.day}/{self.subject_id}_{self.task_name}_{self.current_time}.csv", "w") as out_csv:
             writer = csv.writer(out_csv, delimiter=",")

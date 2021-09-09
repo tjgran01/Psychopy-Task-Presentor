@@ -28,7 +28,7 @@ def main(task_list):
     if sub_id[1] == "nirs":
         task_list.insert(0, "resting_state")
 
-    tp = TaskPresentor(sub_id[0], task_list=task_list, present_method=sub_id[1], task_template=sub_id[2], full_screen=sub_id[4])
+    tp = TaskPresentor(9999, task_list=task_list, present_method="mri", task_template="Lighter Cue")
 
 if __name__ == "__main__":
     task_list = ["emotional_anticipation", "end"]
