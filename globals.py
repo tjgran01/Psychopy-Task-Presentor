@@ -23,8 +23,8 @@ class PsychopyGlobals(object):
         # PsychoPy Stuff.
         if platform.system() == "Windows":
             self.window = visual.Window(size=[1920 / 2 , 1080 / 2], monitor='testMonitor',
-                                            color="black", fullscr=full_screen,
-                                            screen=2, allowGUI=True, mouseVisible=False)
+                                            color="black", fullscr=False,
+                                            screen=2, allowGUI=True)
         else:
             self.window = visual.Window(size=[500, 500], monitor='testMonitor',
                                 color="black", fullscr=False,
