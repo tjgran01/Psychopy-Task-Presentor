@@ -25,10 +25,10 @@ def main(task_list):
     if not myDlg.OK:  # or if ok_data is not None
         sys.exit()
 
-    if sub_id[1] == "nirs":
-        task_list.insert(0, "resting_state")
+    # if sub_id[1] == "nirs":
+    #     task_list.insert(0, "resting_state")
 
-    tp = TaskPresentor(9999, task_list=task_list, present_method="mri", task_template="Lighter Cue")
+    tp = TaskPresentor(sub_id[0], task_list=task_list, present_method="mri", task_template="Lighter Cue")
 
 if __name__ == "__main__":
     task_list = ["emotional_anticipation", "end"]
