@@ -1,0 +1,6 @@
+Hello. I am the void.
+I do not know what to say about this task.
+I am just a lonely programmer, out of coffee.
+If you are not a programmer, and are instead an experimenter. You can find me in the './instructions/episodic_prospection_instructions_mri.txt' file.
+You can edit me to your hearts content. Be sure to push your changes to github!
+Each line is a new sreen for the participant to see. What a lovely, user friendly, system. Bye Bye.

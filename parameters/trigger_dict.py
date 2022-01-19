@@ -50,6 +50,9 @@ trigger_dict = {
                 48: "Emotional_Anticipation_Video_End",
                 49: "Emotional_Anticipation_Fix_Dot_Start",
                 50: "Emotional_Anticipation_Fix_Dot_End",
+                # Update for Episodic Prospection Task
+                51: "Episodic_Prospection_Block_Start",
+                52: "Episodic_Prospection_Block_End"
                }
 
 trigger_string_dict = {
@@ -104,4 +107,7 @@ trigger_string_dict = {
                         "Emotional_Anticipation_Video_End": 48,
                         "Emotional_Anticipation_Fix_Dot_Start": 49,
                         "Emotional_Anticipation_Fix_Dot_End": 50,
+                        # Update for Episodic Prospection Task
+                        "Episodic_Prospection_Block_Start": 51,
+                        "Episodic_Prospection_Block_End": 52
                       }

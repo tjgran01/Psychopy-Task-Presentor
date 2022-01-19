@@ -69,8 +69,8 @@ affect_reading_defaults = {
                            }
 
 emotional_anticipation_defaults = {
-                                   "num_blocks": 1,
-                                   "ibi_time": 15, # Not used since there is only one block.
+                                   "num_blocks": 3,# Not used since there is only one block.
+                                   "ibi_time": 30, # Not used since there is only one block.
                                    "fixation_time": 2, # How long between cue and stim.
                                    "iti_time": 6, # Time between individual stimulus presentations
                                    "cue_time": 1, # How long cue stays on screen.
@@ -83,10 +83,22 @@ emotional_anticipation_defaults = {
                                    "name": "emotional_anticipation_defaults",
                                    }
 
+episodic_prospection_defaults = {
+                                  "num_blocks": 1,# Not used since there is only one block.
+                                  "ibi_time": 15, # Not used since there is only one block.
+                                  "fixation_time": 2, # How long between cue and stim.
+                                  "iti_time": 6, # Time between individual stimulus presentations
+                                  "num_trials": 40, # overridden if block_time != 0. PROBABLY UNUSED CURRENTLY.
+                                  "variable_isi": False, # Will use 'fixation_time as mean.'
+                                  "name": "episodic_prospection_defaults",
+                                  "conditions": ["None"]
+}
+
 defaults_dicts = [stroop_defaults,
                   finger_tapping_defaults,
                   affect_reading_defaults,
-                  emotional_anticipation_defaults]
+                  emotional_anticipation_defaults,
+                  episodic_prospection_defaults]
 
 for defaults in defaults_dicts:
     fname = defaults.pop("name")

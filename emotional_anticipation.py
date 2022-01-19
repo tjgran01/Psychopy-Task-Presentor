@@ -11,17 +11,20 @@ import time
 import math
 import random
 
-##### TTL PULSE IS A 'T' KEY.
-
 class EmotionalAnticipationTask(object):
     def __init__(self, subject_id, task_presentor, conditions=[], num_blocks=1,
                  fixation_time=2, iti_time=6, cue_time=1, movie_time=6.9,
                  num_trials=10, ibi_time=10, variable_isi=False, question_timeouts={},
-                 preload_stims=True):
+                 preload_stims=True, practice=False):
         self.task_name = "emotional_anticipation"
-        self.trial_fpath = Path("./resources/emotional_anticipation_trials/")
-        self.cue_fpath = Path("./resources/emotional_anticipation_cues/")
-        self.video_fpath = Path("./resources/emotional_anticipation_videos/")
+        if not practice:
+            self.trial_fpath = Path("./resources/emotional_anticipation_trials/")
+            self.cue_fpath = Path("./resources/emotional_anticipation_cues/")
+            self.video_fpath = Path("./resources/emotional_anticipation_videos/")
+        else:
+            self.trial_fpath = Path("./resources/emotional_anticipation_trials/practice/")
+            self.cue_fpath = Path("./resources/emotional_anticipation_cues/practice/")
+            self.video_fpath = Path("./resources/emotional_anticipation_videos/practice/")
         self.subject_id = subject_id
 
         self.task_presentor = task_presentor

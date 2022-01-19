@@ -122,3 +122,12 @@ Video:
 
 Question files:
     `./resources/affect_reading_questions`
+
+### TODO:
+
+1. Add practice mode for conditions. DONE
+2. Want a break every 14 trials. 30 Sec break.
+3. 2 breaks total.
+4. last block with only have 12 trials.
+5. Same condition the whole time.
+6. Randomly select 7 / 7, 7 / 7, 6 / 6 of each condition in each "Block".

@@ -19,12 +19,12 @@ import sys
 class TaskPresentor(object):
     def __init__(self, subject_id, task_list=["finger_tapping", "end"],
                  present_method="mri", run_task_list=True, task_template=None,
-                 full_screen=True):
+                 full_screen=True, practice=False):
         self.subject_id = subject_id
         self.task_list = task_list
-        self.full_screen = True
-        if full_screen == "No":
-            self.full_screen = False
+        self.full_screen = full_screen
+        self.practice = practice
+        print(f"TASK PRESENTER PRACTICE MODE: {self.practice}")
         self.globals = PsychopyGlobals(full_screen=self.full_screen)
         self.task_factory = TaskFactory(self.subject_id, self)
         self.input_handler = InputHandler(mode=present_method)
@@ -51,13 +51,13 @@ class TaskPresentor(object):
                 if task == "resting_state":
                     self.run_resting_state()
                     continue
-                task_obj = self.task_factory.create_task(task)
+                task_obj = self.task_factory.create_task(task, practice=self.practice)
                 self.logger.set_current_task(task)
                 task_obj.run_full_task()
                 del task_obj
 
         else:
-            self.task_obj = self.task_factory.create_task(task_list[0])
+            self.task_obj = self.task_factory.create_task(task_list[0], practice=self.practice)
             self.logger.set_current_task(task_list[0])
 
 
@@ -291,7 +291,7 @@ class TaskPresentor(object):
             self.display_drawer.draw_all()
             self.window.flip()
 
-            while not event.getKeys(keyList=["5"]):
+            while not event.getKeys(keyList=["5", self.globals.ttl_key]):
                 continue
 
             self.trigger_handler.send_string_trigger("Scanner_Start_Received")

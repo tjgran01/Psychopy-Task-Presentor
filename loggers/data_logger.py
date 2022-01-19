@@ -86,6 +86,12 @@ class DataLogger(object):
                     "video_off",
                     "video_duration",
                     "valence_level_reported"]
+        elif self.task_name == "episodic_prospection":
+            return ["subject_id",
+                    "timestamp",
+                    "stim_value",
+                    "block_num",
+                    "more_data_to_bedecided"]
         elif self.task_name == "timing_data":
             return ["id",
                     "timestamp",

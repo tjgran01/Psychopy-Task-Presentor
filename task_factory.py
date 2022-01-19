@@ -4,6 +4,7 @@ from stroop import StroopTask
 from finger_tapping import FingerTappingTask
 from affect_reading import AffectReadingTask
 from emotional_anticipation import EmotionalAnticipationTask
+from episodic_prospection import EpisodicProspectionTask
 
 import pickle
 
@@ -26,11 +27,11 @@ class TaskFactory(object):
             return pd.Series()
 
 
-    def create_task(self, task_string):
+    def create_task(self, task_string, practice=False):
 
         prefs = self.try_param_set_from_file(task_string)
         if prefs.empty:
-            return self.create_default_task(task_string)
+            return self.create_default_task(task_string, practice=practice)
 
         if task_string == "stroop":
 
@@ -61,7 +62,7 @@ class TaskFactory(object):
         return task
 
 
-    def create_default_task(self, task_string):
+    def create_default_task(self, task_string, practice=False):
 
         prefs = pickle.load(open(f"./preferences/saved_defaults/{task_string}_defaults.pkl", "rb"))
 
@@ -117,4 +118,15 @@ class TaskFactory(object):
                                              num_trials=prefs["num_trials"],
                                              ibi_time=prefs["ibi_time"],
                                              variable_isi=prefs["variable_isi"],
-                                             question_timeouts=prefs["question_timeouts"])
+                                             question_timeouts=prefs["question_timeouts"],
+                                             practice=practice)
+        elif task_string == "episodic_prospection":
+            return EpisodicProspectionTask(self.sub_id, self.task_presentor,
+                                             num_blocks=prefs["num_blocks"],
+                                             conditions=prefs["conditions"],
+                                             fixation_time=prefs["fixation_time"],
+                                             iti_time=prefs["iti_time"],
+                                             num_trials=prefs["num_trials"],
+                                             ibi_time=prefs["ibi_time"],
+                                             variable_isi=prefs["variable_isi"],
+                                             practice=practice)

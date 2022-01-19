@@ -30,6 +30,7 @@ class PsychopyGlobals(object):
                                 color="black", fullscr=False,
                                 screen=1, allowGUI=True)
 
+        self.ttl_key = "t"
 
         self.the_drawer = DisplayDrawer()
         self.default_text_color = [0,0,0]
