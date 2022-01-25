@@ -126,7 +126,9 @@ class TaskFactory(object):
                                              conditions=prefs["conditions"],
                                              fixation_time=prefs["fixation_time"],
                                              iti_time=prefs["iti_time"],
+                                             cue_time=prefs["cue_time"],
                                              num_trials=prefs["num_trials"],
                                              ibi_time=prefs["ibi_time"],
                                              variable_isi=prefs["variable_isi"],
+                                             question_timeouts=prefs["question_timeouts"],
                                              practice=practice)

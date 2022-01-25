@@ -91,7 +91,11 @@ class DataLogger(object):
                     "timestamp",
                     "stim_value",
                     "block_num",
-                    "more_data_to_bedecided"]
+                    "time_button_pressed",
+                    "is_button_pressed",
+                    "how_detailed_reported",
+                    "question_presented_time",
+                    "question_answered_time"]
         elif self.task_name == "timing_data":
             return ["id",
                     "timestamp",

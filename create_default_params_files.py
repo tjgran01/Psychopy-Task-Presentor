@@ -87,10 +87,12 @@ episodic_prospection_defaults = {
                                   "num_blocks": 1,# Not used since there is only one block.
                                   "ibi_time": 15, # Not used since there is only one block.
                                   "fixation_time": 2, # How long between cue and stim.
+                                  "cue_time": 15, # How long the word is played for.
                                   "iti_time": 6, # Time between individual stimulus presentations
                                   "num_trials": 40, # overridden if block_time != 0. PROBABLY UNUSED CURRENTLY.
-                                  "variable_isi": False, # Will use 'fixation_time as mean.'
+                                  "variable_isi": True, # Will use 'fixation_time as mean.'
                                   "name": "episodic_prospection_defaults",
+                                  "question_timeouts": {"slider affect": 5},
                                   "conditions": ["None"]
 }
 

@@ -10,6 +10,7 @@ class QuestionFactory(object):
         self.mode = mode
         self.mouse = event.Mouse()
         self.snap_for_all = snap_for_all
+        self.image_path = None
 
 
     def get_data_line(self, subject_id, block_num):
@@ -170,6 +171,25 @@ class QuestionFactory(object):
             self.m_flip = False
             self._question_text = self.m_question_text
             self.image_path = f"{os.getcwd()}/resources/sam_images/sam_full.png"
+            self.m_text_pos = (0, .8)
+            self.m_text_width = 1.5
+
+
+        elif type == "wie_detalliert":
+
+            self.m_text = "Wie detalliert?"
+            self.m_question_text = ""
+            self.m_ticks = [1,2,3,4,5]
+            self.question_answers = ["Nicht",
+                                     "",
+                                     "",
+                                     "Sehr"]
+            self.m_labels = self.question_answers
+            self.m_style = "rating"
+            self.m_size = [0.75, 0.1]
+            self.m_pos = (0.0, -0.3)
+            self.m_flip = False
+            self._question_text = self.m_question_text
             self.m_text_pos = (0, .8)
             self.m_text_width = 1.5
 

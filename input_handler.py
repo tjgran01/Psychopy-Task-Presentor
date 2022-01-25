@@ -39,7 +39,7 @@ class InputHandler(object):
         else:
             while not event.getKeys(valid_keys):
                 continue
-            return True
+            return True        
 
 
     def handle_mouse_input(self, input_btn, timer=None):
