@@ -249,6 +249,17 @@ class TaskPresentor(object):
 
 
 
+    def sample_variable_isi(self, mean, std):
+
+        dist = np.random.normal(mean, std, 1000)
+        choice = np.random.choice(dist)
+        print(choice)
+        return np.random.choice(dist)
+
+
+
+
+
 ### Big Brain Stuff ------------------------------------------------------------
 
 

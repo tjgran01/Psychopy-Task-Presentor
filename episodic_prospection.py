@@ -49,8 +49,8 @@ class EpisodicProspectionTask(object):
         self.input_handler = InputHandler()
 
         self.condition_stims = {
-            "0": visual.TextStim(self.task_presentor.window, text="Condition 1", pos=(0.0, 0.5), height=(0.1*self.text_size_mult)),
-            "1": visual.TextStim(self.task_presentor.window, text="Condition 2", pos=(0.0, 0.5), height=(0.1*self.text_size_mult))
+            "0": visual.TextStim(self.task_presentor.window, text="Zukünftiges Ereignis", pos=(0.0, 0.5), height=(0.1*self.text_size_mult)),
+            "1": visual.TextStim(self.task_presentor.window, text="Satz bilden", pos=(0.0, 0.5), height=(0.1*self.text_size_mult))
         }
 
 
@@ -103,13 +103,12 @@ class EpisodicProspectionTask(object):
 
         export_row = {}
 
-        self.task_presentor.run_isi(self.fixation_time)
+        self.task_presentor.run_isi(self.task_presentor.sample_variable_isi(6, 1))
         self.task_presentor.display_stims([trial_data["stim"], self.condition_stims[trial_data["condition"]]])
 
         self.trial_timer.reset()
         inp = self.input_handler.handle_button_input("default", timer=self.trial_timer)
         if inp:
-            print("Hey")
             export_row["time_pressed"] = time.time()
             export_row["is_button_pressed"] = 1
             while self.trial_timer.getTime() > 0:
@@ -126,7 +125,7 @@ class EpisodicProspectionTask(object):
         self.write_data(trial_data["word"], export_row, q_data, question_presented, question_responsed)
 
 
-    def write_data(self, word, row, q_data):
+    def write_data(self, word, row, q_data, question_presented, question_responsed):
 
         data = [self.subject_id,
                 time.time(),
@@ -134,7 +133,7 @@ class EpisodicProspectionTask(object):
                 0,
                 row["time_pressed"],
                 row["is_button_pressed"],
-                q_data[-3]
+                q_data[-3],
                 question_presented,
                 question_responsed]
 

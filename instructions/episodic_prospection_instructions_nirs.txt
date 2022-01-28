@@ -1,6 +1,9 @@
-Hello. I am the void.
-I do not know what to say about this task.
-I am just a lonely programmer, out of coffee.
-If you are not a programmer, and are instead an experimenter. You can find me in the './instructions/episodic_prospection_instructions_mri.txt' file.
-You can edit me to your hearts content. Be sure to push your changes to github!
-Each line is a new sreen for the participant to see. What a lovely, user friendly, system. Bye Bye.
+Im Folgenden werden Ihnen verschiedene Wörter präsentiert und je nach Bedingung die ihnen dazu angezeigt wird, sollen Sie sich entweder ein persönliches zukünftiges Ereignis vorstellen oder das Wort gedanklich mit zwei anderen Wörtern in Vergleich setzten. Was damit gemeint ist schauen wir uns nun im Detail an. Drücken Sie eine beliebige Taste, um fortzufahren.
+Wird Ihnen beispielsweise die Instruktion Vorstellen: zukünftiges Ereignis und das Wort Stift angezeigt, sollen Sie sich ein persönliches Ereignis in der Zukunft das lose mit dem Wort Stift zu tun hat, aus der Ich-Perspektive vorstellen.
+Das Ereignis selbst soll neu, plausibel und möglichst emotional neutral sein. Außerdem soll es an einem spezifischen Ort zu einer spezifischen Zeit stattfinden (es kann also Minuten bis Stunden dauern). Stellen Sie sich das Ereignis aus der ersten Person vor.
+Sobald Sie ein Szenario vor Augen haben, drücken Sie bitte den Knopf in ihrer rechten Hand. Konzentrieren Sie sich nun darauf sich weitere Details des zukünftigen Ereignisses vorzustellen.
+Drücken Sie eine beliebige Taste, um fortzufahren.
+Wird ihnen wiederum das Wort Stift zusammen mit den Instruktionen Satz Bilden, Größe angezeigt, sollen Sie sich zwei andere Objekte vorstellen, die mit dem Wort Stift zusammenhängen. Beispielsweise Buch und Radiergummi.
+Diese sollen Sie dann gedanklich in einem Satz ihrer Größe nach in der folgenden Form sortieren: Stift größer Radiergummi und Buch größer Stift. Die Reihenfolge der Objekte ist egal.
+Sobald sie den Satz gebildet haben drücken Sie auch wieder den Knopf in ihrer rechten Hand. Denken Sie nun für den Rest der Zeit über die Definition bzw. Bedeutung der drei Wörter nach.
+Drücken Sie eine beliebige Taste, um fortzufahren.

@@ -178,12 +178,10 @@ class QuestionFactory(object):
         elif type == "wie_detalliert":
 
             self.m_text = "Wie detalliert?"
+            self.m_ticks = [1, 2]
             self.m_question_text = ""
-            self.m_ticks = [1,2,3,4,5]
-            self.question_answers = ["Nicht",
-                                     "",
-                                     "",
-                                     "Sehr"]
+            self.question_answers = ["Nicht lebhaft",
+                                     "Sehr lebhaft"]
             self.m_labels = self.question_answers
             self.m_style = "rating"
             self.m_size = [0.75, 0.1]
@@ -192,6 +190,7 @@ class QuestionFactory(object):
             self._question_text = self.m_question_text
             self.m_text_pos = (0, .8)
             self.m_text_width = 1.5
+            self.m_style = "triangleMarker"
 
 
         if self.mode == "likert":
@@ -262,8 +261,8 @@ class QuestionFactory(object):
             mouse_indx = 0
             snapping = False
 
-        if self.snap_for_all:
-            snapping = True
+        # if self.snap_for_all:
+        #     snapping = True
 
         self.task_presentor.display_stims(self.stims)
 
