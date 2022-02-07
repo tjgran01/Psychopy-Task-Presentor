@@ -17,14 +17,6 @@ class EmotionalAnticipationTask(object):
                  num_trials=10, ibi_time=10, variable_isi=False, question_timeouts={},
                  preload_stims=True, practice=False):
         self.task_name = "emotional_anticipation"
-        if not practice:
-            self.trial_fpath = Path("./resources/emotional_anticipation_trials/")
-            self.cue_fpath = Path("./resources/emotional_anticipation_cues/")
-            self.video_fpath = Path("./resources/emotional_anticipation_videos/")
-        else:
-            self.trial_fpath = Path("./resources/emotional_anticipation_trials/practice/")
-            self.cue_fpath = Path("./resources/emotional_anticipation_cues/practice/")
-            self.video_fpath = Path("./resources/emotional_anticipation_videos/practice/")
         self.subject_id = subject_id
 
         self.task_presentor = task_presentor
@@ -41,12 +33,26 @@ class EmotionalAnticipationTask(object):
         self.variable_isi = variable_isi
         self.question_timeouts = question_timeouts
 
+        if not practice:
+            self.trial_fpath = Path("./resources/emotional_anticipation_trials/")
+            self.cue_fpath = Path("./resources/emotional_anticipation_cues/")
+            self.video_fpath = Path("./resources/emotional_anticipation_videos/")
+        else:
+            self.trial_fpath = Path("./resources/emotional_anticipation_trials/practice/")
+            self.cue_fpath = Path("./resources/emotional_anticipation_cues/practice/")
+            self.video_fpath = Path("./resources/emotional_anticipation_videos/practice/")
+            self.num_trials=8
+            self.num_blocks=1
+        self.practice = practice
+
+
         # this is used for testing purposes only.
         if preload_stims:
-            self.stim_dictionary = self.create_stim_dictionary()
+            self.stim_dictionary = self.create_stim_dictionary(shuffle=practice)
 
         # Keeping track of state
         self._block_num=0
+        self.trials_presented = 0
 
         self.instructions = self.task_presentor.read_instructions_from_file(self.task_name)
         self.question_factory = QuestionFactory(self.task_presentor,
@@ -76,10 +82,11 @@ class EmotionalAnticipationTask(object):
         if video_name == "None":
             return None
         return visual.MovieStim3(win=self.task_presentor.window,
-                                 filename=f"{self.video_fpath}/{video_name}")
+                                 filename=f"{self.video_fpath}/{video_name}", 
+                                 noAudio=True)
 
 
-    def create_stim_dictionary(self):
+    def create_stim_dictionary(self, shuffle=False):
 
         lines = FileReader(f"{self.trial_fpath}/emotional_anticipation_trials.csv").return_rows()
 
@@ -107,7 +114,7 @@ class EmotionalAnticipationTask(object):
         for block in range(self.num_blocks):
             self.set_current_block_num(block)
             self.run_block(block_num=block)
-            if (self.num_blocks > 1):
+            if (self.num_blocks > 1 and not self.practice):
                 self.task_presentor.run_ibi(self.ibi_time)
 
 
@@ -116,9 +123,12 @@ class EmotionalAnticipationTask(object):
         self.task_presentor.trigger_handler.send_string_trigger("Emotional_Anticipation_Block_Start")
 
         for trial, trial_data in self.stim_dictionary.items():
-            print(trial)
-            self.run_single_trial(trial_data)
-            self.task_presentor.run_isi(self.iti_time)
+            if self.trials_presented < self.num_trials:
+                self.run_single_trial(trial_data)
+                self.task_presentor.run_isi(self.iti_time)
+                self.trials_presented += 1
+                print(self.trials_presented)
+                print(self.num_trials)
 
         self.task_presentor.trigger_handler.send_string_trigger("Emotional_Anticipation_Block_End")
 
@@ -140,7 +150,8 @@ class EmotionalAnticipationTask(object):
         affect_data = self.run_affect_prompt(had_video=has_video)
         print(affect_data)
         self.write_data(trial_data["cue"].name, cue_time, cue_off_time,
-                        video_start_time, video_end_time, affect_data[-3])
+                        video_start_time, video_end_time, affect_data[-3], 
+                        affect_data[-2], affect_data[-1])
 
 
     def display_cue(self, cue):
@@ -182,7 +193,7 @@ class EmotionalAnticipationTask(object):
 
 
     def write_data(self, cue, cue_time, cue_off_time, video_start_time, video_end_time,
-                   affect_data):
+                   affect_data_score, affect_data_onset, affect_data_dur):
 
         data = [self.subject_id,
                 cue_time,
@@ -193,7 +204,9 @@ class EmotionalAnticipationTask(object):
                 "Video",
                 video_start_time,
                 video_end_time,
-                video_end_time - video_end_time,
-                affect_data]
+                video_end_time - video_start_time,
+                affect_data_score,
+                affect_data_onset,
+                affect_data_dur]
 
         self.task_presentor.logger.write_data_row(data)

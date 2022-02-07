@@ -11,6 +11,7 @@ class QuestionFactory(object):
         self.mouse = event.Mouse()
         self.snap_for_all = snap_for_all
         self.image_path = None
+        self.question_displayed_time = None
 
 
     def get_data_line(self, subject_id, block_num):
@@ -25,11 +26,13 @@ class QuestionFactory(object):
             selection = -1
             score = -2
             selection_string = "TIMEOUT"
+            duration = self._timeout_time
 
         else:
             rt = self.slider.getRT()
             selection = self.selection
             selection_string = self.m_labels[int(self.selection)-1]
+            duration = rt
 
 
         return [subject_id,
@@ -42,7 +45,9 @@ class QuestionFactory(object):
                 self.m_labels,
                 selection,
                 selection_string,
-                score]
+                score,
+                self.question_displayed_time,
+                duration]
 
 
     def score_mult_choice(self):
@@ -251,6 +256,9 @@ class QuestionFactory(object):
 
 
     def display_question(self, question_timer):
+
+        self.question_displayed_time = time.time()
+        self._timeout_time = question_timer.getTime()
 
         self.mouse.setVisible(False)
 

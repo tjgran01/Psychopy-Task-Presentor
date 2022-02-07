@@ -22,8 +22,17 @@ class TaskPresentor(object):
                  full_screen=True, practice=False):
         self.subject_id = subject_id
         self.task_list = task_list
-        self.full_screen = full_screen
-        self.practice = practice
+        
+        if practice == "Yes":
+            self.practice = True
+        else:
+            self.practice = False
+
+        if full_screen == "Yes":
+            self.full_screen = True
+        else:
+            self.full_screen = False
+
         print(f"TASK PRESENTER PRACTICE MODE: {self.practice}")
         self.globals = PsychopyGlobals(full_screen=self.full_screen)
         self.task_factory = TaskFactory(self.subject_id, self)

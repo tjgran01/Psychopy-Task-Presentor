@@ -85,7 +85,9 @@ class DataLogger(object):
                     "video_onset",
                     "video_off",
                     "video_duration",
-                    "valence_level_reported"]
+                    "valence_level_reported",
+                    "SAM_onset",
+                    "SAM_duration"]
         elif self.task_name == "episodic_prospection":
             return ["subject_id",
                     "timestamp",
