@@ -71,13 +71,13 @@ affect_reading_defaults = {
 emotional_anticipation_defaults = {
                                    "num_blocks": 3,# Not used since there is only one block.
                                    "ibi_time": 30, # Not used since there is only one block.
-                                   "fixation_time": 2, # How long between cue and stim.
-                                   "iti_time": 6, # Time between individual stimulus presentations
+                                   "fixation_time": 6.9, # How long between cue and stim.
+                                   "iti_time": 3, # Time between individual stimulus presentations
                                    "cue_time": 1, # How long cue stays on screen.
                                    "movie_time": 6.9, # How long the video plays
                                    "num_trials": 96, # overridden if block_time != 0. PROBABLY UNUSED CURRENTLY.
                                    "variable_isi": False, # Will use 'fixation_time as mean.'
-                                   "question_timeouts": {"slider affect": 5},
+                                   "question_timeouts": {"slider affect": 10},
                                    "conditions": ["darker",
                                                   "lighter"],
                                    "name": "emotional_anticipation_defaults",
@@ -92,7 +92,7 @@ episodic_prospection_defaults = {
                                   "num_trials": 40, # overridden if block_time != 0. PROBABLY UNUSED CURRENTLY.
                                   "variable_isi": False, # Will use 'fixation_time as mean.'
                                   "name": "episodic_prospection_defaults",
-                                  "question_timeouts": {"slider affect": 5},
+                                  "question_timeouts": {"slider affect": 10},
                                   "conditions": ["None"]
 }
 
