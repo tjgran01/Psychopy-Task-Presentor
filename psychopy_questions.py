@@ -1,4 +1,4 @@
-from psychopy import visual, core, event
+from psychopy import visual, core, event, hardware
 import random
 
 import time
@@ -306,5 +306,38 @@ class QuestionFactory(object):
                     self.score = -1
                     self._question_text = self.m_text
                 return
+
+        self.timeout = True
+
+
+    def display_question_button_slider(self, question_timer, speed_dampen=0.0):
+
+        self.question_displayed_time = time.time()
+        self._timeout_time = question_timer.getTime()
+
+        self.mouse.setVisible(False)
+
+        self.task_presentor.display_stims(self.stims)
+
+        kb = hardware.keyboard.Keyboard()
+        newPos = self.slider.markerPos
+        while not self.slider.getRating() and question_timer.getTime() > 0:
+            self.slider.markerPos = newPos
+            self.task_presentor.display_stims(self.stims)
+            keys = kb.getKeys(["1", "2", "4"], waitRelease=False, clear=False)
+            if keys and not keys[-1].duration:
+                key = keys[-1].name
+                if key == "1" and newPos > 0.0:
+                    newPos -= .05 * speed_dampen
+                if key == "2" and newPos < 5.0:
+                    newPos += .05 * speed_dampen
+                if key == "4":
+                    self.timeout = False
+                    self.slider.recordRating(self.slider.markerPos)
+                    self.selection = (self.slider.getRating() - 1) / (len(self.m_ticks) - 1)
+                    self.type_text = self.type
+                    self.score = -1
+                    self._question_text = self.m_text
+                    return
 
         self.timeout = True

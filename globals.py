@@ -5,6 +5,8 @@ import platform
 
 from display_drawer import DisplayDrawer
 
+from resources.generic.basic_prompts import prompts
+
 
 ### Might want to singleton this.
 class PsychopyGlobals(object):
@@ -19,7 +21,7 @@ class PsychopyGlobals(object):
         None
     """
 
-    def __init__(self, full_screen=False, presentation_mode="mri"):
+    def __init__(self, full_screen=False, presentation_mode="mri", lang="English"):
         # PsychoPy Stuff.
         if platform.system() == "Windows":
             print(f"full screen: {full_screen}")
@@ -42,11 +44,22 @@ class PsychopyGlobals(object):
             self.advance_btn_str = "SPACEBAR"
 
         self.aspect_ratio = float(self.window.size[1]) / float(self.window.size[0])
-        self.advance_text = visual.TextStim(self.window,
-                                            text=f"Press '{self.advance_btn_str}' to advance to the next page.",
-                                            colorSpace='rgb',
-                                            color=(1.0, 0.0, 0.0),
-                                            pos=(0.0, -0.6))
+
+        if lang == "Deutsch":
+            print("DEUTSCH being used as language for instructions.")
+            self.advance_text = visual.TextStim(self.window,
+                        text=prompts["advance_text"][lang],
+                        colorSpace='rgb',
+                        color=(1.0, 0.0, 0.0),
+                        pos=(0.0, -0.6))
+        else:
+            print("ENGLISH being used as language for instructions.")
+            self.advance_text = visual.TextStim(self.window,
+                                    text=f"Press '{self.advance_btn_str}' to advance to the next page.",
+                                    colorSpace='rgb',
+                                    color=(1.0, 0.0, 0.0),
+                                    pos=(0.0, -0.6))
+
         self.fixation_cross = visual.TextStim(self.window,
                                               text="+",
                                               color=self.default_text_color)

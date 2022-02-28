@@ -14,14 +14,17 @@ from input_handler import InputHandler
 from lsl_trigger import LSLTriggerHandler
 from parameters.trigger_dict import trigger_dict, trigger_string_dict
 
+from resources.generic.basic_prompts import prompts
+
 import sys
 
 class TaskPresentor(object):
     def __init__(self, subject_id, task_list=["finger_tapping", "end"],
                  present_method="mri", run_task_list=True, task_template=None,
-                 full_screen=True, practice=False):
+                 full_screen=True, practice=False, lang="English"):
         self.subject_id = subject_id
         self.task_list = task_list
+        self.lang = lang
         
         if practice == "Yes":
             self.practice = True
@@ -34,7 +37,7 @@ class TaskPresentor(object):
             self.full_screen = False
 
         print(f"TASK PRESENTER PRACTICE MODE: {self.practice}")
-        self.globals = PsychopyGlobals(full_screen=self.full_screen)
+        self.globals = PsychopyGlobals(full_screen=self.full_screen, lang=self.lang)
         self.task_factory = TaskFactory(self.subject_id, self)
         self.input_handler = InputHandler(mode=present_method)
         self.window = self.globals.window
@@ -75,7 +78,7 @@ class TaskPresentor(object):
         event.clearEvents()
 
         end_text = visual.TextStim(self.window,
-                                   text="Thank you for completing all of the tasks",
+                                   text=prompts["thank_you"][self.lang],
                                    color=self.globals.default_text_color)
         self.display_drawer.add_to_draw_list(end_text)
         self.display_drawer.add_to_draw_list(self.advance_text)
@@ -104,22 +107,7 @@ class TaskPresentor(object):
 
     def set_advance_text(self):
 
-        if self.present_method == 'mri':
-            if self.current_task != "affect_reading":
-                m_text = "Press Index Finger Button to Continue."
-            else:
-                m_text = "Press Thumb Button to Continue."
-        else:
-            if self.current_task != "affect_reading":
-                m_text = "Press Spacebar Key to Continue."
-            else:
-                m_text = "Click Left Mouse Button to Continue."
-
-        self.advance_text = visual.TextStim(self.window,
-                                            text=m_text,
-                                            colorSpace='rgb',
-                                            color=(1.0, 0.0, 0.0),
-                                            pos=(0.0, -0.6))
+        self.advance_text = self.globals.advance_text
 
 
 
@@ -136,7 +124,7 @@ class TaskPresentor(object):
 
         m_advance_text = self.set_advance_text()
 
-        size_mult = 1.0
+        size_mult = 0.8
 
         self.trigger_handler.send_string_trigger("Instructions_Displayed")
 
@@ -169,10 +157,8 @@ class TaskPresentor(object):
 
             self.trigger_handler.send_string_trigger("Experimenter_Screen_Displayed")
 
-            text_prompt = "The next task will begin shortly, please wait for the experimenter to advance to the next task."
-
             display_text = visual.TextStim(self.window,
-                                           text=text_prompt,
+                                           text=prompts["experimentor"][self.lang],
                                            height=(0.1*size_mult),
                                            color=self.globals.default_text_color)
             self.display_drawer.add_to_draw_list(display_text)
@@ -305,8 +291,9 @@ class TaskPresentor(object):
         if self.present_method == "mri":
 
             scanner_wait_text =  visual.TextStim(self.window,
-                                                 text="Waiting for scanner event...",
+                                                 text=prompts["wait_for_scanner"][self.lang],
                                                  color=self.globals.default_text_color)
+
             self.display_drawer.add_to_draw_list(scanner_wait_text)
             self.display_drawer.draw_all()
             self.window.flip()

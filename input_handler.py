@@ -1,4 +1,5 @@
 from psychopy import core, event
+from psychopy.hardware import keyboard
 
 class InputHandler(object):
     def __init__(self, mode="mri"):
@@ -10,7 +11,8 @@ class InputHandler(object):
                                       "response_1": ["1"],
                                       "response_2": ["2"],
                                       "response_all": ["1", "2"],
-                                      "experimenter": ["e"]}
+                                      "experimenter": ["e"],
+                                      "slider_question": ["1", "2", "4"]}
             self.response_mouse_dict = {"left": 0,
                                         "middle": 1,
                                         "right": 2}
@@ -39,8 +41,23 @@ class InputHandler(object):
         else:
             while not event.getKeys(valid_keys):
                 continue
-            return True        
+            return True
 
+
+    def handle_button_input_slider(self, timer=None):
+
+        kb = keyboard.Keyboard()
+
+        while not timer.getTime() < 0:
+            keys = kb.getKeys(["1", "2", "4"], waitRelease=False, clear=True)
+            if "1" in keys:
+                print("Hello")
+                return -1
+            elif "2" in keys:
+                return 1
+            elif event.getKeys("4"):
+                return 0
+        return None
 
     def handle_mouse_input(self, input_btn, timer=None):
 

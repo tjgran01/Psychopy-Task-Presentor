@@ -13,15 +13,12 @@ def main(task_list):
     myDlg = gui.Dlg(title="Participant ID Entry Field")
     myDlg.addText('Please enter the Participant ID for this session:')
     myDlg.addField('Participant ID:', "XXXX")
-    myDlg.addText('Please choose a presentation method.')
-    myDlg.addField('Presentation Method', choices=["mri", "nirs"])
     myDlg.addText('What template will this participant be running through.')
     myDlg.addField('Task Template', choices=["Lighter Cue", "Darker Cue"])
-    myDlg.addText('Is this a test? (Answering Yes will not save output data.)')
-    # myDlg.addField('Testing?', choices=["Yes", "No"])
     myDlg.addField('Full Screen?', choices=["Yes", "No"])
     myDlg.addField('Practice', choices=["Yes", "No"])
     myDlg.addField('First Task', choices=["emotional_anticipation", "episodic_prospection"])
+    myDlg.addField('Language', choices=["Deutsch", "English"])
 
 
     sub_id = myDlg.show()  # show dialog and wait for OK or Cancel
@@ -44,7 +41,7 @@ def main(task_list):
     #     task_list.insert(0, "resting_state")
 
     tp = TaskPresentor(sub_id[0], task_list=task_list, present_method="mri", 
-                       task_template="Lighter Cue", full_screen=sub_id[-3], practice=sub_id[-2])
+                       task_template="Lighter Cue", full_screen=sub_id[-4], practice=sub_id[-3], lang=sub_id[-1])
 
 if __name__ == "__main__":
     task_list = ["emotional_anticipation", "end"]

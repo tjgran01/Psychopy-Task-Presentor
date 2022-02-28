@@ -116,10 +116,11 @@ class EpisodicProspectionTask(object):
         else:
             export_row["time_pressed"] = None
             export_row["is_button_pressed"] = 0
+
         self.question_factory.create_question("wie_detalliert")
         self.question_timer.reset()
         question_presented = time.time()
-        self.question_factory.display_question(self.question_timer)
+        self.question_factory.display_question_button_slider(self.question_timer, speed_dampen=0.5)
         question_responsed = time.time()
         q_data = self.question_factory.get_data_line(self.subject_id, block_num)
         self.write_data(trial_data["word"], export_row, q_data, question_presented, question_responsed)

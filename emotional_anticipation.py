@@ -186,7 +186,7 @@ class EmotionalAnticipationTask(object):
         ### Has video flag should change the text for the question (will update in question factory).
         self.question_timer.reset()
         self.question_factory.create_question("emotional_SAM")
-        self.question_factory.display_question(self.question_timer)
+        self.question_factory.display_question_button_slider(self.question_timer)
         return self.question_factory.get_data_line(self.subject_id, self._block_num)
 
         # self.task_presentor.logger.write_data_row(self.question_factory.get_data_line(self.subject_id, self._block_num))
