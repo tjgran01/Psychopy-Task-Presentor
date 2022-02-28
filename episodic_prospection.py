@@ -63,9 +63,13 @@ class EpisodicProspectionTask(object):
     def parse_trial_data(self, shuffle=False):
 
         lines = FileReader(f"{self.trial_fpath}/episodic_prospection_trials.csv").return_rows()
+        lines = lines[1:]
+
+        if shuffle:
+            random.shuffle(lines)
 
         stim_dictionary = {}
-        for l in tqdm(lines[1:], desc="Loading Stims"):
+        for l in tqdm(lines, desc="Loading Stims"):
             word = self.create_word_stim(l[0])
             stim_dictionary[l[0]] = {"stim": word,
                                     "word": l[0], 
@@ -87,23 +91,33 @@ class EpisodicProspectionTask(object):
 
         for block in range(self.num_blocks):
             self.run_block(block_num=block)
-            self.task_presentor.run_ibi(self.ibi_time)
 
 
     def run_block(self, block_num=0):
 
         self.task_presentor.trigger_handler.send_string_trigger("Episodic_Prospection_Block_Start")
+        count = 0
         for trial in self.trials.values():
             self.run_single_trial(trial)
+            count += 1
+            if count == 14 or count == 28:
+                self.display_break()
         self.task_presentor.trigger_handler.send_string_trigger("Episodic_Prospection_Block_End")
 
+
+    def display_break(self):
+
+        self.task_presentor.trigger_handler.send_string_trigger("Episodic_Prospection_Block_End")
+        self.task_presentor.run_isi(30, instead_focus="Sie haben nun eine kurze Pause von 30 Sekunden")
+        self.task_presentor.trigger_handler.send_string_trigger("Episodic_Prospection_Block_Start")
 
 
     def run_single_trial(self, trial_data, block_num=0):
 
         export_row = {}
 
-        self.task_presentor.run_isi(self.task_presentor.sample_variable_isi(6, 1))
+        # self.task_presentor.run_isi(self.task_presentor.sample_variable_isi(6, 1))
+        self.task_presentor.run_isi(self.iti_time)
         self.task_presentor.display_stims([trial_data["stim"], self.condition_stims[trial_data["condition"]]])
 
         self.trial_timer.reset()

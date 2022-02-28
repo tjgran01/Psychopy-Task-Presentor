@@ -182,12 +182,16 @@ class TaskPresentor(object):
         core.wait(ibi_time)
 
 
-    def run_isi(self, isi_time, trigger=False):
+    def run_isi(self, isi_time, trigger=False, instead_focus=None):
 
         if trigger:
             self.trigger_handler.send_string_trigger("Resting_State_Start")
 
-        self.display_drawer.add_to_draw_list(self.fixation_cross)
+        if instead_focus != None:
+            self.display_drawer.add_to_draw_list(visual.TextStim(self.window, text=instead_focus))
+        else:
+            self.display_drawer.add_to_draw_list(self.fixation_cross)
+
         self.display_drawer.draw_all()
         self.window.flip()
         core.wait(isi_time)

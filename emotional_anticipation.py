@@ -90,6 +90,11 @@ class EmotionalAnticipationTask(object):
 
         lines = FileReader(f"{self.trial_fpath}/emotional_anticipation_trials.csv").return_rows()
 
+        lines = lines[1:]
+
+        if shuffle:
+            random.shuffle(lines)
+
         stim_dictionary = {}
         for l in tqdm(lines[1:], desc="Loading Stims"):
             cue = self.create_cue_stim(l[0])
