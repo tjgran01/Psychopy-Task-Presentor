@@ -310,7 +310,7 @@ class QuestionFactory(object):
         self.timeout = True
 
 
-    def display_question_button_slider(self, question_timer, speed_dampen=0.0):
+    def display_question_button_slider(self, question_timer, speed_dampen=1.0):
 
         self.question_displayed_time = time.time()
         self._timeout_time = question_timer.getTime()

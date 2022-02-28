@@ -31,7 +31,7 @@ def main(task_list):
         if elm == "No":
             elm = False
 
-    if sub_id[-1] == "emotional_anticipation":
+    if sub_id[-2] == "emotional_anticipation":
         task_list = ["emotional_anticipation", "episodic_prospection", "end"]
     else:
         task_list = ["episodic_prospection", "emotional_anticipation", "end"]
