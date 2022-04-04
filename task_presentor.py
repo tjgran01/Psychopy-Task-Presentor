@@ -21,10 +21,11 @@ import sys
 class TaskPresentor(object):
     def __init__(self, subject_id, task_list=["finger_tapping", "end"],
                  present_method="mri", run_task_list=True, task_template=None,
-                 full_screen=True, practice=False, lang="English"):
+                 full_screen=True, practice=False, lang="English", cue_cond="light_to_dark"):
         self.subject_id = subject_id
         self.task_list = task_list
         self.lang = lang
+        self.cue_cond = cue_cond
         
         if practice == "Yes":
             self.practice = True
@@ -86,7 +87,7 @@ class TaskPresentor(object):
         self.window.flip()
 
         while not event.getKeys():
-            if self.input_handler.handle_mouse_input("left"):
+            if self.input_handler.handle_mouse_input("left") or self.input_handler.handle_button_input("experimenter"):
                 break
             continue
 

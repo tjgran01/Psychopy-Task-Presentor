@@ -87,7 +87,8 @@ class DataLogger(object):
                     "video_duration",
                     "valence_level_reported",
                     "SAM_onset",
-                    "SAM_duration"]
+                    "SAM_duration",
+                    "was_timedout"]
         elif self.task_name == "episodic_prospection":
             return ["subject_id",
                     "timestamp",
@@ -97,7 +98,8 @@ class DataLogger(object):
                     "is_button_pressed",
                     "how_detailed_reported",
                     "question_presented_time",
-                    "question_answered_time"]
+                    "question_answered_time",
+                    "was_timedout"]
         elif self.task_name == "timing_data":
             return ["id",
                     "timestamp",

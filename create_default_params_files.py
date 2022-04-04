@@ -69,30 +69,30 @@ affect_reading_defaults = {
                            }
 
 emotional_anticipation_defaults = {
-                                   "num_blocks": 3,# Not used since there is only one block.
-                                   "ibi_time": 30, # Not used since there is only one block.
+                                   "num_blocks": 1,# Not used since there is only one block.
+                                   "ibi_time": 30, # Not used since there is only one block. REST TIME. 
                                    "fixation_time": 6.9, # How long between cue and stim.
                                    "iti_time": 3, # Time between individual stimulus presentations
                                    "cue_time": 1, # How long cue stays on screen.
                                    "movie_time": 6.9, # How long the video plays
                                    "num_trials": 96, # overridden if block_time != 0. PROBABLY UNUSED CURRENTLY.
                                    "variable_isi": False, # Will use 'fixation_time as mean.'
-                                   "question_timeouts": {"slider affect": 10},
+                                   "question_timeouts": {"slider affect": 4},
                                    "conditions": ["darker",
                                                   "lighter"],
                                    "name": "emotional_anticipation_defaults",
                                    }
 
 episodic_prospection_defaults = {
-                                  "num_blocks": 1,# Not used since there is only one block.
-                                  "ibi_time": 15, # Not used since there is only one block.
+                                  "num_blocks": 1,
+                                  "ibi_time": 15,
                                   "fixation_time": 2, # How long between cue and stim.
                                   "cue_time": 15, # How long the word is played for.
                                   "iti_time": 6, # Time between individual stimulus presentations
                                   "num_trials": 40, # overridden if block_time != 0. PROBABLY UNUSED CURRENTLY.
                                   "variable_isi": False, # Will use 'fixation_time as mean.'
                                   "name": "episodic_prospection_defaults",
-                                  "question_timeouts": {"slider affect": 10},
+                                  "question_timeouts": {"slider affect": 4},
                                   "conditions": ["None"]
 }
 

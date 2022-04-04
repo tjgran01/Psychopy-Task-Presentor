@@ -14,7 +14,7 @@ def main(task_list):
     myDlg.addText('Please enter the Participant ID for this session:')
     myDlg.addField('Participant ID:', "XXXX")
     myDlg.addText('What template will this participant be running through.')
-    myDlg.addField('Task Template', choices=["Lighter Cue", "Darker Cue"])
+    myDlg.addField('Bad Videos', choices=["light_to_dark", "dark_to_light"])
     myDlg.addField('Full Screen?', choices=["Yes", "No"])
     myDlg.addField('Practice', choices=["Yes", "No"])
     myDlg.addField('First Task', choices=["emotional_anticipation", "episodic_prospection"])
@@ -32,16 +32,16 @@ def main(task_list):
             elm = False
 
     if sub_id[-2] == "emotional_anticipation":
-        task_list = ["emotional_anticipation", "episodic_prospection", "end"]
+        task_list = ["emotional_anticipation", "end"]
     else:
-        task_list = ["episodic_prospection", "emotional_anticipation", "end"]
+        task_list = ["episodic_prospection", "end"]
     
 
     # if sub_id[1] == "nirs":
     #     task_list.insert(0, "resting_state")
 
     tp = TaskPresentor(sub_id[0], task_list=task_list, present_method="mri", 
-                       task_template="Lighter Cue", full_screen=sub_id[-4], practice=sub_id[-3], lang=sub_id[-1])
+                       task_template="Lighter Cue", full_screen=sub_id[-4], practice=sub_id[-3], lang=sub_id[-1], cue_cond=sub_id[-5])
 
 if __name__ == "__main__":
     task_list = ["emotional_anticipation", "end"]

@@ -20,6 +20,7 @@ class EmotionalAnticipationTask(object):
         self.subject_id = subject_id
 
         self.task_presentor = task_presentor
+        self.cue_cond = self.task_presentor.cue_cond
 
         # From parameter file.
         self.num_blocks = num_blocks
@@ -35,7 +36,7 @@ class EmotionalAnticipationTask(object):
 
         if not practice:
             self.trial_fpath = Path("./resources/emotional_anticipation_trials/")
-            self.cue_fpath = Path("./resources/emotional_anticipation_cues/")
+            self.cue_fpath = Path(f"./resources/emotional_anticipation_cues/{self.cue_cond}/")
             self.video_fpath = Path("./resources/emotional_anticipation_videos/")
         else:
             self.trial_fpath = Path("./resources/emotional_anticipation_trials/practice/")
@@ -81,9 +82,15 @@ class EmotionalAnticipationTask(object):
 
         if video_name == "None":
             return None
-        return visual.MovieStim3(win=self.task_presentor.window,
-                                 filename=f"{self.video_fpath}/{video_name}", 
-                                 noAudio=True)
+
+        try:
+            return visual.MovieStim3(win=self.task_presentor.window,
+                                    filename=f"{self.video_fpath}/{video_name}", 
+                                    noAudio=True)
+        except OSError:
+            print(f"VIDEO: {video_name} not found!!!")
+            return None
+
 
 
     def create_stim_dictionary(self, shuffle=False):
@@ -153,10 +160,10 @@ class EmotionalAnticipationTask(object):
             has_video = False
 
         affect_data = self.run_affect_prompt(had_video=has_video)
-        print(affect_data)
+        print(affect_data[-5])
         self.write_data(trial_data["cue"].name, cue_time, cue_off_time,
-                        video_start_time, video_end_time, affect_data[-3], 
-                        affect_data[-2], affect_data[-1])
+                        video_start_time, video_end_time, affect_data[-6], 
+                        affect_data[-3], affect_data[-2], affect_data[-1])
 
 
     def display_cue(self, cue):
@@ -198,7 +205,7 @@ class EmotionalAnticipationTask(object):
 
 
     def write_data(self, cue, cue_time, cue_off_time, video_start_time, video_end_time,
-                   affect_data_score, affect_data_onset, affect_data_dur):
+                   affect_data_score, affect_data_onset, affect_data_dur, was_timeout):
 
         data = [self.subject_id,
                 cue_time,
@@ -212,6 +219,7 @@ class EmotionalAnticipationTask(object):
                 video_end_time - video_start_time,
                 affect_data_score,
                 affect_data_onset,
-                affect_data_dur]
+                affect_data_dur,
+                was_timeout]
 
         self.task_presentor.logger.write_data_row(data)

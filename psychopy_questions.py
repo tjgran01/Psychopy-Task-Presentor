@@ -23,7 +23,7 @@ class QuestionFactory(object):
 
         if self.timeout:
             rt = None
-            selection = -1
+            selection = self.selection
             score = -2
             selection_string = "TIMEOUT"
             duration = self._timeout_time
@@ -47,7 +47,8 @@ class QuestionFactory(object):
                 selection_string,
                 score,
                 self.question_displayed_time,
-                duration]
+                duration,
+                self.timeout]
 
 
     def score_mult_choice(self):
@@ -234,7 +235,12 @@ class QuestionFactory(object):
                                     pos=pos,
                                     flip=flip)
 
-        self.slider.markerPos = random.choice(ticks)
+        if len(ticks) == 2:
+            self.slider.setMarkerPos(random.choice([1.25, 1.75]))
+        elif len(ticks) == 5:
+            self.slider.markerPos = random.choice([2, 4])
+        else:
+            self.slider.markerPos = random.choice(ticks)
 
         if self.m_question_text:
             self.question_text_stim = visual.TextStim(win=self.task_presentor.window,
@@ -340,4 +346,6 @@ class QuestionFactory(object):
                     self._question_text = self.m_text
                     return
 
+        self.slider.recordRating(self.slider.markerPos)
+        self.selection = (self.slider.getRating() - 1) / (len(self.m_ticks) - 1)
         self.timeout = True

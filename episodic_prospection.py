@@ -142,14 +142,18 @@ class EpisodicProspectionTask(object):
 
     def write_data(self, word, row, q_data, question_presented, question_responsed):
 
+        for elm in q_data:
+            print(elm)
+
         data = [self.subject_id,
                 time.time(),
                 word,
                 0,
                 row["time_pressed"],
                 row["is_button_pressed"],
-                q_data[-3],
+                q_data[-6],
                 question_presented,
-                question_responsed]
+                question_responsed,
+                q_data[-1]]
 
         self.task_presentor.logger.write_data_row(data)
