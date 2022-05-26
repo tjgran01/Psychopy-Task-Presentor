@@ -100,6 +100,28 @@ class DataLogger(object):
                     "question_presented_time",
                     "question_answered_time",
                     "was_timedout"]
+        elif self.task_name == "social_self_control":
+            return ["subject_id",
+                    "timestamp",
+                    "stim_value",
+                    "block_num",
+                    "time_button_pressed",
+                    "is_button_pressed",
+                    "how_detailed_reported",
+                    "question_presented_time",
+                    "question_answered_time",
+                    "was_timedout"]
+        elif self.task_name == "non_social_self_control":
+            return ["subject_id",
+                    "timestamp",
+                    "stim_value",
+                    "block_num",
+                    "time_button_pressed",
+                    "is_button_pressed",
+                    "how_detailed_reported",
+                    "question_presented_time",
+                    "question_answered_time",
+                    "was_timedout"]
         elif self.task_name == "timing_data":
             return ["id",
                     "timestamp",

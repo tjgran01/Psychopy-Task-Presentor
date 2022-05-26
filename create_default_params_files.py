@@ -2,6 +2,12 @@ import pickle
 
 #### EDIT THIS TO EDIT DEFAULT PARAMETERS.
 
+def set_defaults():
+
+    for defaults in defaults_dicts:
+        fname = defaults.pop("name")
+        pickle.dump(defaults, open(f"./preferences/saved_defaults/{fname}.pkl", "wb"))
+
 stroop_defaults = {
                    "num_blocks": 6,
                    "fixation_time": 2, # How long between trials.
@@ -74,6 +80,7 @@ emotional_anticipation_defaults = {
                                    "fixation_time": 6.9, # How long between cue and stim.
                                    "iti_time": 3, # Time between individual stimulus presentations
                                    "cue_time": 1, # How long cue stays on screen.
+                                   "video_sub_cue_time": 2,# how long a cue is displayed if it is not a video.
                                    "movie_time": 6.9, # How long the video plays
                                    "num_trials": 96, # overridden if block_time != 0. PROBABLY UNUSED CURRENTLY.
                                    "variable_isi": False, # Will use 'fixation_time as mean.'
@@ -96,12 +103,45 @@ episodic_prospection_defaults = {
                                   "conditions": ["None"]
 }
 
+social_self_control_defaults = {
+                                "num_blocks": 1,
+                                "ibi_time": 0,
+                                "fixation_time": 2, # How long between cue and stim.
+                                "cue_time": 2, # How long the word is played for.
+                                "iti_time": 6, # Time between individual stimulus presentations
+                                "num_trials": 64, # overridden if block_time != 0. PROBABLY UNUSED CURRENTLY.
+                                "variable_isi": True, # Will use 'fixation_time as mean.'
+                                "stim_time": 10,
+                                "name": "social_self_control_defaults",
+                                "question_timeouts": {"slider affect": 4},
+                                "conditions": ["None"],
+                                "is_non_social": False
+}
+
+non_social_self_control_defaults = {
+                                    "num_blocks": 1,
+                                    "ibi_time": 0,
+                                    "fixation_time": 2, # How long between cue and stim.
+                                    "cue_time": 2, # How long the word is played for.
+                                    "iti_time": 6, # Time between individual stimulus presentations
+                                    "num_trials": 64, # overridden if block_time != 0. PROBABLY UNUSED CURRENTLY.
+                                    "variable_isi": True, # Will use 'fixation_time as mean.',
+                                    "stim_time": 10,
+                                    "name": "non_social_self_control_defaults",
+                                    "question_timeouts": {"slider affect": 4},
+                                    "conditions": ["None"],
+                                    "is_non_social": True
+}
+
 defaults_dicts = [stroop_defaults,
                   finger_tapping_defaults,
                   affect_reading_defaults,
                   emotional_anticipation_defaults,
-                  episodic_prospection_defaults]
+                  episodic_prospection_defaults,
+                  social_self_control_defaults,
+                  non_social_self_control_defaults]
 
-for defaults in defaults_dicts:
-    fname = defaults.pop("name")
-    pickle.dump(defaults, open(f"./preferences/saved_defaults/{fname}.pkl", "wb"))
+
+
+if __name__ == "__main__":
+    set_defaults()

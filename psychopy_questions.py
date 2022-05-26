@@ -199,6 +199,26 @@ class QuestionFactory(object):
             self.m_style = "triangleMarker"
 
 
+        elif type == "nein_ja":
+
+            self.m_text = "?"
+            self.m_ticks = [1, 2, 3, 4]
+            self.m_question_text = ""
+            self.question_answers = ["nein",
+                                     "eher nein",
+                                     "eher ja",
+                                     "ja"]
+            self.m_labels = self.question_answers
+            self.m_style = "rating"
+            self.m_size = [0.75, 0.1]
+            self.m_pos = (0.0, -0.3)
+            self.m_flip = False
+            self._question_text = self.m_question_text
+            self.m_text_pos = (0, .8)
+            self.m_text_width = 1.5
+            self.m_style = "triangleMarker"
+
+
         if self.mode == "likert":
             stims = self.create_likert_question(type, self.m_text, self.m_ticks, self.m_labels,
                                                 self.m_style, self.m_size, self.m_pos, self.m_flip,
@@ -239,6 +259,8 @@ class QuestionFactory(object):
             self.slider.setMarkerPos(random.choice([1.25, 1.75]))
         elif len(ticks) == 5:
             self.slider.markerPos = random.choice([2, 4])
+        elif len(ticks) == 4:
+            self.slider.markerPos = random.choice([1,2,3,4])
         else:
             self.slider.markerPos = random.choice(ticks)
 
@@ -337,6 +359,41 @@ class QuestionFactory(object):
                     newPos -= .05 * speed_dampen
                 if key == "2" and newPos < 5.0:
                     newPos += .05 * speed_dampen
+                if key == "4":
+                    self.timeout = False
+                    self.slider.recordRating(self.slider.markerPos)
+                    self.selection = (self.slider.getRating() - 1) / (len(self.m_ticks) - 1)
+                    self.type_text = self.type
+                    self.score = -1
+                    self._question_text = self.m_text
+                    return
+
+        self.slider.recordRating(self.slider.markerPos)
+        self.selection = (self.slider.getRating() - 1) / (len(self.m_ticks) - 1)
+        self.timeout = True
+
+
+    def display_question_button_snap(self, question_timer):
+
+        self.question_displayed_time = time.time()
+        self._timeout_time = question_timer.getTime()
+
+        self.mouse.setVisible(False)
+
+        self.task_presentor.display_stims(self.stims)
+
+        kb = hardware.keyboard.Keyboard()
+        newPos = self.slider.markerPos
+        while not self.slider.getRating() and question_timer.getTime() > 0:
+            self.slider.markerPos = newPos
+            self.task_presentor.display_stims(self.stims)
+            keys = kb.getKeys(["1", "2", "4"], waitRelease=False, clear=True)
+            if keys:
+                key = keys[-1].name
+                if key == "1" and newPos > 0.0:
+                    newPos -= 1
+                if key == "2" and newPos < 5.0:
+                    newPos += 1
                 if key == "4":
                     self.timeout = False
                     self.slider.recordRating(self.slider.markerPos)

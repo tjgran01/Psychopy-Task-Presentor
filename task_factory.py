@@ -5,6 +5,7 @@ from finger_tapping import FingerTappingTask
 from affect_reading import AffectReadingTask
 from emotional_anticipation import EmotionalAnticipationTask
 from episodic_prospection import EpisodicProspectionTask
+from social_self_control import SocialSelfControl
 
 import pickle
 
@@ -132,3 +133,31 @@ class TaskFactory(object):
                                              variable_isi=prefs["variable_isi"],
                                              question_timeouts=prefs["question_timeouts"],
                                              practice=practice)
+        elif task_string == "social_self_control":
+            return SocialSelfControl(self.sub_id, self.task_presentor,
+                                     num_blocks=prefs["num_blocks"],
+                                     conditions=prefs["conditions"],
+                                     fixation_time=prefs["fixation_time"],
+                                     iti_time=prefs["iti_time"],
+                                     cue_time=prefs["cue_time"],
+                                     stim_time=prefs["stim_time"],
+                                     num_trials=prefs["num_trials"],
+                                     ibi_time=prefs["ibi_time"],
+                                     variable_isi=prefs["variable_isi"],
+                                     question_timeouts=prefs["question_timeouts"],
+                                     practice=practice,
+                                     is_non_social=False)
+        elif task_string == "non_social_self_control":
+            return SocialSelfControl(self.sub_id, self.task_presentor,
+                                     num_blocks=prefs["num_blocks"],
+                                     conditions=prefs["conditions"],
+                                     fixation_time=prefs["fixation_time"],
+                                     iti_time=prefs["iti_time"],
+                                     cue_time=prefs["cue_time"],
+                                     stim_time=prefs["stim_time"],
+                                     num_trials=prefs["num_trials"],
+                                     ibi_time=prefs["ibi_time"],
+                                     variable_isi=prefs["variable_isi"],
+                                     question_timeouts=prefs["question_timeouts"],
+                                     practice=practice,
+                                     is_non_social=True)

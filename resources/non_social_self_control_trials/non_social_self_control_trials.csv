@@ -1,0 +1,65 @@
+item,scenario,condition
+nonsoz_1,"Nach einer Feier bei mir wird aufgeräumt, aber ich habe keine Lust, den Müll zu trennen. Ich packe den gesamten Müll in einen Sack.",1
+nonsoz_10,"Es ist heiß, die Sonne scheint und ich bekomme schnell Sonnenbrand. Längere Klamotten wären sinnvoll, jedoch möchte ich nicht schwitzen und verzichte darauf.",2
+nonsoz_100,"Auf dem Hinweg zum Einkaufen bemerke ich, dass ich meinen Einkaufsbeutel vergessen habe. Trotzdem gehe ich zum Supermarkt und kaufe mir einen neuen.",1
+nonsoz_102,"Ich habe große Lust auf Schokolade, möchte aber eigentlich gerade abnehmen. Trotzdem kann ich der Versuchung nicht widerstehen, ein Stückchen zu essen.",2
+nonsoz_103,"Ich habe mir eine Eispackung gekauft und möchte sie über mehrere Wochen verteilt essen. Weil es dann so köstlich schmeckt, esse ich alles auf einmal.",1
+nonsoz_106,"Ich hatte mir für heute ein Workout vorgenommen. Weil ich nach meinem langen Arbeitstag keine Lust mehr habe, lasse ich es ausfallen und verschiebe es.",2
+nonsoz_107,"Ich bin bei einem All You Can Eat Buffet. Obwohl ich mehr auf mein Körpergewicht achten wollte, entschließe ich mich, übermäßig viel zu essen.",2
+nonsoz_108,"Ich ziehe aus und muss laut Mietvertrag die Zimmerwände streichen. Da ich gestresst bin, streiche ich nicht und hoffe, dass es nicht auffallen wird.",1
+nonsoz_11,"Mein Kühlschrank kühlt nicht mehr richtig, das Gefrierfach müsste abgetaut werden. Weil mir das momentan zu viel Aufwand ist, nehme ich es mir für später vor.",1
+nonsoz_112,"Es regnet und ich nehme mein Fahrrad mit in die Bahn. Allerdings möchte ich nicht extra ein Fahrradticket kaufen und hoffe, nicht kontrolliert zu werden.",1
+nonsoz_113,"Eines meiner Zimmer hat eine farbige Wand, die ich überhaupt nicht schön finde. Jedoch stresst mich der Aufwand des Streichens und ich streiche vorerst nicht.",1
+nonsoz_114,Mein  Handytarif ist zu teuer für die gebotenen Konditionen. Jedoch bin ich zu faul einen günstigeren Tarif herauszusuchen und behalte meinen alten Tarif.,1
+nonsoz_12,Mein Gefrierfach ist vereist und muss abgetaut werden. Mir ist das im Moment zu aufwändig und ich nehme es mir für die nächste Woche vor.,2
+nonsoz_15,"Ich habe die Nacht schlecht geschlafen. Statt mich zu überwinden trotzdem zur Uni zu gehen, lasse ich die ersten Veranstaltungen ausfallen und schlafe weiter.",1
+nonsoz_16,"Ich brauche unbedingt neue Hosen, weil meine Lieblingshose schon etwas abgenutzt sind. Da ich nur ungern shoppen gehe, schiebe ich den Einkauf trotzdem erstmal auf.",2
+nonsoz_17,"Ich bin fertig mit einer Aufgabe für die Arbeit, aber sollte noch einmal nach Fehlern suchen. Weil ich genervt bin, gebe ich sie sofort ab.",2
+nonsoz_18,"Ich habe morgen früh eine Vorlesung, aber es kam eine neue Staffel meiner Lieblingsserie raus. Ich schaue die neue Staffel bis tief in die Nacht.",1
+nonsoz_2,"Ich komme nachts von einer ausgelassenen Feier und sollte genügend Wasser trinken, um dem Alkohol entgegenzuwirken. Müde falle ich jedoch direkt ins Bett.",2
+nonsoz_22,"Ich möchte mir gerne etwas Leckeres kochen, habe aber nichts Passendes mehr im Kühlschrank. Statt einkaufen zu gehen, greife ich zur Fertigpizza in meiner Tiefkühltruhe.",1
+nonsoz_24,Ich finde seit einem halben Jahr keinen geeigneten Job. Das ständige Bewerbungen Schreiben ermüdet mich und ich gebe mir erstmal einen Monat Pause von allem.,2
+nonsoz_25,"Ich schreibe in einer Woche eine wichtige Klausur. Da aber noch ein bisschen Zeit ist, schiebe ich das Lernen erstmal auf und mache was angenehmeres.",1
+nonsoz_3,"Ich habe wahnsinnige Lust, etwas Bestimmtes zu essen, weiß aber, dass ich davon meist Bauchschmerzen bekomme. Ich habe so großen Appetit, dass ich es riskiere.",1
+nonsoz_30,"Ich mache gerade eine Diät, aber in der Cafeteria gibt es Schokoladenkuchen zum Essen dazu. Ich entscheide, den Schokoladenkuchen trotzdem zu essen.",1
+nonsoz_33,"Mein neuer Wollschal färbt ab. Statt ihn mit per Handwäsche zu waschen, wasche ich ihn gar nicht mehr und trage ihn nur noch selten.",1
+nonsoz_34,"Ich habe ein Glas Limonade verschüttet. Statt den Fußboden gründlich zu wischen, wische ich nur die Limonade auf und verzichte auf das Wischen.",2
+nonsoz_35,"Es kommen später Leute zu Besuch, aber mein Zimmer ist noch ein Chaos. Weil ich keine Lust habe, ordentlich aufzuräumen, beseitige ich nur das Gröbste.",1
+nonsoz_36,"Die Kindersicherung meiner Waschmaschine ist an. Da ich zu ungeduldig bin die Bedienungsanleitung zu suchen, probiere ich, das Problem ohne Anleitung zu lösen.",2
+nonsoz_37,"Ich wollte morgen eigentlich zum Sport gehen, müsste dafür aber früher aufstehen. Ich entscheide mich für's Ausschlafen und ein anderes Mal zum Sport zu gehen.",1
+nonsoz_39,"Ich möchte einen größeren Urlaub machen, habe aber absolut keinen Spaß daran, Dinge zu organisieren und zu recherchieren. Deshalb schiebe ich die Planung auf.",2
+nonsoz_4,"Die Waschmaschine ist fertig, aber ich muss gerade los, um pünktlich zu meiner Verabredung zu kommen. Ich hänge die Wäsche nicht auf und mache mich los.",2
+nonsoz_40,"In meinem Tee schwimmen kleine Bröckchen und es würde helfen, den Wasserkocher zu entkalken, jedoch hab ich keine Lust, mich mit dem Thema zu beschäftigen.",2
+nonsoz_42,"Meine Lieblingshose hat ein Loch bekommen, jedoch ist es mir zu aufwändig, das Loch zu stopfen. Ich ziehe die Hose erstmal nicht mehr an.",2
+nonsoz_44,"Ich habe abends einen Sportkurs, muss aber noch etwas Wichtiges für die Uni vorbereiten. Ich habe jedoch mehr Lust auf Sport und gehe zum Kurs.",1
+nonsoz_45,Es ist schon ziemlich spät und ich muss morgen früh aus dem Haus. Ich möchte aber nicht schlafen gehen und schaue lieber meine Lieblingsserie.,2
+nonsoz_46,"Ich besuche meinen Partner, der in der 5. Etage wohnt. Obwohl ich mich mehr bewegen wollte, nehme ich vorzugsweise den Fahrstuhl statt der Treppe.",2
+nonsoz_48,"Ich habe großen Hunger. Doch statt nur meinen Hunger zu stillen, bekomme ich eine kleine Fressattacke und esse so viel, dass ich Bauchschmerzen bekomme.",2
+nonsoz_5,"Ich habe morgen früh ein Vorstellungsgespräch. Mein ausgesuchtes Hemd hat noch leicht Falten, aber weil ich zu müde bin, bügle ich es nicht mehr.",2
+nonsoz_51,Ich möchte meine Abschlussarbeit schreiben und es wäre sinnvoll einen 10-Fingerschreibekurs zu absolvieren. Ich habe aber keine Lust auf den Aufwand und verzichte darauf.,2
+nonsoz_52,"Ich hatte mir vorgenommen, heute joggen zu gehen, jedoch regnet es leicht. Ich entscheide mich, an einem anderen Wochentag joggen zu gehen.",1
+nonsoz_53,"Um noch pünktlich auf Arbeit anzukommen müsste ich rennen, um den Bus zu bekommen. Weil ich mich nicht hetzen will, laufe ich entspannt zur Bushaltestelle.",2
+nonsoz_56,"Mit frisch gewaschenen Haaren möchte ich mit dem Fahrrad zur Arbeit fahren. Ich entscheide mich meinen Fahrradhelm heute nicht zu tragen, um meine Frisur nicht zu zerstören.",1
+nonsoz_57,"Ich wollte heute Sport machen, aber es ist ungewöhnlich kalt draußen. Ich entscheide mich, drinnen zu bleiben und lieber einen Film zu schauen.",2
+nonsoz_58,"Eine Klamottenmarke, die ich mag, hat eine Rabattaktion. Obwohl ich schon mehr als genügend Klamotten habe und Geld sparen möchte, bestelle ich mir neue Sachen.",1
+nonsoz_6,"Ich würde gerne meiner Freizeitbeschäftigung nachgehen, habe aber die Wohnung schon zwei Wochen lang nicht geputzt. Ich schiebe das Putzen abermals auf.",2
+nonsoz_60,"Beim Einkaufen habe ich die Wahl zwischen einem Fertiggericht und einer gesünderen Alternative zum Selbstkochen. Obwohl ich gesünder leben wollte, greife ich zum Fertiggericht.",1
+nonsoz_61,"Ich wollte mehr Geld sparen, aber mir gefällt mein alter, aber funktionstüchtiger Rucksack nicht mehr. Ich entscheide mich trotzdem einen Neuen zu bestellen.",2
+nonsoz_63,"Ich sollte meinen Infekt ganz auskurieren, habe aber gerade viel auf Arbeit zu tun. Ich entscheide mich trotz des Infekts dafür zu arbeiten.",2
+nonsoz_65,"Vor dem Einschlafen habe ich die Wahl zwischen Lesen und Serie schauen. Obwohl Lesen zum Runterkommen sinnvoller wäre, entscheide ich mich für das Serie schauen.",1
+nonsoz_68,"Mein Fahrrad hat seit der letzten Fahrradtour einen platten Hinterreifen. Statt den Reifen zu wechseln, benutze ich das Fahrrad erstmal nicht mehr.",2
+nonsoz_70,"Ich habe einen freien Nachmittag und hatte mir vorgenommen, mehr zu lesen. Weil mir das aber zu anstrengend ist, verbringe ich mehr Zeit vor dem Laptop.",1
+nonsoz_71,"Ich bin knapp bei Kasse, möchte aber gerne ein neues PC-Spiel haben. Ich kaufe mir das Spiel, obwohl ich es mir momentan nicht leisten sollte.",2
+nonsoz_73,"Ich habe Kuchen zum Geburtstag eines Familienmitgliedes gebacken, aber er muss noch verziert werden. Weil ich keine Lust mehr habe, lasse ich das Verzieren sein.",2
+nonsoz_75,"Ich habe morgen früh ein Bewerbungsgespräch, aber heute ist ein tolles Konzert. Ich entscheide mich dazu, hinzugehen und nehme in Kauf zu wenig Schlaf abzubekommen.",1
+nonsoz_77,Ich komme nach einer Geburtstagsfeier spät nach Hause und bin furchtbar müde. Ich gehe direkt Schlafen und verzichte auf das Zähne putzen.,1
+nonsoz_78,"Meine seidene Bluse hat einen Fleck. Ich ziehe sie vorerst einfach nicht mehr an, obwohl eine Handwäsche ausreichen würde den Fleck zu entfernen.",1
+nonsoz_81,"Ich muss auf Arbeit und habe die Wahl zwischen Fahrrad und Bahn fahren. Obwohl ich mich mehr bewegen wollte, entscheide ich mich für die angenehmere Bahn.",1
+nonsoz_82,"Ich bin Essen und möchte nicht viel Geld ausgeben, allerdings habe ich große Lust auf ein bestimmtes Gericht. Ich bestelle es, obwohl es ziemlich teuer ist.",2
+nonsoz_86,"Der Klarspüler für die Spülmaschine ist leer. Da ich keine Lust habe neuen zu besorgen, rede ich mir ein, dass das Geschirr auch ohne einigermaßen sauber wird.",2
+nonsoz_87,"Ich bin zuhause und habe eine Heißhungerattacke. Ich greife direkt zu ungesunden Süßigkeiten, obwohl ich auch noch jede Menge gesündere Lebensmittel im Haus habe.",1
+nonsoz_88,"Nach einem umfangreichen Mittagsschlaf klingelt mein Wecker und ich sollte aufstehen um meinen Schlafrhythmus nicht zu zerstören. Weil es so bequem ist, schlafe ich weiter.",2
+nonsoz_9,"Eigentlich wollte ich weniger Süßigkeiten essen. Als ich jedoch im Supermarkt am Süßigkeitenregal vorbeilaufe, kann ich es nicht lassen, zumindest etwas zu kaufen.",1
+nonsoz_90,"Eine neue Folge meiner Lieblingsserie ist online, aber morgen schreibe ich eine Prüfung. Statt noch weiter zu lernen, schaue ich lieber die neue Folge.",2
+nonsoz_91,"Gestern haben wir bei mir gefeiert und die Wohnung muss geputzt werden, jedoch fühle ich mich nicht besonders und schaue lieber eine Serie.",1
+nonsoz_94,Ich muss die Wohnung putzen. Allerdings scheint draußen das erste mal seit Tagen die Sonne und ich gehe lieber erstmal eine Runde spazieren.,1

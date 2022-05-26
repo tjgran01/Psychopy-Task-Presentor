@@ -52,7 +52,12 @@ trigger_dict = {
                 50: "Emotional_Anticipation_Fix_Dot_End",
                 # Update for Episodic Prospection Task
                 51: "Episodic_Prospection_Block_Start",
-                52: "Episodic_Prospection_Block_End"
+                52: "Episodic_Prospection_Block_End",
+                # Update for social self control.
+                53: "Social_Self_Control_Block_Start",
+                54: "Social_Self_Control_Block_End",
+                55: "Non_Social_Self_Control_Block_Start",
+                56: "Non_Social_Self_Control_Block_End"
                }
 
 trigger_string_dict = {
@@ -109,5 +114,10 @@ trigger_string_dict = {
                         "Emotional_Anticipation_Fix_Dot_End": 50,
                         # Update for Episodic Prospection Task
                         "Episodic_Prospection_Block_Start": 51,
-                        "Episodic_Prospection_Block_End": 52
+                        "Episodic_Prospection_Block_End": 52,
+                        # Update For social tasks
+                        "Social_Self_Control_Block_Start": 53,
+                        "Social_Self_Control_Block_End": 54,
+                        "Non_Social_Self_Control_Block_Start": 55,
+                        "Non_Social_Self_Control_Block_End": 56
                       }

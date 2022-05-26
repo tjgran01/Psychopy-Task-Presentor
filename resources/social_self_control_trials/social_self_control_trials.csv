@@ -1,0 +1,65 @@
+item,scenario,group
+dom_10,"Mein:e Freund:in trifft sich mit einer befreundeten Person. Obwohl ich nicht misstrauisch auftreten möchte, frage ich aus Eifersucht über Details des Treffens nach.",2.0
+dom_13,"Im Freundeskreis erzählt jemand von einem gemeinsamen Erlebnis. Da die Person die Ereignisse meiner Meinung nach falsch erinnert, unterbreche ich sie und erzähle meine Version.",1.0
+dom_2,"Vor einer Veranstaltung warte ich eine halbe Stunde auf meine Begleitung. Ich kritisiere sie dafür, auch wenn ich die Gründe für die Verspätung nicht kenne.",2.0
+dom_3,"Auf Arbeit tauschen wir uns beim Mittag über das Wochenende aus. Ich unterbreche jemand anderen, weil mir endlich eingefallen ist, was ich noch sagen wollte.",1.0
+dom_5,"Im Streit bringt die andere Person ein für mich nicht nachvollziehbares Argument. Ich unterbreche sie, um sie zu korrigieren. Dadurch heize ich den Konflikt wahrscheinlich an.",2.0
+dom_7,"Im Gespräch kann ich nicht davon ablassen, meine Erzählung lange und detailreich vorzutragen, obwohl ich ahne, dass die anderen auch gerne etwas sagen würden.",2.0
+dom_8,Beim gemeinsamen Recherchieren tippt die Person am Computer sehr langsam und macht viele Fehler. Ich reagiere genervt und übernehme die Kontrolle über das Schreiben.,1.0
+dom_9,"Eine befreundete Person berichtet mal wieder von ihren Problemen auf Arbeit. Mich ärgert, dass sie meine Ratschläge nicht annimmt und kritisiere sie dafür.",1.0
+int_1,"Ich arbeite mit anderen Personen an einem Projekt. Ich übernehme die Führung und teile die Aufgaben zu, da ich schon eine genaue Vorstellung vom Ergebnis habe.",1.0
+int_10,"Ein:e Kolleg:in lehnt die Einladung zu einer Veranstaltung ab. Obwohl ich ahne, dass er über die Gründe dafür nicht sprechen will, frage ich nach.",2.0
+int_13,"Ein:e Freund:in erzählt mir sichtlich zurückhaltend von einer kürzlichen sexuellen Begegnung. Aus Interesse frage ich nach Einzelheiten, obwohl es der Person unangenehm ist.",2.0
+int_2,"Ich koche mit Freunden und Freundinnen zusammen Abendessen. Weil ich eine genaue Vorstellung vom Gericht habe, kann ich nicht widerstehen, alle genaustens anzuweisen.",1.0
+int_4,"Ich lerne eine neue Person kennen und kann mich nach kurzer Unterhaltung nicht zurückhalten, ihr recht persönliche Dinge aus meinem Leben zu erzählen.",2.0
+int_5,"Im Zuge einer Verabschiedung setze ich noch mehrmals erneut zum Sprechen an, obwohl ich merke, dass die andere Person eigentlich schon gehen möchte.",1.0
+int_6,Auf Arbeit erzählt mir ein:e Kollege:in von einer für Sie peinlichen Situation. Aus Neugier und trotz besseren Wissens frage ich sie zu Details aus.,1.0
+int_9,"Ich habe den Eindruck, dass es einer befreundeten Person nicht gut geht. Obwohl er auf Nachfrage sagt, dass alles in Ordnung sei, bohre ich mehrmals nach.",2.0
+acc_1,"Auf der Straße treffe ich jemand Bekanntes. Obwohl ich es eilig habe, kann ich es nicht lassen, mit dem Gegenüber über dies und das zu quatschen.",1.0
+acc_10,"Bei einem Winterausflug mit Freund:innen bemerke ich, dass eine Person scheinbar kalte Hände hat. Ich gebe ihr meine Handschuhe, obwohl mir dann kalt ist.",1.0
+acc_11,"Eine Bekanntschaft ist gerade in der Stadt. Ich biete ihr einen Schlafplatz bei mir an, obwohl ich gestresst bin und lieber meine Ruhe hätte.",2.0
+acc_12,"Für einen Grillabend muss sich noch jemand finden, der einen Salat vorbereitet. Obwohl ich absolut im Stress bin, erkläre ich mich dazu bereit.",1.0
+acc_14,"Eine mir nahestehende Person kommt 4 Uhr nachts am Flughafen an. Mich um ihr Wohlbefinden sorgend schlage ich spontan vor, sie abzuholen.",2.0
+acc_2,"Spontan sage ich meine Hilfe zu, als mir eine befreundete Person von ihrem Umzug erzählt. Dabei weiß ich, dass ich die Woche wenig Freizeit habe.",2.0
+acc_7,"Ich kaufe für ein:e Freund:in ein besonderes Geschenk. Es ist eigentlich zu teuer für mich, aber ich möchte der Person eine Freude machen.",1.0
+acc_8,"Für ein Last-Minute-Arbeitstreffen übernehme ich freiwillig organisatorische Aufgaben und stelle Besprechungspunkte zusammen, damit alles reibungslos abläuft, obwohl ich Zeit für meine eigenen Aufgaben bräuchte.",2.0
+exploi_1,"Auf Arbeit bittet mich jemand um Hilfe bei einer Aufgabe. Ich freue mich und sage sofort zu, obwohl ich selbst noch viel zu tun habe.",1.0
+exploi_10,"In einem Geschäft möchte mich das Verkaufspersonal hinsichtlich der Produkte beraten. Obwohl ich daran nicht interessiert bin, höre ich aus Höflichkeit zu.",2.0
+exploi_12,"Meine Familie organisiert für meinen Geburtstag einen Ausflug. Obwohl ich lieber etwas anderes machen würde, stimme ich freundlich zu, da es so viel Mühe war.",2.0
+exploi_2,"Die Nachbarschaft fragt, ob ich deren Pflanzen über die Ferien gießen könnte. Ich sage sofort zu. Dabei weiß ich noch gar nicht, ob ich Zeit habe.",2.0
+exploi_4,"Im Restaurant wird mir nicht das richtige Essen vom Kellner gebracht. Obwohl ich unzufrieden bin, sage ich nichts, da ich keine Umstände bereiten will.",2.0
+exploi_6,"Nachts sitze ich mit Bekannten in einer Bar. Um nicht unhöflich zu sein, trinke ich die nächste Runde noch mit, obwohl ich schon sehr müde bin.",1.0
+exploi_7,"Beim Bezahlen bemerke ich, dass meine Begleitung ziemlich viel Trinkgeld gibt. Obwohl ich nicht so viel ausgeben möchte, fühle ich mich nun dazu genötigt.",1.0
+exploi_8,"An der Supermarktkasse fragt mich jemand, ob ich sie denn vorlassen würde. Ich willige trotz Zeitmangel ein, um keine schlechte Stimmung zu erzeugen.",1.0
+nonass_12,"Ein:e Vorgesetzte:r fragt mich, ob ich eine Aufgabe noch diese Woche erledigen kann. Obwohl ich dadurch unliebsame Überstunden machen muss, stimme ich zu.",1.0
+nonass_13,"Beim Pausengespräch auf Arbeit wird über eine Person gelästert, die gerade im Urlaub ist. Mich stört das sehr, aus Angst vor Gegenwind sage ich aber nichts.",1.0
+nonass_3,"Eines meiner WG-Mitglieder geht seinem Putzdienst nur unregelmäßig nach. Weil ich keine Lust habe das Problem anzusprechen, lasse ich mir nichts anmerken.",2.0
+nonass_4,"Eine Bekanntschaft redet bei jedem Treffen vorrangig über sich selbst. Obwohl mich das stört, höre ich zu und sage nichts, um sie nicht zu kränken.",2.0
+nonass_6,"Eine mir wichtige Person ruft an, um über familiäre Probleme zu sprechen. Mir ist es unangenehm, zu sagen, dass ich keine Zeit habe und höre zu.",1.0
+nonass_7,"Mein Nachbar spielt mal wieder zu laut Musik. Obwohl es mich stört, tue ich so als wäre alles normal, weil ich keinen Ärger machen möchte.",2.0
+nonass_8,"Ich werde gefragt, ob ich eine Aufgabe übernehmen kann. Obwohl ich mich nicht verantwortlich fühle, sage ich zu, um keine Diskussion zu haben.",1.0
+nonass_9,"Ich streite mit einer befreundeten Person über das Thema Verlässlichkeit. Ich habe keine Lust mehr und lenke ein, obwohl es für mich noch nicht geklärt ist.",2.0
+avoi_1,"Ein:e Freund:in lädt mich zu einer Feier ein. Obwohl ich sie damit enttäusche, sage ich ab, da ich ungern unter vielen fremden Leuten bin.",1.0
+avoi_10,"Beim Spazieren sehe ich eine Person von der Arbeit. Weil ich keinen Kontakt möchte, tue ich so, als hätte ich die Person nicht gesehen.",2.0
+avoi_13,"Beim Treffen in der Referatsgruppe bin ich zurückhaltend und warte ab, bis mir eine Aufgabe zugeteilt wird. Dabei wüsste ich was ich gut könnte.",2.0
+avoi_14,"Bei einer Runde in meinem Freundeskreis lerne ich jemand Neues kennen, vergesse aber sofort dessen Namen. Weil es mir unangenehm ist, frage ich nicht nochmal nach.",1.0
+avoi_3,"In einer Runde mit Bekannten werden Probleme besprochen. Obwohl ich etwas anmerken will, halte ich mich im Hintergrund, aus Angst, etwas Peinliches zu sagen.",1.0
+avoi_4,"Auf einer Feier kenne ich nur die Gastgebenden. Obwohl sie sichtlich beschäftigt sind, hänge ich mich an sie, weil ich schwer mit Fremden ins Gespräch komme.",2.0
+avoi_7,"Angekommen auf einer Feier, bei der ich niemanden kenne, schaue ich mich beim Buffet erst einmal um, um nicht in die Menge gehen zu müssen.",1.0
+avoi_8,"In einer Gruppe von fremden Personen findet ein Gespräch statt, zu dem ich etwas Gutes beizutragen wüsste. Aber aus Schüchternheit höre ich nur zu.",2.0
+cold_1,"Mal wieder erzählt eine Bekanntschaft ausführlich von ihren Problemen. Obwohl ich die Person mag, schalte ich auf Durchzug, weil ich gerade keine Lust habe, zuzuhören.",1.0
+cold_11,"Zum Geburtstag erhalte ich ein Geschenk, das mir nicht gefällt. Obwohl sich die Person viel Mühe gemacht hat, sage ich nur kurz Danke und lege es beiseite.",2.0
+cold_13,"Jemand fragt mich um Rat, und obwohl ich eigentlich ausführlich antworten könnte, sage ich ""ich weiß nicht"", um meine Ruhe zu haben.",2.0
+cold_15,"Eine obdachlose Person fragt, ob ich ihr etwas Geld geben könnte. Ich tue so, als hätte ich sie nicht gesehen und laufe weiter.",1.0
+cold_2,"In meiner WG besuchen uns der Freundeskreis eines Mitbewohners. Obwohl ich mehr Zeit mit meiner WG verbringen möchte, bleibe ich aus Bequemlichkeit in meinem Zimmer.",1.0
+cold_3,"Ein:e Freund:in schreibt mir eine längere Nachricht. Obwohl meine Rückmeldung wichtig wäre, schiebe ich die Antwort auf, weil ich gerade keine Lust habe.",2.0
+cold_4,"Ich komme müde und gestresst in meine Wohngemeinschaft. Die Anderen fragen, wie mein Tag war. Ich antworte kurz angebunden, um das Gespräch zu verkürzen.",2.0
+cold_6,"Ein enger Arbeitskollege braucht offensichtlich Hilfe, und obwohl ich helfen könnte, tue ich das nicht, weil ich gerade keine Lust habe.",1.0
+vind_1,"Ich bin bei einer Familienfeier und schlecht gelaunt. Obwohl ich das nicht an anderen auslassen möchte, reagiere ich abweisend, als meine Eltern mich etwas fragen.",1.0
+vind_13,Über meine Arbeit lerne ich eine besonders ehrgeizige Person kennen. Ich kann mir einen negativen Kommentar über diese im Gespräch mit befreundeten Personen nicht verkneifen.,2.0
+vind_15,Ein:e Freund:in versetzt mich zum zweiten Mal. Verärgert schreibe ich ihr eine kühle und angriffslustige Nachricht. Dabei kenne ich die Gründe dafür nicht.,1.0
+vind_2,"Nachdem ich mich mit jemandem aus meinem Freundeskreis gestritten habe, ignoriere ich vor Ärger zeitweise dessen Nachrichten auf meinem Handy und nehme Anrufe nicht entgegen.",1.0
+vind_3,Im Streit mit jemandem aus dem Freundeskreis kann ich die letzte Bemerkung meines Gegenübers nicht unkommentiert lassen. Dabei könnte es den Konflikt verschlimmern.,2.0
+vind_5,"Bei einem Gruppenprojekt kann ich nicht widerstehen, einige Verbesserungen an der Arbeit einer anderen mitarbeitenden Person vorzunehmen. Dabei haben wir darüber nicht gesprochen.",2.0
+vind_6,"Mein:e Partner:in und ich streiten uns. Als mir mein Gegenüber einen Vorwurf macht, packe ich aus Wut verschiedene Fehltritte aus der Vergangenheit aus.",2.0
+vind_9,"Als ich von meinem Studium/Ausbildung erzähle, wollen mir meine Eltern einen Rat bezüglich meiner Karriere geben. Ich reagiere genervt, dabei will ich sie nicht verletzen.",1.0

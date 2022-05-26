@@ -1,0 +1,7 @@
+item,scenario,condition
+vind_p_1,"Ich streite mich mit einer befreundeten Person. Als diese etwas sagt, das mich unglaublich wütend, kritisiere ich sie für verschiedenes aus der Vergangenheit.",1.0
+vind_p_2,"Als ich von meinem beruflichen Werdegang erzähle, will mir eine befreundete Person einen Ratschlag geben. Ich reagiere genervt, obwohl mein Gegenüber es nur gut meint.",2.0
+acc_p_1,Als ich auf der Straße einen Arbeitskollege treffe verquatsche ich mich. Dabei habe ich es eigentlich gerade eilig.,1.0
+acc_p_2,Ein:e Freund:in tut sich schwer beim Aufbauen eines Regals. Spontan sage ich der Person zu. Dabei habe ich eigentlich keine Zeit.,2.0
+avoi_p_1,"In der Pause besprechen Arbeitskollegen Probleme. Ich möchte auch etwas sagen, halte mich aber zurück aus Angst mich bloßzustellen.",1.0
+nonass_p_1,"Ein Nachbar saugt noch spät Abends seine Wohnung. Obwohl ich morgen früh raus muss und es mich stört, sage ich nichts, weil ich keinen Ärger will.",2.0
