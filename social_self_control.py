@@ -5,6 +5,7 @@ from input_handler import InputHandler
 
 from pathlib import Path
 import random
+import time
 from tqdm import tqdm
 
 
@@ -28,6 +29,7 @@ class SocialSelfControl(object):
         self.variable_isi = variable_isi
         self.is_non_social = is_non_social
         self.trials_presented = 0
+        self.question_factory = QuestionFactory(self.task_presentor)
 
         if not practice:
             self.trial_fpath = Path(f"./resources/{self.task_name}_trials/")
@@ -74,6 +76,7 @@ class SocialSelfControl(object):
         self.task_presentor.display_experimenter_wait_screen("experimenter")
         self.task_presentor.display_instructions(self.instructions)
         self.task_presentor.draw_wait_for_scanner()
+        self.scan_start = time.time()
         print("Wait for scanner run.")
 
         for block in range(self.num_blocks):
@@ -107,15 +110,43 @@ class SocialSelfControl(object):
 
     def run_single_trial(self, trial_data):
 
+        cue_disp_time = time.time()
         self.task_presentor.display_stim(trial_data["cue"])
         core.wait(self.cue_time)
+        stim_disp_time = time.time()
         self.task_presentor.display_stim(trial_data["stim"])
         self.trial_timer.reset()
         
         event.clearEvents()
         while not event.getKeys("1") and self.trial_timer.getTime() > 0:
             continue
+        stim_removed_time = time.time()
 
-        question = QuestionFactory(self.task_presentor)
-        question.create_question("nein_ja")
-        question.display_question_button_snap(core.CountdownTimer(self.question_timeouts["slider affect"]))
+        self.question_factory.create_question("nein_ja")
+        self.question_factory.display_question_button_snap(core.CountdownTimer(self.question_timeouts["slider affect"]))
+        q_data = self.question_factory.get_data_line(self.subject_id, 0)
+        self.write_data(trial_data["item"], trial_data["scenario"], trial_data["condition"],
+                        cue_disp_time, stim_disp_time, stim_removed_time, q_data)
+
+
+
+    def write_data(self, item, scenario, condition, cue_disp_time, stim_disp_time, stim_removed_time,
+                   q_data):
+
+
+        data = [self.subject_id,
+                time.time(),
+                item,
+                scenario,
+                condition,
+                q_data[-6],
+                q_data[-3],
+                q_data[-3] + q_data[-2],
+                q_data[-1],
+                cue_disp_time,
+                stim_disp_time,
+                stim_removed_time,
+                self.scan_start
+                ]
+
+        self.task_presentor.logger.write_data_row(data)
