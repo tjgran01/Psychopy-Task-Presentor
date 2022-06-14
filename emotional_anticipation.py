@@ -53,7 +53,7 @@ class EmotionalAnticipationTask(object):
         self._block_num=0
         self.trials_presented = 0
 
-        self.instructions = self.task_presentor.read_instructions_from_file(self.task_name)
+        self.instructions = self.task_presentor.read_instructions_from_file(self.task_name, cue_cond=self.cue_cond)
         self.question_factory = QuestionFactory(self.task_presentor,
                                                 mode="likert",
                                                 snap_for_all=True)

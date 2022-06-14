@@ -112,10 +112,12 @@ class TaskPresentor(object):
         self.advance_text = self.globals.advance_text
 
 
+    def read_instructions_from_file(self, task, cue_cond=""):
 
-    def read_instructions_from_file(self, task):
-
-        fname = f"./instructions/{task}_instructions_{self.present_method}.txt"
+        if cue_cond == "":
+            fname = f"./instructions/{task}_instructions_{self.present_method}.txt"
+        else:
+            fname = f"./instructions/{task}_instructions_{self.present_method}_{cue_cond}.txt"
 
         with open (fname, 'r') as in_file:
             return in_file.readlines()
