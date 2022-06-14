@@ -1,15 +1,12 @@
-from psychopy import visual, core, event
-from globals import PsychopyGlobals
+from psychopy import visual, core
 from psychopy_questions import QuestionFactory
 from util.file_reader import FileReader
 from input_handler import InputHandler
 
 from pathlib import Path
 from tqdm import tqdm
-import csv
 
 import time
-import math
 import random
 
 class EpisodicProspectionTask(object):
@@ -88,6 +85,7 @@ class EpisodicProspectionTask(object):
         self.task_presentor.display_experimenter_wait_screen("experimenter")
         self.task_presentor.display_instructions(self.instructions)
         self.task_presentor.draw_wait_for_scanner()
+        self.scan_start = time.time()
 
         for block in range(self.num_blocks):
             self.run_block(block_num=block)
@@ -154,6 +152,7 @@ class EpisodicProspectionTask(object):
                 q_data[-6],
                 question_presented,
                 question_responsed,
-                q_data[-1]]
+                q_data[-1],
+                self.scan_start]
 
         self.task_presentor.logger.write_data_row(data)

@@ -1,14 +1,12 @@
-from psychopy import visual, core, event
+from psychopy import visual, core
 from globals import PsychopyGlobals
 from psychopy_questions import QuestionFactory
 from util.file_reader import FileReader
 
 from pathlib import Path
 from tqdm import tqdm
-import csv
 
 import time
-import math
 import random
 
 class EmotionalAnticipationTask(object):
@@ -122,6 +120,7 @@ class EmotionalAnticipationTask(object):
         self.task_presentor.display_experimenter_wait_screen("experimenter")
         self.task_presentor.display_instructions(self.instructions)
         self.task_presentor.draw_wait_for_scanner()
+        self.scan_start = time.time()
 
         for block in range(self.num_blocks):
             self.set_current_block_num(block)
@@ -220,6 +219,7 @@ class EmotionalAnticipationTask(object):
                 affect_data_score,
                 affect_data_onset,
                 affect_data_dur,
-                was_timeout]
+                was_timeout,
+                self.scan_start]
 
         self.task_presentor.logger.write_data_row(data)

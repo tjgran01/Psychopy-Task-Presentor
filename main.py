@@ -15,7 +15,7 @@ def main(task_list):
     myDlg.addField('Participant ID:', "XXXX")
 
     myDlg.addText('What template will this participant be running through.')
-    myDlg.addField('Bad Videos', choices=["light_to_dark", "dark_to_light"])
+    myDlg.addField('Bad Videos', choices=["Blue", "White"])
     myDlg.addField('Full Screen?', choices=["Yes", "No"])
     myDlg.addField('Practice', choices=["Yes", "No"])
     myDlg.addField('Task', choices=["emotional_anticipation", "episodic_prospection", "social_self_control", "non_social_self_control"])

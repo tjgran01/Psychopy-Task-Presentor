@@ -88,7 +88,8 @@ class DataLogger(object):
                     "valence_level_reported",
                     "SAM_onset",
                     "SAM_duration",
-                    "was_timedout"]
+                    "was_timedout",
+                    "scanner_start_time"]
         elif self.task_name == "episodic_prospection":
             return ["subject_id",
                     "timestamp",
@@ -99,7 +100,8 @@ class DataLogger(object):
                     "how_detailed_reported",
                     "question_presented_time",
                     "question_answered_time",
-                    "was_timedout"]
+                    "was_timedout",
+                    "scanner_start_time"]
         elif self.task_name == "social_self_control":
             return ["subject_id",
                     "timestamp",

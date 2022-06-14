@@ -87,9 +87,9 @@ class TaskPresentor(object):
         self.display_drawer.draw_all()
         self.window.flip()
 
+        core.wait(.2)
+
         while not event.getKeys():
-            if self.input_handler.handle_mouse_input("left") or self.input_handler.handle_button_input("experimenter"):
-                break
             continue
 
         sys.exit()
