@@ -42,13 +42,14 @@ class SocialSelfControl(object):
 
         self.stim_dictionary = self.create_stim_dictionary(shuffle=practice)
 
+        self.trial_timer = core.CountdownTimer(self.stim_time)
+
         
     def create_stim_dictionary(self, shuffle=False):
 
         lines = FileReader(f"{self.trial_fpath}/{self.task_name}_trials.csv").return_rows()
 
         lines = lines[1:]
-        print(lines)
 
         if shuffle:
             random.shuffle(lines)
@@ -73,6 +74,7 @@ class SocialSelfControl(object):
         self.task_presentor.display_experimenter_wait_screen("experimenter")
         self.task_presentor.display_instructions(self.instructions)
         self.task_presentor.draw_wait_for_scanner()
+        print("Wait for scanner run.")
 
         for block in range(self.num_blocks):
             self.set_current_block_num(block)
@@ -108,7 +110,11 @@ class SocialSelfControl(object):
         self.task_presentor.display_stim(trial_data["cue"])
         core.wait(self.cue_time)
         self.task_presentor.display_stim(trial_data["stim"])
-        core.wait(self.stim_time)
+        self.trial_timer.reset()
+        
+        event.clearEvents()
+        while not event.getKeys("1") and self.trial_timer.getTime() > 0:
+            continue
 
         question = QuestionFactory(self.task_presentor)
         question.create_question("nein_ja")

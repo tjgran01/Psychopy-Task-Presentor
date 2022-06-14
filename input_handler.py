@@ -5,6 +5,7 @@ class InputHandler(object):
     def __init__(self, mode="mri"):
         self.mode = mode
         self.mouse = event.Mouse()
+        self.mouse.setVisible(False)
 
         if mode == "mri":
             self.response_key_dict = {"default": ["1"],

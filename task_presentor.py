@@ -80,7 +80,8 @@ class TaskPresentor(object):
 
         end_text = visual.TextStim(self.window,
                                    text=prompts["thank_you"][self.lang],
-                                   color=self.globals.default_text_color)
+                                   color=self.globals.default_text_color,
+                                   font=self.globals.font)
         self.display_drawer.add_to_draw_list(end_text)
         self.display_drawer.add_to_draw_list(self.advance_text)
         self.display_drawer.draw_all()
@@ -130,10 +131,15 @@ class TaskPresentor(object):
         self.trigger_handler.send_string_trigger("Instructions_Displayed")
 
         for text_prompt in instructions:
+
+            if len(text_prompt) == 2:
+                continue
+
             display_text = visual.TextStim(self.window,
                                            text=text_prompt,
                                            height=(0.1*size_mult),
-                                           color=self.globals.default_text_color)
+                                           color=self.globals.default_text_color,
+                                           font=self.globals.font)
             self.display_drawer.add_to_draw_list(display_text)
             self.display_drawer.add_to_draw_list(self.advance_text)
             self.display_drawer.draw_all()
@@ -161,7 +167,8 @@ class TaskPresentor(object):
             display_text = visual.TextStim(self.window,
                                            text=prompts["experimentor"][self.lang],
                                            height=(0.1*size_mult),
-                                           color=self.globals.default_text_color)
+                                           color=self.globals.default_text_color,
+                                           font=self.globals.font)
             self.display_drawer.add_to_draw_list(display_text)
             self.display_drawer.draw_all()
             self.window.flip()
@@ -297,7 +304,8 @@ class TaskPresentor(object):
 
             scanner_wait_text =  visual.TextStim(self.window,
                                                  text=prompts["wait_for_scanner"][self.lang],
-                                                 color=self.globals.default_text_color)
+                                                 color=self.globals.default_text_color,
+                                                 font=self.globals.font)
 
             self.display_drawer.add_to_draw_list(scanner_wait_text)
             self.display_drawer.draw_all()

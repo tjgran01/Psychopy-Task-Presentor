@@ -126,7 +126,7 @@ non_social_self_control_defaults = {
                                     "iti_time": 6, # Time between individual stimulus presentations
                                     "num_trials": 64, # overridden if block_time != 0. PROBABLY UNUSED CURRENTLY.
                                     "variable_isi": True, # Will use 'fixation_time as mean.',
-                                    "stim_time": 10,
+                                    "stim_time": 20,
                                     "name": "non_social_self_control_defaults",
                                     "question_timeouts": {"slider affect": 4},
                                     "conditions": ["None"],

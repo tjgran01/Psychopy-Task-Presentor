@@ -33,6 +33,7 @@ class PsychopyGlobals(object):
                                 color="black", fullscr=False,
                                 screen=1, allowGUI=True)
 
+        self.font = "Cambria"
         self.ttl_key = "t"
 
         self.the_drawer = DisplayDrawer()

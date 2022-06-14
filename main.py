@@ -1,7 +1,5 @@
-from re import sub
 from task_presentor import TaskPresentor
 
-from stroop import StroopTask
 from psychopy import gui
 import sys
 
@@ -9,7 +7,6 @@ import pandas as pd
 import time
 
 import create_default_params_files
-
 
 def main(task_list):
     myDlg = gui.Dlg(title="Participant ID Entry Field")
@@ -21,7 +18,7 @@ def main(task_list):
     myDlg.addField('Bad Videos', choices=["light_to_dark", "dark_to_light"])
     myDlg.addField('Full Screen?', choices=["Yes", "No"])
     myDlg.addField('Practice', choices=["Yes", "No"])
-    myDlg.addField('First Task', choices=["emotional_anticipation", "episodic_prospection", "social_self_control", "non_social_self_control"])
+    myDlg.addField('Task', choices=["emotional_anticipation", "episodic_prospection", "social_self_control", "non_social_self_control"])
     myDlg.addField('Language', choices=["Deutsch", "English"])
 
 
@@ -44,10 +41,11 @@ def main(task_list):
     else:
         task_list = ["episodic_prospection", "end"]
 
+
     tp = TaskPresentor(sub_id[0], task_list=task_list, present_method="mri", 
-                       task_template="Lighter Cue", full_screen=sub_id[-4], 
-                       practice=sub_id[-3], lang=sub_id[-1], 
-                       cue_cond=sub_id[-5])
+                task_template="Lighter Cue", full_screen=sub_id[-4], 
+                practice=sub_id[-3], lang=sub_id[-1], 
+                cue_cond=sub_id[-5])
 
 if __name__ == "__main__":
     create_default_params_files.set_defaults()

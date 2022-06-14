@@ -1,4 +1,4 @@
-from psychopy import visual, core, event, hardware
+from psychopy import visual, event, hardware
 import random
 
 import time
@@ -256,11 +256,11 @@ class QuestionFactory(object):
                                     flip=flip)
 
         if len(ticks) == 2:
-            self.slider.setMarkerPos(random.choice([1.25, 1.75]))
+            self.slider.setMarkerPos(random.choice([1.25, 1.5, 1.75]))
         elif len(ticks) == 5:
-            self.slider.markerPos = random.choice([2, 4])
+            self.slider.markerPos = random.choice([2, 3, 4])
         elif len(ticks) == 4:
-            self.slider.markerPos = random.choice([1,2,3,4])
+            self.slider.markerPos = random.choice([1, 2, 3, 4])
         else:
             self.slider.markerPos = random.choice(ticks)
 
