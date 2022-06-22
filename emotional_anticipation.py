@@ -149,7 +149,7 @@ class EmotionalAnticipationTask(object):
         # Trigger
         cue_time, cue_off_time = self.display_cue(trial_data["cue"])
         self.task_presentor.run_isi(self.fixation_time)
-        if trial_data["video"] != None:
+        if trial_data["video"] != "None":
             video_start_time, video_end_time = self.display_video(trial_data["video"])
             has_video = True
         else:
