@@ -67,41 +67,7 @@ Because this task will be run in an MRI scanner. Fixations will need to be padde
 
 ISI = Inner Stimulus Interval and refers to a fixation between presentations of a task (i.e. a trial).
 
-IBI = Inner Block Interval and refers to a fixation between presentations of a block (i.e. a SET of trials.)
-
-
-
-## TODOs
-
-~1. Change background to black with slightly grey font color.~
-
-~2. Make Sliders continuous as opposed to discrete.~
-
-~3. Create new Input_Handler to work with button box~
-
-~3. ... and trackball. (1,2) for index / middle.~
-
-~4. Set Pages that wait for TTL from MRI (5)~
-
-~5. Add timeouts to questions.~
-
-~6. Definitely need a refactor :)~
-
-7. Link up triggers for all stim.
-
-8. Write a TTL Pulse class for EEG trig.
-
-~9. Look into connecting EyeLink. I need some information on this.~
-
-~10. Make Stroop use congruence rather than color choice.~
-
-~11. Finger tapping - add response logging.~
-
-~12. Add slider practice.~
-
-~13. Pad times for fMRI.~
-
-~14. Change to sentence level presentation. Self paced. Hard timeout.~
+IBI = Inner Block Interval and refers to a fixation between presentations of a block (i.e. a SET of trials.
 
 
 ## Exported Data
