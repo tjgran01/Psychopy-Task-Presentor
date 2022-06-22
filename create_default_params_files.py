@@ -76,7 +76,7 @@ affect_reading_defaults = {
 
 emotional_anticipation_defaults = {
                                    "num_blocks": 1,# Not used since there is only one block.
-                                   "ibi_time": 30, # Not used since there is only one block. REST TIME. 
+                                   "ibi_time": 30, # Not used since there is only one block. REST TIME.
                                    "fixation_time": 6.9, # How long between cue and stim.
                                    "iti_time": 3, # Time between individual stimulus presentations
                                    "cue_time": 1, # How long cue stays on screen.
@@ -130,7 +130,7 @@ non_social_self_control_defaults = {
                                     "name": "non_social_self_control_defaults",
                                     "question_timeouts": {"slider affect": 4},
                                     "conditions": ["None"],
-                                    "is_non_social": True
+                                    "is_non_social": True # Shows whether this is a non-social task.
 }
 
 defaults_dicts = [stroop_defaults,

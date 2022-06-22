@@ -41,10 +41,9 @@ def main(task_list):
     else:
         task_list = ["episodic_prospection", "end"]
 
-
-    tp = TaskPresentor(sub_id[0], task_list=task_list, present_method="mri", 
-                task_template="Lighter Cue", full_screen=sub_id[-4], 
-                practice=sub_id[-3], lang=sub_id[-1], 
+    tp = TaskPresentor(sub_id[0], task_list=task_list, present_method="mri",
+                task_template="Lighter Cue", full_screen=sub_id[-4],
+                practice=sub_id[-3], lang=sub_id[-1],
                 cue_cond=sub_id[-5])
 
 if __name__ == "__main__":
